@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WebAPI.Model\WebAPI.Model.csproj" />
+    <ProjectReference Include="..\WebAPI.Repository\WebAPI.Repository.csproj" />
+  </ItemGroup>
+
+</Project>
