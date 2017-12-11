@@ -2,15 +2,14 @@
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Test.Entities;
-using WebAPI.DataAccess.Entities;
-using WebAPI.DataAccess.Infrastructure;
-using WebAPI.DataAccess.Repositories;
+using WebAPI.Model;
+using WebAPI.Repository;
 
 namespace ApiLayer.Library
 {
     public class CustomerManager : BaseManager
     {
-        private IGenericRepository<CustomRepository> _customerRepository;
+        private ICustomerRepository _customerRepository;
 
         //public CustomerManager()
         //{
@@ -23,7 +22,7 @@ namespace ApiLayer.Library
             ResultModel resultModel = CheckToken(token);
             if (resultModel.Result)
             {
-                resultModel.Payload = Tools.Base64Encode(JsonConvert.SerializeObject(_customerRepository.GetAll()));
+                resultModel.Payload = Tools.Base64Encode(JsonConvert.SerializeObject(_customerRepository.GetAllCustomers()));
             }
             return resultModel;
         }

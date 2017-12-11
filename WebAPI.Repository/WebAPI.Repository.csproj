@@ -16,6 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\WebAPI.DataAccess\WebAPI.DataAccess.csproj" />
     <ProjectReference Include="..\WebAPI.Model\WebAPI.Model.csproj" />
+    <ProjectReference Include="..\WebAPI.SQL\WebAPI.SQL.csproj" />
   </ItemGroup>
 
 </Project>

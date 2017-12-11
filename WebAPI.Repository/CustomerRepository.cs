@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Dapper;
@@ -20,9 +19,7 @@ namespace WebAPI.Repository
 
         public async Task<IEnumerable<Customer>> GetAllAsync()
         {
-            var query = "GetAllCustomers";
-            var list = await SqlMapper.QueryAsync<DataAccess.Entities.Customer>(_cnx, query, commandType: CommandType.StoredProcedure);
-            return (IEnumerable<Customer>) list;
+            throw new NotImplementedException();
         }
 
         public IEnumerable<Customer> FindBy(Expression<Func<Customer, bool>> predicate)
@@ -55,9 +52,11 @@ namespace WebAPI.Repository
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Customer>> GetAllCustomer()
+        public IEnumerable<Customer> GetAllCustomers()
         {
-            throw new NotImplementedException();
+            var query = "GetAllCustomers";
+            var list = _cnx.Query<Customer>(query, commandType: CommandType.StoredProcedure);
+            return list;
         }
     }
 }

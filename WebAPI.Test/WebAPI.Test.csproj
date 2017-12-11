@@ -55,8 +55,9 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Repositories\ContactoRepositoryTest.cs" />
+    <Compile Include="Repositories\ComunaRepositoryTest.cs" />
     <Compile Include="Repositories\CustomRepositoryTest.cs" />
-    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

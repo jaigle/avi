@@ -50,6 +50,9 @@
     <Reference Include="Autofac.Integration.WebApi, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\packages\Autofac.WebApi2.4.0.0\lib\net45\Autofac.Integration.WebApi.dll</HintPath>
     </Reference>
+    <Reference Include="Dapper, Version=1.50.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.50.4\lib\net451\Dapper.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.8.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -117,6 +120,8 @@
   <ItemGroup>
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ComunaController.cs" />
+    <Compile Include="Controllers\ContactoController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Global.asax.cs">
@@ -124,7 +129,9 @@
     </Compile>
     <Compile Include="Library\AuthManager.cs" />
     <Compile Include="Library\BaseManager.cs" />
+    <Compile Include="Library\ContactoManager.cs" />
     <Compile Include="Library\CryptoManager.cs" />
+    <Compile Include="Library\ComunaManager.cs" />
     <Compile Include="Library\CustomerManager.cs" />
     <Compile Include="Library\Tools.cs" />
     <Compile Include="Library\UserManager.cs" />
@@ -139,6 +146,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -165,14 +173,6 @@
     <ProjectReference Include="..\Test.Repository\Test.Repository.csproj">
       <Project>{012B767F-3930-4A66-B9B5-A169D11FA679}</Project>
       <Name>Test.Repository</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WebAPI.DataAccess\WebAPI.DataAccess.csproj">
-      <Project>{B30D18E1-6722-42A8-AFA2-8FF1C9B862AE}</Project>
-      <Name>WebAPI.DataAccess</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WebAPI.IBLL\WebAPI.IBLL.csproj">
-      <Project>{8DEF37EC-EA7D-4003-84BE-80C477009253}</Project>
-      <Name>WebAPI.IBLL</Name>
     </ProjectReference>
     <ProjectReference Include="..\WebAPI.Model\WebAPI.Model.csproj">
       <Project>{BA481D08-923E-4535-9132-F55FBEC4FD32}</Project>

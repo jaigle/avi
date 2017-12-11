@@ -9,25 +9,25 @@ using WebAPI.Repository;
 namespace WebAPI.Test.Repositories
 {
     [TestClass]
-    public class CustomRepositoryTest
+    public class ComunaRepositoryTest
     {
-        CustomerRepository objRepo;
+        ComunaRepository objRepo;
 
         [TestInitialize]
         public void Initialize()
         {
-            objRepo = new CustomerRepository(); 
+            objRepo = new ComunaRepository(); 
         }
 
         [TestMethod]
-        public void Country_Custom_getAll()
+        public void Comunas_getAll()
         {
             //Act
-            IEnumerable<Customer> result = objRepo.GetAllCustomers();
+            IEnumerable<Comuna> result = objRepo.GetListaComunas();
             
             //Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(92, result.AsList().Count);
+            //Assert.AreEqual(92, result.AsList().Count);
         }
     }
 }

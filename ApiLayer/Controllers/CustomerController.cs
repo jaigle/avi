@@ -7,9 +7,6 @@ using System.Web.Http;
 using ApiLayer.Library;
 using Newtonsoft.Json;
 using Test.Entities;
-using WebAPI.DataAccess.Infrastructure;
-using WebAPI.DataAccess.Repositories;
-using WebAPI.IBLL;
 using WebAPI.Repository;
 
 namespace ApiLayer.Controllers
@@ -35,7 +32,8 @@ namespace ApiLayer.Controllers
         // GET: api/Customer
         public ResultModel GetCustomers([FromUri] string token)
         {
-            ResultModel resultModel = new ResultModel {Payload = Tools.Base64Encode(JsonConvert.SerializeObject(objRepo.GetAllAsync()))};
+            var listado = objRepo.GetAllCustomers();
+            ResultModel resultModel = new ResultModel {Payload = Tools.Base64Encode(JsonConvert.SerializeObject(listado))};
             return resultModel;
         }
 

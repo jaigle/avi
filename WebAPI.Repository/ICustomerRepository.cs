@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using WebAPI.Model;
 
 namespace WebAPI.Repository
@@ -8,5 +6,6 @@ namespace WebAPI.Repository
     public interface ICustomerRepository : IGenericRepository<Customer>
     {
         Customer GetById(int id);
+        IEnumerable<Customer> GetAllCustomers();
     }
 }

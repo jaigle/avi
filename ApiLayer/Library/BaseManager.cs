@@ -5,10 +5,6 @@ namespace ApiLayer.Library
 {
     public class BaseManager
     {
-        public BaseManager()
-        {
-            
-        }
 
         public string Usuario { get; set; }
         public string Rol { get; set; }
