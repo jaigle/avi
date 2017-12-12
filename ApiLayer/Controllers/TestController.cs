@@ -15,27 +15,27 @@ namespace ApiLayer.Controllers
         
      
     // GET: api/Test
-    public ResultModel  GetUsers([FromUri] string token)
-        {
-           UserManager userManager=new UserManager();
-            return userManager.GetUsers(token);
-        }
+    //public ResultModel  GetUsers([FromUri] string token)
+    //    {
+    //       UserManager userManager=new UserManager();
+    //        return userManager.GetUsers(token);
+    //    }
 
-        // GET: api/Test/ADMIN
-        [Route("api/Test/{id}")]
-        public ResultModel Get(string id, [FromUri] string token)
-        {
-            UserManager userManager = new UserManager();
-            return userManager.GetUsersByRol(token,id);
-        }
+    //    // GET: api/Test/ADMIN
+    //    [Route("api/Test/{id}")]
+    //    public ResultModel Get(string id, [FromUri] string token)
+    //    {
+    //        UserManager userManager = new UserManager();
+    //        return userManager.GetUsersByRol(token,id);
+    //    }
 
-        // POST: api/Test
-        [Route("api/Test/Auth")]
-        public ResultModel Post([FromBody]LoginModel data)
-        {
-            AuthManager authManager = new AuthManager();
-            return authManager.Authenticate(data);
-        }
+    //    // POST: api/Test
+    //    [Route("api/Test/Auth")]
+    //    public ResultModel Post([FromBody]LoginModel data)
+    //    {
+    //        AuthManager authManager = new AuthManager();
+    //        return authManager.Authenticate(data);
+    //    }
 
     }
 }

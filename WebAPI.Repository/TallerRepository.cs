@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq.Expressions;
 using Dapper;
 using WebAPI.DataAccess.Infrastructure;
@@ -8,26 +9,20 @@ using static WebAPI.SQL.Consultas;
 
 namespace WebAPI.Repository
 {
-    public class ComunaRepository : GenericRepository<Comuna>, IComunaRepository
+    public class TallerRepository : GenericRepository<Taller>, ITallerRepository
     {
-        public ComunaRepository()
+        public TallerRepository()
         {
             ConnectionFactoryAvis myConection = new ConnectionFactoryAvis();
             _cnx = myConection.GetConnection;
         }
 
-        public IEnumerable<Comuna> GetListaComunas()
+
+        public IEnumerable<Taller> GetListaTalleres()
         {
-            try
-            {
-                var query = SqlText.Comuna_Select;
-                var list = _cnx.Query<Comuna>(query);
-                return list;
-            }
-            catch (Exception e)
-            {
-                throw new Exception("Error obteniendo Listado de Comunas de Contactos: " + e.Message);
-            }
+            var query = SqlText.Comuna_Select;
+            var list = _cnx.Query<Taller>(query);
+            return list;
         }
 
         public IEnumerable<Comuna> GetAllAsync()

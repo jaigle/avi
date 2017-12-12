@@ -12,10 +12,11 @@ namespace ApiLayer.Controllers
     public class ComunaController : ApiController
     {
         // GET: api/Test
-        public ResultModel GetComunas([FromUri] string token)
+        //public ResultModel GetComunas([FromUri] string token)
+        public ResultModel GetComunas()
         {
             ComunaManager comunaManager = new ComunaManager();
-            return comunaManager.GetComunas(token);
+            return comunaManager.GetComunas();
         }
     }
 }

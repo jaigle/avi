@@ -4,7 +4,11 @@
     {
         public ResultModel()
         {
-            
+            ErrorCode = 0;
+            ErrorMessage = string.Empty;
+            Payload = string.Empty;
+            Result = true;
+            Token = string.Empty;
         }
         public string ErrorMessage { get; set; }
         public int ErrorCode { get; set; }
