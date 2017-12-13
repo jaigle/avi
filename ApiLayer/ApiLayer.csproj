@@ -123,12 +123,14 @@
     <Compile Include="Controllers\ComunaController.cs" />
     <Compile Include="Controllers\ContactoController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\MantencionController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Library\AuthManager.cs" />
     <Compile Include="Library\BaseManager.cs" />
+    <Compile Include="Library\MantencionManager.cs" />
     <Compile Include="Library\ContactoManager.cs" />
     <Compile Include="Library\CryptoManager.cs" />
     <Compile Include="Library\ComunaManager.cs" />

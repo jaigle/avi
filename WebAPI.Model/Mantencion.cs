@@ -25,7 +25,7 @@ namespace WebAPI.Model
     }
 
     /// <summary>
-    /// Calse para el Get de Mtto
+    /// Clase para el Get de Mtto
     /// </summary>
     public class MantencionDto : Entity<int>
     {
@@ -39,12 +39,28 @@ namespace WebAPI.Model
         public string patente { get; set; }
         public int KilomIndicadoCliente { get; set; }
         public string clienteSolReemplazo { get; set; }
-        public string descServicio { get; set; }
+        public string descervicio { get; set; }
         public string obsServicio { get; set; }
         public int numCliente { get; set; }
         public string idMedioAgenda { get; set; }
         public int idContacto { get; set; }
         public int kilomVeh { get; set; }
         public int idSigAgenda { get; set; }
+    }
+
+
+    public class MantencionDisponible : Entity<int>
+    {
+        public int IdHorario { get; set; }
+        public int IdTaller { get; set; }
+        public int IdDiaSemana { get; set; }
+        public TimeSpan horaDesde { get; set; }
+        public TimeSpan horaHasta { get; set; }
+        public int cantVehMismoHorario { get; set; }
+        public string codSistUltGrab { get; set; }
+        public DateTime fechaUltGrab { get; set; }
+        public string codOpUltGrab { get; set; }
+        public string obsUltGrab { get; set; }
+        public int cantMantAgendadas { get; set; }
     }
 }
