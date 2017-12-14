@@ -48,8 +48,13 @@ AND cc.CodTipoNegocio = 2";
             #endregion
 
             public static string Comuna_Select = "SELECT Comuna_Codigo AS Id, Comuna_Nombre AS Nombre FROM COMUNAS Com With(Nolock) order by Comuna_Codigo asc";
-            
 
+            public static string FLota_Select =
+                @"select F.Flotas_Patente as flotaPatente, E.EstFlo_Nombre as estFloAltaBaja, 
+S.SubCat_NomMarca as subCatNomMarca, S.SubCat_NomModelo as subCatNomModelo, F.Flotas_AnoFabric as flotasAnoFrabic, F.Flotas_UltKiloEntr as flotasUltKiloEntr
+from Flota as F inner join ESTADOFLOTA as E on F.Flotas_Estado = E.EstFlo_COdigo
+inner join SUBCATEGORIAS as S on F.SubCat_CodMarcaModelo = S.SubCat_CodMarcaModelo
+where F.Flotas_Patente = @Patente";
         }
     }
 }

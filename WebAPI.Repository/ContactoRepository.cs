@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
 using Dapper;
@@ -27,23 +28,28 @@ namespace WebAPI.Repository
             throw new NotImplementedException();
         }
 
-        public ContactoDto Add(ContactoDto entity)
+        public int Add(ContactoDto entity)
         {
-            throw new NotImplementedException();
-        }
+            Error myError = new Error();
+            int numeroContacto;
 
-        public int Add(ContactoNew entity)
-        {
             try
             {                
-                var query = Consultas.SqlText.ContactoNew_Insert;
-                var numeroContacto = _cnx.QuerySingle<int>(query, new
-                {
-                    Nombre = entity.contacNombre,
-                    Rut = entity.contacRutContacto
-                });
-                ContactoNew myEntity = GetContactoNew_ByContactoNumber(numeroContacto);
-                return myEntity.contacNumero;
+                var query = "ContactoNew_Ins_POSTContacto";
+                DynamicParameters p = new DynamicParameters();
+                p.Add("@DescError", "");//, ParameterDirection.Output);
+                p.Add("@Rut", entity.contacRutContacto);
+                p.Add("@Nombre", entity.contacNombre);
+                p.Add("@Contac_Numero", entity.contacNumero);//, ParameterDirection.Output); 
+                p.Add("@idTipoContacto", entity.idTipoContacto);
+                p.Add("@Contac_Telefono1", entity.telefono1);
+                p.Add("@Contac_Mail", entity.contacMail);
+                p.Add("@Contac_Celular", entity.contacCelular); 
+                p.Add("@Ciudad_Codigo", entity.ciudadCodigo);
+                numeroContacto = _cnx.Execute(query, p, commandType: CommandType.StoredProcedure);
+                myError.ErrorCode = p.Get<Int16>("@NumError");
+                myError.ErrorMessage = p.Get<string>("@DescError");
+                return myError.ErrorCode > 0 ? throw new CustomException(myError.ErrorMessage, myError) : numeroContacto;
             }
             catch (Exception e)
             {

@@ -20,7 +20,7 @@ namespace WebAPI.Repository
         {
         }
 
-        public IEnumerable<T> GetAllAsync()
+        public IEnumerable<T> GetAll()
         {
             throw new NotImplementedException();
         }

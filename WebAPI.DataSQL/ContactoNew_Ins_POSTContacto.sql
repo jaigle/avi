@@ -1,5 +1,4 @@
-﻿
-CREATE PROCEDURE [dbo].[ContactoNew_Ins_POSTContacto] 
+﻿CREATE PROCEDURE [dbo].[ContactoNew_Ins_POSTContacto] 
 	@Rut char(11),
 	@Nombre varchar(200),
 	@Contac_Numero numeric(18,2) OUTPUT, 
@@ -8,31 +7,32 @@ CREATE PROCEDURE [dbo].[ContactoNew_Ins_POSTContacto]
 	@Contac_Mail varchar(100),
 	@Contac_Celular varchar(20),
     @Ciudad_Codigo char(20),
-	@ContacNumero int = 0,
 	@DescError	varchar(1000) ='' OUTPUT
 AS
 BEGIN
-SET @Rut = '12492054-K' 
-SET @Nombre = 'Testing Name'
 	
-SELECT @ContacNumero = cn.Contac_Numero FROM contactoNew cn WHERE cn.Contac_RutContacto = @Rut
+SELECT @Contac_Numero = cn.Contac_Numero FROM contactoNew cn WHERE cn.Contac_RutContacto = @Rut
 BEGIN TRAN	
 	
-if (@ContacNumero <> 0)
+if (@Contac_Numero <> 0)
 BEGIN
 	INSERT INTO [contactoCliente]
 			   ([Contac_Numero]
 			   ,[idTipoContacto]
 			   ,[Contac_Telefono1]
 			   ,[Contac_Mail]
-			   ,[Contac_Celular],
-			   Ciudad_Codigo)
+			   ,[Contac_Celular]
+			   ,Cliente_Numero
+			   ,CodTipoNegocio
+			   ,Ciudad_Codigo)
 		 VALUES
-			   (@ContacNumero
+			   (@Contac_Numero
 			   ,@idTipoContacto
 			   ,@Contac_Telefono1
 			   ,@Contac_Mail
 			   ,@Contac_Celular
+			   ,(SELECT MAX(Cliente_Numero)+1 FROM contactoCliente)
+			   ,2				--PENDIENTE POR DEFINIR ESTOS DOS
 			   ,@Ciudad_Codigo)
 END
 ELSE
@@ -51,14 +51,18 @@ BEGIN
 			   ,[idTipoContacto]
 			   ,[Contac_Telefono1]
 			   ,[Contac_Mail]
-			   ,[Contac_Celular],
-			   Ciudad_Codigo)
+			   ,[Contac_Celular]
+			   ,Cliente_Numero
+			   ,CodTipoNegocio
+			   ,Ciudad_Codigo)
 		 VALUES
 			   (@Contac_Numero
 			   ,@idTipoContacto
 			   ,@Contac_Telefono1
 			   ,@Contac_Mail
 			   ,@Contac_Celular
+			   ,(SELECT MAX(Cliente_Numero)+1 FROM contactoCliente)
+			   ,2				--PENDIENTE POR DEFINIR ESTOS DOS
 			   ,@Ciudad_Codigo)
 END
 

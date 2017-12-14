@@ -16,7 +16,7 @@ namespace WebAPI.Repository
             _cnx = myConection.GetConnection;
         }
 
-        public IEnumerable<Comuna> GetListaComunas()
+        public IEnumerable<Comuna> GetAll()
         {
             try
             {
@@ -28,11 +28,6 @@ namespace WebAPI.Repository
             {
                 throw new Exception("Error obteniendo Listado de Comunas de Contactos: " + e.Message);
             }
-        }
-
-        public IEnumerable<Comuna> GetAllAsync()
-        {
-            throw new NotImplementedException();
         }
 
         public IEnumerable<Comuna> FindBy(Expression<Func<Comuna, bool>> predicate)
@@ -56,6 +51,11 @@ namespace WebAPI.Repository
         }
 
         public void Save()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Comuna> GetListaComunas()
         {
             throw new NotImplementedException();
         }

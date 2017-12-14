@@ -7,7 +7,7 @@ namespace WebAPI.Repository
 {
     public interface IGenericRepository<T> where T : BaseEntity
     {
-        IEnumerable<T> GetAllAsync();
+        IEnumerable<T> GetAll();
         IEnumerable<T> FindBy(Expression<Func<T, bool>> predicate);
         T Add(T entity);
         T Delete(T entity);

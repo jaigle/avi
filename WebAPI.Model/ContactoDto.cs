@@ -7,7 +7,7 @@ namespace WebAPI.Model
         public int contacNumero { get; set; }
         public string contacNombre { get; set; }
         public string contacRutContacto { get; set; }
-        public string idTipoContacto { get; set; }
+        public int idTipoContacto { get; set; }
         public string telefono1 { get; set; }
         public string contacCelular { get; set; }
         public string contacMail { get; set; }

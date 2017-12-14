@@ -42,13 +42,21 @@ namespace ApiLayer.Library
             {
                 resultModel.Payload = Tools.Base64Encode(JsonConvert.SerializeObject(_contactoRepository.Add(value)));
             }
+            catch (CustomException myException)
+            {
+                resultModel.ErrorMessage = myException.LocalError.ErrorMessage;
+                resultModel.ErrorCode = myException.LocalError.ErrorCode;
+                resultModel.Payload = String.Empty;
+                resultModel.Result = false;
+                resultModel.Token = String.Empty;
+            }
             catch (Exception e)
             {
                 resultModel.ErrorMessage = e.Message;
-                resultModel.ErrorCode = 0;
+                resultModel.ErrorCode = 10;
                 resultModel.Payload = String.Empty;
                 resultModel.Result = false;
-                resultModel.Token = token;
+                resultModel.Token = String.Empty;
             }
             return resultModel;
         }
