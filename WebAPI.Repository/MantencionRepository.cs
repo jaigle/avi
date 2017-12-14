@@ -131,9 +131,9 @@ namespace WebAPI.Repository
             }
             catch (Exception e)
             {
-                throw new CustomException("Error seleccionando de la Disponibilidad: registro: " + e.Message, myError);
+                throw new Exception("Error seleccionando la Disponibilidad: registro: " + e.Message);
             }
-            return myError.ErrorCode > 0 ? throw new Exception(myError.ErrorMessage) : valor;
+            return myError.ErrorCode > 0 ? throw new CustomException(myError.ErrorMessage, myError) : valor;
         }
     }
 }
