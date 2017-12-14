@@ -10,9 +10,11 @@ using WebAPI.Model;
 
 namespace ApiLayer.Controllers
 {
+    [RoutePrefix("api/mantencion")]
     public class MantencionController : ApiController
     {
         // PUT: api/Mantencion
+        [Route("")]
         public ResultModel PutMantencion([FromBody]Mantencion value)
         {
             MantencionManager mantencionManager = new MantencionManager();
@@ -20,6 +22,7 @@ namespace ApiLayer.Controllers
         }
 
         // POST: api/Mantencion
+        [Route("")]
         public ResultModel PostMantencion([FromBody]Mantencion value)
         {
             MantencionManager mantencionManager = new MantencionManager();
@@ -27,6 +30,7 @@ namespace ApiLayer.Controllers
         }
 
         // GET: api/Mantencion/{Agenda}{CodigoCliente}
+        [Route("Listado/{pintIdAgenda:int}/{pintCodCliente:int}")]
         public ResultModel GetListMantencion(int pintIdAgenda, int pintCodCliente)
         {
             MantencionManager mantencionManager = new MantencionManager();
@@ -34,7 +38,7 @@ namespace ApiLayer.Controllers
         }
 
         // GET: api/Mantencion/{Agenda}{CodigoCliente}
-        [Route("api/Disponibilidad")]
+        [Route("Disponibilidad/{pintIdTaller:int}/{pFecha:datetime:regex(\\d{4}-\\d{2}-\\d{2})}")]
         public ResultModel GetDisponibilidad(int pintIdTaller, DateTime pFecha)
         {
             MantencionManager mantencionManager = new MantencionManager();
