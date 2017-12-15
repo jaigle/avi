@@ -4,10 +4,17 @@ namespace WebAPI.Model
 {
     public class ContactoDto: Entity<int>
     {
+        public ContactoDto()
+        {
+            codigoTipoNegocio = 2;
+        }
+
         public int contacNumero { get; set; }
+        public int clienteNumero { get; set; }
+        public int codigoTipoNegocio{ get; set; }
+        public int idTipoContacto { get; set; }
         public string contacNombre { get; set; }
         public string contacRutContacto { get; set; }
-        public int idTipoContacto { get; set; }
         public string telefono1 { get; set; }
         public string contacCelular { get; set; }
         public string contacMail { get; set; }

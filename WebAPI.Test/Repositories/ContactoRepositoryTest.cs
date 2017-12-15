@@ -20,6 +20,31 @@ namespace WebAPI.Test.Repositories
         }
 
         [TestMethod]
+        public void ContactoNew_Probar_CafeeRut()
+        {
+            ContactoDto entity = new ContactoDto
+            {
+                contacRutContacto = "12492054-K"
+            };
+            //Act
+            int result = 0;
+            try
+            {
+                result = objRepo.Add(entity);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+            //Assert
+            Assert.IsNotNull(result);
+            //Assert.AreEqual(1822, result.contacNumero);
+        }
+
+
+        [TestMethod]
         public void ContactoNew_BuscarPorRut()
         {
             //Act
