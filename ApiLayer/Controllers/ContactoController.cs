@@ -65,12 +65,12 @@ namespace ApiLayer.Controllers
             return contactoManager.PutContactoCliente(value, String.Empty);
         }
 
-        // DELETE: api/Contacto/5
-        [Route("contactoCliente/{id1}/cliente/{id2}")]
-        public ResultModel Delete(int id1, int id2)
-        {
-            ContactoManager contactoManager = new ContactoManager();
-            return contactoManager.DeleteContactClient(id1,id2, String.Empty);
-        }
+        //// DELETE: api/Contacto/5
+        //[Route("contactoCliente/{id1}/cliente/{id2}")]
+        //public ResultModel Delete(int id1, int id2)
+        //{
+        //    ContactoManager contactoManager = new ContactoManager();
+        //    return contactoManager.DeleteContactClient(id1,id2, String.Empty);
+        //}
     }
 }
