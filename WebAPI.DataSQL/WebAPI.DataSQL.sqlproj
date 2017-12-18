@@ -65,5 +65,7 @@
     <None Include="AgendaMant_Select_GetListMantencion.sql" />
     <None Include="Cliente_Select_GetEmpresa.sql" />
     <None Include="ContratosLO_Select_GetListaContratos.sql" />
+    <None Include="COntratoLO_Central_Select.sql" />
+    <None Include="ContratoLO_Vehiculos_Select.sql" />
   </ItemGroup>
 </Project>

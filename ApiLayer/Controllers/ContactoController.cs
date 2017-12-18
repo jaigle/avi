@@ -10,10 +10,11 @@ using WebAPI.Model;
 
 namespace ApiLayer.Controllers
 {
+    [RoutePrefix("api/contacto")]
     public class ContactoController : ApiController
     {
         // GET: api/TipoContacto
-        [Route("api/TipoContacto/")]
+        [Route("tipoContacto/")]
         //public ResultModel GetListTipoContacto([FromUri] string token)
         public ResultModel GetListTipoContacto()
         {
@@ -22,7 +23,7 @@ namespace ApiLayer.Controllers
         }
 
         // GET: api/Contacto/5
-        [Route("api/ContactoEmpresa/{id}")]
+        [Route("contactoEmpresa/{id}")]
         //public ResultModel GetContactoPorEmpresa(int id, [FromUri] string token)
         public ResultModel GetContactoPorEmpresa(int id)
         {
@@ -30,7 +31,7 @@ namespace ApiLayer.Controllers
             return contactoManager.GetContactoPorEmpresa(id, String.Empty);
         }
 
-        [Route("api/ContactoCliente/{id1}/cliente/{id2}")]
+        [Route("contactoCliente/{id1}/cliente/{id2}")]
         //public ResultModel GetContactoPorEmpresa(int id1, int id2, [FromUri] string token)
         public ResultModel GetContactoPorEmpresa(int id1, int id2)
         {
@@ -38,16 +39,17 @@ namespace ApiLayer.Controllers
             return contactoManager.GetContactoClientePorLlave(id1,id2, String.Empty);
         }
 
-        [Route("api/ContactoCliente/{id1}/cliente/{id2}")]
+        [Route("deletecontactoCliente/{id1}/cliente/{id2}")]
         //public ResultModel DeleteContactoPorEmpresa(int id1, int id2, [FromUri] string token)
         public ResultModel DeleteContactoPorEmpresa(int id1, int id2)
         {
             ContactoManager contactoManager = new ContactoManager();
-            return contactoManager.GetContactoClientePorLlave(id1, id2, String.Empty);
+            return contactoManager.DeleteContactClient(id1, id2, String.Empty);
         }
 
         // POST: api/Contacto
         //public ResultModel Post([FromBody]ContactoDto value, [FromUri] string token)
+        [Route("")]
         public ResultModel Post([FromBody]ContactoDto value)
         {
             ContactoManager contactoManager = new ContactoManager();
@@ -56,6 +58,7 @@ namespace ApiLayer.Controllers
 
         // PUT: api/Contacto/5
         //public ResultModel Put([FromBody]ContactoCliente value, [FromUri] string token)
+        [Route("")]
         public ResultModel Put([FromBody]ContactoCliente value)
         {
             ContactoManager contactoManager = new ContactoManager();
@@ -63,8 +66,11 @@ namespace ApiLayer.Controllers
         }
 
         // DELETE: api/Contacto/5
-        public void Delete(int id)
+        [Route("contactoCliente/{id1}/cliente/{id2}")]
+        public ResultModel Delete(int id1, int id2)
         {
+            ContactoManager contactoManager = new ContactoManager();
+            return contactoManager.DeleteContactClient(id1,id2, String.Empty);
         }
     }
 }

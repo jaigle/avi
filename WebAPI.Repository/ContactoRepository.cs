@@ -221,7 +221,7 @@ namespace WebAPI.Repository
         {
             try
             {
-                var query = Consultas.SqlText.ContactoCliente_Update;
+                var query = Consultas.SqlText.ContactoCliente_Delete;
                 _cnx.Execute(query, new
                 {
                     ContactNumero = pintContactNumero,

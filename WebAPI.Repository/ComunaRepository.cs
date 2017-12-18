@@ -18,16 +18,7 @@ namespace WebAPI.Repository
 
         public IEnumerable<Comuna> GetAll()
         {
-            try
-            {
-                var query = SqlText.Comuna_Select;
-                var list = _cnx.Query<Comuna>(query);
-                return list;
-            }
-            catch (Exception e)
-            {
-                throw new Exception("Error obteniendo Listado de Comunas de Contactos: " + e.Message);
-            }
+            throw new NotImplementedException();
         }
 
         public IEnumerable<Comuna> FindBy(Expression<Func<Comuna, bool>> predicate)
@@ -57,7 +48,16 @@ namespace WebAPI.Repository
 
         public IEnumerable<Comuna> GetListaComunas()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var query = SqlText.Comuna_Select;
+                var list = _cnx.Query<Comuna>(query);
+                return list;
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error obteniendo Listado de Comunas de Contactos: " + e.Message);
+            }
         }
     }
 }

@@ -35,6 +35,11 @@ namespace WebAPI.Repository
             throw new NotImplementedException();
         }
 
+        public T Get(T entity)
+        {
+            throw new NotImplementedException();
+        }
+
         public T Delete(T entity)
         {
             throw new NotImplementedException();

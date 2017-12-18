@@ -30,7 +30,7 @@ namespace ApiLayer.Controllers
         }
 
         // GET: api/Mantencion/{Agenda}{CodigoCliente}
-        [Route("Listado/{pintIdAgenda:int}/{pintCodCliente:int}")]
+        [Route("agenda/{pintIdAgenda:int}/{pintCodCliente:int}")]
         public ResultModel GetListMantencion(int pintIdAgenda, int pintCodCliente)
         {
             MantencionManager mantencionManager = new MantencionManager();
@@ -38,7 +38,7 @@ namespace ApiLayer.Controllers
         }
 
         // GET: api/Mantencion/{Agenda}{CodigoCliente}
-        [Route("Disponibilidad/{pintIdTaller:int}/{pFecha:datetime:regex(\\d{4}-\\d{2}-\\d{2})}")]
+        [Route("taller/{pintIdTaller:int}/{pFecha:datetime:regex(\\d{4}-\\d{2}-\\d{2})}")]
         public ResultModel GetDisponibilidad(int pintIdTaller, DateTime pFecha)
         {
             MantencionManager mantencionManager = new MantencionManager();

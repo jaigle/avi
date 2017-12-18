@@ -9,15 +9,15 @@ using Test.Entities;
 
 namespace ApiLayer.Controllers
 {
-    public class ComunaController : ApiController
+    public class AnexoController : ApiController
     {
         // GET: api/Test
         //public ResultModel GetComunas([FromUri] string token)
-        [Route("api/comunas/")]
-        public ResultModel GetComunas()
+        [Route("api/anexo/{pintIdAnexo}")]
+        public ResultModel GetAnexo(int pintIdAnexo)
         {
-            ComunaManager comunaManager = new ComunaManager();
-            return comunaManager.GetComunas();
+            AnexoManager anexoManager = new AnexoManager();
+            return anexoManager.GetAnexo(pintIdAnexo, String.Empty);
         }
     }
 }

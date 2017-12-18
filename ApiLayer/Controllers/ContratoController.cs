@@ -9,10 +9,12 @@ using Test.Entities;
 
 namespace ApiLayer.Controllers
 {
+    [RoutePrefix("api/contrato")]
     public class ContratoController : ApiController
     {
         // GET: api/Test
         //public ResultModel GetComunas([FromUri] string token)
+        [Route("empresa/{pintCodEmpresa}/cliente/{pintClienteNumero}")]
         public ResultModel GetListadoContrato(int pintCodEmpresa, int pintClienteNumero)
         {
             ContratoManager entityManager = new ContratoManager();
