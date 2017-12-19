@@ -40,7 +40,7 @@ namespace ApiLayer.Library
             ResultModel resultModel = new ResultModel();
             try
             {
-                resultModel.Payload = "";//Tools.Base64Encode(JsonConvert.SerializeObject(_empresaRepository.Edit(value)));
+                _empresaRepository.Edit(value);
             }
             catch (Exception e)
             {

@@ -120,6 +120,8 @@
   <ItemGroup>
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\TallerController.cs" />
+    <Compile Include="Controllers\CiudadController.cs" />
     <Compile Include="Controllers\FlotaController.cs" />
     <Compile Include="Controllers\AnexoController.cs" />
     <Compile Include="Controllers\ContratoController.cs" />
@@ -135,6 +137,8 @@
     </Compile>
     <Compile Include="Library\AuthManager.cs" />
     <Compile Include="Library\BaseManager.cs" />
+    <Compile Include="Library\TallerManager.cs" />
+    <Compile Include="Library\CiudadManager.cs" />
     <Compile Include="Library\FlotaManager.cs" />
     <Compile Include="Library\AnexoManager.cs" />
     <Compile Include="Library\ContratoManager.cs" />

@@ -7,8 +7,8 @@ BEGIN
 BEGIN TRAN
 
 select IDContratoloGrupoEP AS iDContratoloGrupoEP, CtoLO AS ctoLO, Patente AS patente, VigenteAlMesActual AS vigenteAlMesActual, 
-'' AS marcaModelo,FechaIngreso AS fechaIngreso, FechaDevolucion AS fechaDevolucion, 
-FechaExtension AS fechaExtension, FechaTermino AS fechaTermino, '' AS calidad
+SubCat_NomMarca AS subCatNomMarca,SubCat_NomModelo AS subCatNomModelo,FechaIngreso AS fechaIngreso, FechaDevolucion AS fechaDevolucion, 
+FechaExtension AS fechaExtension, FechaTermino AS fechaTermino, Calidad AS calidad
 FROM central.dbo.ContratoLO_Vehiculos_Drilo AS Pcpal    
 WHERE ((@IdContrato = 0) OR (Pcpal.CtoLO = @IdContrato)) AND ((@IdGrupoVehiculo = 0) OR (Pcpal.IDContratoLo_GrupoVeh = @IdGrupoVehiculo))
    
@@ -30,5 +30,4 @@ WHERE ((@IdContrato = 0) OR (Pcpal.CtoLO = @IdContrato)) AND ((@IdGrupoVehiculo 
 			COMMIT TRAN
 	OK:
 		return (@NumError)
-END
 END

@@ -22,9 +22,16 @@ namespace ApiLayer.Controllers
             return empresaManager.GetEmpresa(pstrRut, pintNumCliente);
         }
 
-        // PUT: api/Empresa
+        //// PUT: api/Empresa
+        //[Route("")]
+        //public ResultModel PutMantencion([FromBody]Empresa_put value)
+        //{
+        //    EmpresaManager empresaManager = new EmpresaManager();
+        //    return empresaManager.ActualizarEmpresa(value);
+        //}
+
         [Route("")]
-        public ResultModel PutMantencion([FromBody]Empresa_put value)
+        public ResultModel PutEmpresa([FromBody]Empresa_put value)
         {
             EmpresaManager empresaManager = new EmpresaManager();
             return empresaManager.ActualizarEmpresa(value);

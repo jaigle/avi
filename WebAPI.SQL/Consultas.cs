@@ -61,8 +61,9 @@ AND cc.CodTipoNegocio = 2";
             #endregion
 
             public static string Comuna_Select =
-                    "SELECT Comuna_Codigo AS Id, Comuna_Nombre AS Nombre FROM COMUNAS Com With(Nolock) order by Comuna_Codigo asc"
-                ;
+                    "SELECT Comuna_Codigo AS Id, Comuna_Nombre AS Nombre FROM COMUNAS Com With(Nolock) order by Comuna_Codigo asc";
+            public static string Ciudad_Select =
+                "select Ciudad_Codigo as ciudadCodigo, Ciudad_Nombre as ciudadNombre from CIUDADES";
 
             public static string FLota_Select =
                 @"select F.Flotas_Patente as flotaPatente, E.EstFlo_Nombre as estFloAltaBaja, 
@@ -70,6 +71,15 @@ S.SubCat_NomMarca as subCatNomMarca, S.SubCat_NomModelo as subCatNomModelo, F.Fl
 from Flota as F inner join ESTADOFLOTA as E on F.Flotas_Estado = E.EstFlo_COdigo
 inner join SUBCATEGORIAS as S on F.SubCat_CodMarcaModelo = S.SubCat_CodMarcaModelo
 where F.Flotas_Patente = @Patente";
+
+            public static string Taller_Select = @"select IdTaller AS idTaller
+,IdSucursal AS idSucursal
+,NombreTaller AS nombreTaller
+,DireccionTaller AS direccionTaller
+,EncargadoTaller AS  encargadoTaller
+,FonoTaller AS fonoTaller
+,EmailTaller AS emailTaller
+ from Taller";
         }
     }
 }

@@ -59,9 +59,38 @@ namespace WebAPI.Repository
             throw new NotImplementedException();
         }
 
-        public void Edit(Empresa_put entity)
+        public int Edit(Empresa_put entity)
         {
-            throw new NotImplementedException();
+            Error myError = new Error();
+            int numeroContacto;
+
+            try
+            {
+                var query = "Cliente_PUTEmpresa";
+                DynamicParameters p = new DynamicParameters();
+                p.Add("@clienteNumero", entity.clienteNumero);
+                p.Add("@clienteRut", entity.clienteRut);
+                p.Add("@ciudadCodigo", entity.ciudadCodigo);
+                p.Add("@clienteNomRazonSocial", entity.clienteNomRazonSocial);
+                p.Add("@clienteGiro", entity.clienteGiro);
+                p.Add("@clienteDirComercial", entity.clienteDirComercial);
+                p.Add("@clienteCodPostal", entity.clienteCodPostal);
+                p.Add("@clienteTelefono", entity.clienteNumero);
+                p.Add("@clienteMail", entity.clienteMail);
+                p.Add("@clienteWww", entity.clienteWww);
+                p.Add("@comunaCodigo", entity.comunaCodigo);
+                p.Add("@clienteRepresentante", entity.clienteRepresentante);
+                p.Add("@DescError", dbType: DbType.String, direction: ParameterDirection.Output, size: 1000);
+                p.Add("@NumError", dbType: DbType.Int32, direction: ParameterDirection.ReturnValue);
+                numeroContacto = _cnx.Execute(query, p, commandType: CommandType.StoredProcedure);
+                myError.ErrorCode = p.Get<int>("@NumError");
+                myError.ErrorMessage = p.Get<string>("@DescError");
+                return myError.ErrorCode > 0 ? throw new CustomException(myError.ErrorMessage, myError) : numeroContacto;
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error actualizando  Empresa: " + e.Message);
+            }
         }
 
         public void Save()

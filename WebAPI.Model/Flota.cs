@@ -8,7 +8,8 @@ namespace WebAPI.Model
         public int ctoLo { get; set; }
         public string patente { get; set; }
         public string vigentesAlMesActual { get; set; }
-        public string marcaModelo { get; set; }
+        public string subCatNomMarca { get; set; }
+        public string subCatNomModelo { get; set; }
         public DateTime fechaIngreso { get; set; }
         public DateTime fechaDevolucion { get; set; }
         public DateTime fechaTermino { get; set; }
