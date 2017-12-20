@@ -18,8 +18,8 @@ namespace WebAPI.Model
         public string stcCodigo { get; set; }
         public string comunaCodigo { get; set; }
         public string clienteCodigoPais { get; set; }
-        public string codCateg { get; set; }
-        public int idRubro { get; set; }
+        public string descCategoria { get; set; }
+        public string descRubro { get; set; }
         public string clienteRepresentante { get; set; }
         public string codTipoNegocio { get; set; }
         public int idModoFacturacion { get; set; }

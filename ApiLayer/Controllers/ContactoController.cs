@@ -23,12 +23,12 @@ namespace ApiLayer.Controllers
         }
 
         // GET: api/Contacto/5
-        [Route("contactoEmpresa/{id}")]
+        [Route("contactoEmpresa/{idEmpresa:int?}")]
         //public ResultModel GetContactoPorEmpresa(int id, [FromUri] string token)
-        public ResultModel GetContactoPorEmpresa(int id)
+        public ResultModel GetContactoPorEmpresa(int idEmpresa = 0)
         {
             ContactoManager contactoManager = new ContactoManager();
-            return contactoManager.GetContactoPorEmpresa(id, String.Empty);
+            return contactoManager.GetContactoPorEmpresa(idEmpresa, String.Empty);
         }
 
         [Route("contactoCliente/{id1}/cliente/{id2}")]

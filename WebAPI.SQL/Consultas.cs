@@ -33,7 +33,7 @@ FROM contactoNew cn WHERE cn.Contac_Numero = @Numero";
        cc.Contac_Mail AS contacMail, cc.Ciudad_Codigo AS ciudadCodigo
   FROM contactoNew cn INNER JOIN contactoCliente cc ON cc.Contac_Numero = cn.Contac_Numero
 INNER JOIN tipoContacto tc ON tc.idTipoContacto = cc.idTipoContacto
-WHERE cc.CodTipoNegocio = 2 AND contac_estado = 'Activo'";
+WHERE cc.CodTipoNegocio = 2 AND contac_estado = 'Activo' AND (@IdEmpresa = 0 OR @IdEmpresa = cc.Cliente_Numero )";
 
             public static string ContactoCliente_Insert =
                 @"SELECT cc.Contac_Numero AS contactoNumero, cc.Cliente_Numero AS clienteNumero, cc.idTipoContacto, cc.Contac_Telefono1 AS telefono1,
