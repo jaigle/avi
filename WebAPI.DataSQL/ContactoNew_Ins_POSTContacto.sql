@@ -1,7 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[ContactoNew_Ins_POSTContacto] 
 	@Rut varchar(11),
 	@Nombre varchar(200),
-	@Contac_Numero numeric(18,0), 
+	@Contac_Numero numeric(18,0) OUTPUT, 
 	@CodigoTipoNegocio numeric(18,0),
     @idTipoContacto smallint,
 	@Contac_Telefono1 varchar(60),
@@ -19,14 +19,13 @@ BEGIN
 	BEGIN TRAN	
 		if ((@Contac_Numero is null) OR (@Contac_Numero = 0))
 		BEGIN
-			SET @Correlativo = (SELECT MAX(Contac_Numero)+1 FROM contactoNew)
+			SET @Contac_Numero = (SELECT MAX(Contac_Numero)+1 FROM contactoNew)
 			INSERT INTO [contactoNew]
 					   ([Contac_Numero]
 					   ,[Contac_Nombre]
 					   ,[Contac_RutContacto])
-						OUTPUT @Correlativo
 						VALUES
-					   (@Correlativo
+					   (@Contac_Numero
 					   ,@Nombre
 					   ,@Rut)
 
@@ -41,12 +40,12 @@ BEGIN
 					   ,CodTipoNegocio
 					   ,Ciudad_Codigo)
 				 VALUES
-					   (@Correlativo
+					   (@Contac_Numero
 					   ,@idTipoContacto
 					   ,@Contac_Telefono1
 					   ,@Contac_Mail
 					   ,@Contac_Celular
-					   ,@Correlativo
+					   ,(SELECT MAX(Cliente_Numero)+1 FROM contactoCliente)
 					   ,2
 					   ,@Ciudad_Codigo)
 		END
@@ -61,7 +60,6 @@ BEGIN
 					   ,Cliente_Numero
 					   ,CodTipoNegocio
 					   ,Ciudad_Codigo)
-					   OUTPUT @Contac_Numero
 				 VALUES
 					   (@Contac_Numero 
 					   ,@idTipoContacto 
@@ -70,8 +68,7 @@ BEGIN
 					   ,@Contac_Celular 
 					   ,@Cliente_Numero 
 					   ,@CodigoTipoNegocio 				
-					   ,@Ciudad_Codigo)
-					   
+					   ,@Ciudad_Codigo)				   
 		END
 
 
