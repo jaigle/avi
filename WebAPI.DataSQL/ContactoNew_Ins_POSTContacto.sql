@@ -1,4 +1,4 @@
-﻿Create PROCEDURE [dbo].[ContactoNew_Ins_POSTContacto] 
+﻿CREATE PROCEDURE [dbo].[ContactoNew_Ins_POSTContacto] 
 	@Rut varchar(11),
 	@Nombre varchar(200),
 	@Contac_Numero numeric(18,0), 
@@ -24,7 +24,7 @@ BEGIN
 					   ([Contac_Numero]
 					   ,[Contac_Nombre]
 					   ,[Contac_RutContacto])
-						OUTPUT INSERTED.[Contac_Numero]
+						OUTPUT @Correlativo
 						VALUES
 					   (@Correlativo
 					   ,@Nombre
@@ -46,8 +46,8 @@ BEGIN
 					   ,@Contac_Telefono1
 					   ,@Contac_Mail
 					   ,@Contac_Celular
-					   ,(SELECT MAX(Cliente_Numero)+1 FROM contactoCliente)
-					   ,2				--PENDIENTE POR DEFINIR ESTOS DOS
+					   ,@Correlativo
+					   ,2
 					   ,@Ciudad_Codigo)
 		END
 		ELSE
@@ -61,6 +61,7 @@ BEGIN
 					   ,Cliente_Numero
 					   ,CodTipoNegocio
 					   ,Ciudad_Codigo)
+					   OUTPUT @Contac_Numero
 				 VALUES
 					   (@Contac_Numero 
 					   ,@idTipoContacto 
@@ -70,7 +71,6 @@ BEGIN
 					   ,@Cliente_Numero 
 					   ,@CodigoTipoNegocio 				
 					   ,@Ciudad_Codigo)
-					   --(2864,2,'string','string@222.com','string',55555555, 2,'ADUANA QUILLAGUA    ')
 					   
 		END
 

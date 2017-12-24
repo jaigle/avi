@@ -13,5 +13,6 @@ namespace WebAPI.Model
         public string grupoEp { get; set; }
         public string cantidadEp { get; set; }
         public string cantFlotaVig { get; set; }
+        public string anexos { get; set; }
     }
 }

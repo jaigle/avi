@@ -39,7 +39,7 @@ namespace WebAPI.Repository
                 DynamicParameters p = new DynamicParameters();
                 p.Add(name: "@Rut", value: entity.contacRutContacto);
                 p.Add(name: "@Nombre", value: entity.contacNombre);
-                p.Add(name: "@Contac_Numero", value: entity.contacNumero);
+                p.Add(name: "@Contac_Numero", value: entity.contacNumero, direction: ParameterDirection.Output);
                 p.Add(name: "@CodigoTipoNegocio", value: entity.codigoTipoNegocio);
                 p.Add(name: "@idTipoContacto", value: entity.idTipoContacto);
                 p.Add(name: "@Contac_Telefono1", value: entity.telefono1);
@@ -49,9 +49,10 @@ namespace WebAPI.Repository
                 p.Add(name: "@Cliente_Numero", value: entity.clienteNumero);
                 p.Add(name: "@DescError", dbType: DbType.String, direction: ParameterDirection.Output, size: 1000);
                 p.Add(name: "@NumError", dbType: DbType.Int32, direction: ParameterDirection.ReturnValue);
-                numeroContacto = _cnx.Execute(sql: query, param: p, commandType: CommandType.StoredProcedure);
+                _cnx.Execute(sql: query, param: p, commandType: CommandType.StoredProcedure);
                 myError.ErrorCode = p.Get<int>(name: "@NumError");
                 myError.ErrorMessage = p.Get<string>(name: "@DescError");
+                numeroContacto = p.Get<int>(name: "@Contac_Numero");
                 return myError.ErrorCode > 0 ? throw new CustomException(message: myError.ErrorMessage, localError: myError) : numeroContacto;
             }
             catch (Exception e)
