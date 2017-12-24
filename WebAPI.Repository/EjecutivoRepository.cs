@@ -21,12 +21,12 @@ namespace WebAPI.Repository
             try
             {
                 var query = Consultas.SqlText.STCEjecutivos_Select_GetEjecutivos;
-                var list = _cnx.Query<Ejecutivo>(query);
+                var list = _cnx.Query<Ejecutivo>(sql: query);
                 return list;
             }
             catch (Exception e)
             {
-                throw new Exception("Error obteniendo Listado de Ejecutivos: " + e.Message);
+                throw new Exception(message: "Error obteniendo Listado de Ejecutivos: " + e.Message);
             }
         }
     }

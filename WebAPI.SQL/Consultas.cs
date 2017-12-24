@@ -82,12 +82,12 @@ where F.Flotas_Patente = @Patente";
  from Taller";
 
             public static string STCEjecutivos_Select_GetEjecutivos = @"SELECT [Stc_Codigo] AS stcCodigo
-      ,[Stc_Nombre] AS sctNombre
-      ,[Stc_Telefono] AS sctTelefon
-      ,[Stc_Mail] AS sctMail
-      ,[Stc_Direccion] AS sctDireccion
-      ,[Stc_Ciudad] AS sctCiudad
-  FROM [Avis].[dbo].[STCEJECUTIVOS]";
+      ,[Stc_Nombre] AS stcNombre
+      ,[Stc_Telefono] AS stcTelefono
+      ,[Stc_Mail] AS stcMail
+      ,[Stc_Direccion] AS stcDireccion
+      ,[Stc_Ciudad] AS stcCiudad
+  FROM [Avis].[dbo].[STCEJECUTIVOS] where STc_estado = 'Activo'";
         }
     }
 }

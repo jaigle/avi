@@ -5,6 +5,6 @@ namespace WebAPI.Repository
 {
     public interface IFlotaRepository : IGenericRepository<Flota>
     {
-        IEnumerable<Flota> GetListaFlota(int p1,int p2);
+        IEnumerable<Flota> GetListaFlota(int p1, int p2, int pintCliente);
     }
 }

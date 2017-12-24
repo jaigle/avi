@@ -5,6 +5,6 @@ namespace WebAPI.Repository
 {
     public interface IContratoRepository : IGenericRepository<Contrato>
     {
-        IEnumerable<Contrato> GetListaContrato(object pintCodEmpresa, object pintClienteNumero);
+        IEnumerable<Contrato> GetListaContrato(int pintCodEmpresa);
     }
 }

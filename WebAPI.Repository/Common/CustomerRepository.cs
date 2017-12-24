@@ -55,7 +55,7 @@ namespace WebAPI.Repository
         public IEnumerable<Customer> GetAllCustomers()
         {
             var query = "GetAllCustomers";
-            var list = _cnx.Query<Customer>(query, commandType: CommandType.StoredProcedure);
+            var list = _cnx.Query<Customer>(sql: query, commandType: CommandType.StoredProcedure);
             return list;
         }
     }

@@ -12,11 +12,11 @@ namespace WebAPI.Repository
         {
         }
 
-        public CustomException(string message) : base(message)
+        public CustomException(string message) : base(message: message)
         {
         }
 
-        public CustomException(string message, Exception innerException) : base(message, innerException)
+        public CustomException(string message, Exception innerException) : base(message: message, innerException: innerException)
         {
         }
 
@@ -24,7 +24,7 @@ namespace WebAPI.Repository
         {
         }
 
-        protected CustomException(SerializationInfo info, StreamingContext context) : base(info, context)
+        protected CustomException(SerializationInfo info, StreamingContext context) : base(info: info, context: context)
         {
         }
 

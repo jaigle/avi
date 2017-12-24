@@ -15,26 +15,20 @@ namespace WebAPI.Repository
             _cnx = myConection.GetConnection;
         }
 
-        public IEnumerable<Contrato> GetListaContrato(int pintCodEmpresa, int pintClienteNumero)
+        public IEnumerable<Contrato> GetListaContrato(int pintCodEmpresa)
         {
             try
             {
                 var query = "ContratoLO_Select_GetContratos";
                 DynamicParameters p = new DynamicParameters();
-                p.Add("@CodEmpresa", pintCodEmpresa);
-                p.Add("@ClienteNumero", pintClienteNumero);
-                var listaContratos = _cnx.Query<Contrato>(query, p, commandType: CommandType.StoredProcedure);
+                p.Add(name: "@CodEmpresa", value: pintCodEmpresa);
+                var listaContratos = _cnx.Query<Contrato>(sql: query, param: p, commandType: CommandType.StoredProcedure);
                 return listaContratos;
             }
             catch (Exception e)
             {
-                throw new Exception("Error obteniendo listado Contratos: " + e.Message);
+                throw new Exception(message: "Error obteniendo listado Contratos: " + e.Message);
             }
-        }
-
-        public IEnumerable<Contrato> GetListaContrato(object pintCodEmpresa, object pintClienteNumero)
-        {
-            throw new NotImplementedException();
         }
     }
 }

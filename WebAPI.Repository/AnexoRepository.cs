@@ -23,17 +23,17 @@ namespace WebAPI.Repository
             {
                 var query = "ContratoLO_GrupoDF_Select";
                 DynamicParameters p = new DynamicParameters();
-                p.Add("@IdContrato", pintContrato, DbType.String);
-                p.Add("@DescError", dbType: DbType.String, direction: ParameterDirection.Output, size: 1000);
-                p.Add("@NumError", dbType: DbType.Int32, direction: ParameterDirection.ReturnValue);
-                IEnumerable<Anexo> list = _cnx.Query<Anexo>(query, p, commandType: CommandType.StoredProcedure);
-                myError.ErrorCode = p.Get<int>("@NumError");
-                myError.ErrorMessage = p.Get<string>("@DescError");
-                return myError.ErrorCode > 0 ? throw new CustomException(myError.ErrorMessage, myError) : list.First();
+                p.Add(name: "@IdContrato", value: pintContrato, dbType: DbType.String);
+                p.Add(name: "@DescError", dbType: DbType.String, direction: ParameterDirection.Output, size: 1000);
+                p.Add(name: "@NumError", dbType: DbType.Int32, direction: ParameterDirection.ReturnValue);
+                IEnumerable<Anexo> list = _cnx.Query<Anexo>(sql: query, param: p, commandType: CommandType.StoredProcedure);
+                myError.ErrorCode = p.Get<int>(name: "@NumError");
+                myError.ErrorMessage = p.Get<string>(name: "@DescError");
+                return myError.ErrorCode > 0 ? throw new CustomException(message: myError.ErrorMessage, localError: myError) : list.First();
             }
             catch (Exception e)
             {
-                throw new Exception("Error obteniendo Anexo: " + e.Message);
+                throw new Exception(message: "Error obteniendo Anexo: " + e.Message);
             }
         }
     }

@@ -51,12 +51,12 @@ namespace WebAPI.Repository
             try
             {
                 var query = SqlText.Comuna_Select;
-                var list = _cnx.Query<Comuna>(query);
+                var list = _cnx.Query<Comuna>(sql: query);
                 return list;
             }
             catch (Exception e)
             {
-                throw new Exception("Error obteniendo Listado de Comunas de Contactos: " + e.Message);
+                throw new Exception(message: "Error obteniendo Listado de Comunas de Contactos: " + e.Message);
             }
         }
     }

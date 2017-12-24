@@ -4,7 +4,7 @@ namespace WebAPI.Model
 {
     public class Flota : Entity<int>
     {
-        public int idContratoLO_GrupoVeh { get; set; }
+        public int idContratoLOGrupoVeh { get; set; }
         public int ctoLo { get; set; }
         public string patente { get; set; }
         public string vigentesAlMesActual { get; set; }
@@ -15,5 +15,6 @@ namespace WebAPI.Model
         public DateTime fechaTermino { get; set; }
         public DateTime fechaExtension { get; set; }
         public string calidad { get; set; }
+        public string codEmpresa { get; set; }
     }
 }

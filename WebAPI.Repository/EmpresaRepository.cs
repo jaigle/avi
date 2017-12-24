@@ -23,14 +23,14 @@ namespace WebAPI.Repository
             {
                 var query = "Cliente_Select_GetEmpresa";
                 DynamicParameters p = new DynamicParameters();
-                p.Add("@ClienteRut", pstrRut, DbType.String);
-                p.Add("@NumeroCliente", pintNumeroCliente);
-                IEnumerable<Empresa> list = _cnx.Query<Empresa>(query,p, commandType: CommandType.StoredProcedure);
+                p.Add(name: "@ClienteRut", value: pstrRut, dbType: DbType.String);
+                p.Add(name: "@NumeroCliente", value: pintNumeroCliente);
+                IEnumerable<Empresa> list = _cnx.Query<Empresa>(sql: query,param: p, commandType: CommandType.StoredProcedure);
                 return list.First();
             }
             catch (Exception e)
             {
-                throw new Exception("Error obteniendo Empresa: " + e.Message);
+                throw new Exception(message: "Error obteniendo Empresa: " + e.Message);
             }
         }
 
@@ -68,28 +68,28 @@ namespace WebAPI.Repository
             {
                 var query = "Cliente_PUTEmpresa";
                 DynamicParameters p = new DynamicParameters();
-                p.Add("@clienteNumero", entity.clienteNumero);
-                p.Add("@clienteRut", entity.clienteRut);
-                p.Add("@ciudadCodigo", entity.ciudadCodigo);
-                p.Add("@clienteNomRazonSocial", entity.clienteNomRazonSocial);
-                p.Add("@clienteGiro", entity.clienteGiro);
-                p.Add("@clienteDirComercial", entity.clienteDirComercial);
-                p.Add("@clienteCodPostal", entity.clienteCodPostal);
-                p.Add("@clienteTelefono", entity.clienteNumero);
-                p.Add("@clienteMail", entity.clienteMail);
-                p.Add("@clienteWww", entity.clienteWww);
-                p.Add("@comunaCodigo", entity.comunaCodigo);
-                p.Add("@clienteRepresentante", entity.clienteRepresentante);
-                p.Add("@DescError", dbType: DbType.String, direction: ParameterDirection.Output, size: 1000);
-                p.Add("@NumError", dbType: DbType.Int32, direction: ParameterDirection.ReturnValue);
-                numeroContacto = _cnx.Execute(query, p, commandType: CommandType.StoredProcedure);
-                myError.ErrorCode = p.Get<int>("@NumError");
-                myError.ErrorMessage = p.Get<string>("@DescError");
-                return myError.ErrorCode > 0 ? throw new CustomException(myError.ErrorMessage, myError) : numeroContacto;
+                p.Add(name: "@clienteNumero", value: entity.clienteNumero);
+                p.Add(name: "@clienteRut", value: entity.clienteRut);
+                p.Add(name: "@ciudadCodigo", value: entity.ciudadCodigo);
+                p.Add(name: "@clienteNomRazonSocial", value: entity.clienteNomRazonSocial);
+                p.Add(name: "@clienteGiro", value: entity.clienteGiro);
+                p.Add(name: "@clienteDirComercial", value: entity.clienteDirComercial);
+                p.Add(name: "@clienteCodPostal", value: entity.clienteCodPostal);
+                p.Add(name: "@clienteTelefono", value: entity.clienteNumero);
+                p.Add(name: "@clienteMail", value: entity.clienteMail);
+                p.Add(name: "@clienteWww", value: entity.clienteWww);
+                p.Add(name: "@comunaCodigo", value: entity.comunaCodigo);
+                p.Add(name: "@clienteRepresentante", value: entity.clienteRepresentante);
+                p.Add(name: "@DescError", dbType: DbType.String, direction: ParameterDirection.Output, size: 1000);
+                p.Add(name: "@NumError", dbType: DbType.Int32, direction: ParameterDirection.ReturnValue);
+                numeroContacto = _cnx.Execute(sql: query, param: p, commandType: CommandType.StoredProcedure);
+                myError.ErrorCode = p.Get<int>(name: "@NumError");
+                myError.ErrorMessage = p.Get<string>(name: "@DescError");
+                return myError.ErrorCode > 0 ? throw new CustomException(message: myError.ErrorMessage, localError: myError) : numeroContacto;
             }
             catch (Exception e)
             {
-                throw new Exception("Error actualizando  Empresa: " + e.Message);
+                throw new Exception(message: "Error actualizando  Empresa: " + e.Message);
             }
         }
 

@@ -17,14 +17,14 @@ namespace ApiLayer.Library
             _flotaRepository = new FlotaRepository();
         }
 
-        public ResultModel GetListadoFlota(int pintContrato, int pintGrupoVehiculo, string token)
+        public ResultModel GetListadoFlota( int pintIdLCiente, int pintContrato, int pintGrupoVehiculo, string token)
         {
             //ResultModel resultModel = CheckToken(token);
             ResultModel resultModel = new ResultModel();
             try
             {
                 if (resultModel.Result)
-                    resultModel.Payload = Tools.Base64Encode(JsonConvert.SerializeObject(_flotaRepository.GetListaFlota(pintContrato, pintGrupoVehiculo)));
+                    resultModel.Payload = Tools.Base64Encode(JsonConvert.SerializeObject(_flotaRepository.GetListaFlota(pintContrato, pintGrupoVehiculo, pintIdLCiente)));
             }
             catch (Exception e)
             {

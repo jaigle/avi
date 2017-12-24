@@ -14,11 +14,11 @@ namespace ApiLayer.Controllers
     {
         // GET: api/Test
         //public ResultModel GetComunas([FromUri] string token)
-        [Route("empresa/{pintCodEmpresa}/cliente/{pintClienteNumero}")]
-        public ResultModel GetListadoContrato(int pintCodEmpresa, int pintClienteNumero)
+        [Route("empresa/{pintCodEmpresa}")]
+        public ResultModel GetListadoContrato(int pintCodEmpresa)
         {
             ContratoManager entityManager = new ContratoManager();
-            return entityManager.GetListadoContratos(String.Empty, pintCodEmpresa, pintClienteNumero);
+            return entityManager.GetListadoContratos(String.Empty, pintCodEmpresa);
         }
     }
 }

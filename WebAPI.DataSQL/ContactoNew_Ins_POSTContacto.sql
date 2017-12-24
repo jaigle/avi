@@ -12,11 +12,45 @@
 	@DescError	varchar(1000) OUTPUT
 AS
 BEGIN
+    DECLARE @Correlativo int
+    
 	set nocount on	
 	SELECT @Contac_Numero = cn.Contac_Numero FROM contactoNew cn WHERE cn.Contac_RutContacto = @Rut
 	BEGIN TRAN	
-	
-		if (@Contac_Numero <> 0)
+		if ((@Contac_Numero is null) OR (@Contac_Numero = 0))
+		BEGIN
+			SET @Correlativo = (SELECT MAX(Contac_Numero)+1 FROM contactoNew)
+			INSERT INTO [contactoNew]
+					   ([Contac_Numero]
+					   ,[Contac_Nombre]
+					   ,[Contac_RutContacto])
+						OUTPUT INSERTED.[Contac_Numero]
+						VALUES
+					   (@Correlativo
+					   ,@Nombre
+					   ,@Rut)
+
+							
+			INSERT INTO [contactoCliente]
+					   ([Contac_Numero]
+					   ,[idTipoContacto]
+					   ,[Contac_Telefono1]
+					   ,[Contac_Mail]
+					   ,[Contac_Celular]
+					   ,Cliente_Numero
+					   ,CodTipoNegocio
+					   ,Ciudad_Codigo)
+				 VALUES
+					   (@Correlativo
+					   ,@idTipoContacto
+					   ,@Contac_Telefono1
+					   ,@Contac_Mail
+					   ,@Contac_Celular
+					   ,(SELECT MAX(Cliente_Numero)+1 FROM contactoCliente)
+					   ,2				--PENDIENTE POR DEFINIR ESTOS DOS
+					   ,@Ciudad_Codigo)
+		END
+		ELSE
 		BEGIN
 			INSERT INTO [contactoCliente]
 					   ([Contac_Numero]
@@ -39,36 +73,7 @@ BEGIN
 					   --(2864,2,'string','string@222.com','string',55555555, 2,'ADUANA QUILLAGUA    ')
 					   
 		END
-		ELSE
-		BEGIN
-			INSERT INTO [contactoNew]
-					   ([Contac_Numero]
-					   ,[Contac_Nombre]
-					   ,[Contac_RutContacto])
-						OUTPUT INSERTED.[Contac_Numero]
-						VALUES
-					   ((SELECT MAX(Contac_Numero)+1 AS NuevoNumero FROM contactoNew),@Nombre, @Rut)
 
-							
-			INSERT INTO [contactoCliente]
-					   ([Contac_Numero]
-					   ,[idTipoContacto]
-					   ,[Contac_Telefono1]
-					   ,[Contac_Mail]
-					   ,[Contac_Celular]
-					   ,Cliente_Numero
-					   ,CodTipoNegocio
-					   ,Ciudad_Codigo)
-				 VALUES
-					   (@Contac_Numero
-					   ,@idTipoContacto
-					   ,@Contac_Telefono1
-					   ,@Contac_Mail
-					   ,@Contac_Celular
-					   ,(SELECT MAX(Cliente_Numero)+1 FROM contactoCliente)
-					   ,2				--PENDIENTE POR DEFINIR ESTOS DOS
-					   ,@Ciudad_Codigo)
-		END
 
 		declare	@NumError int 
 		set		@NumError = 0

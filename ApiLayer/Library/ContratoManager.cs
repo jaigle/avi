@@ -17,14 +17,14 @@ namespace ApiLayer.Library
             _contratoRepository = new ContratoRepository();
         }
 
-        public ResultModel GetListadoContratos(string token, int pintCodEmpresa, int pintClienteNumero)
+        public ResultModel GetListadoContratos(string token, int pintCodEmpresa)
         {
             //ResultModel resultModel = CheckToken(token);
             ResultModel resultModel = new ResultModel();
             try
             {
                 if (resultModel.Result)
-                    resultModel.Payload = Tools.Base64Encode(JsonConvert.SerializeObject(_contratoRepository.GetListaContrato(pintCodEmpresa, pintClienteNumero)));
+                    resultModel.Payload = Tools.Base64Encode(JsonConvert.SerializeObject(_contratoRepository.GetListaContrato(pintCodEmpresa)));
             }
             catch (Exception e)
             {

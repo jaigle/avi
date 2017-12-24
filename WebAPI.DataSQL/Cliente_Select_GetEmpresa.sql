@@ -18,17 +18,18 @@ C.[Cliente_Numero] AS clienteNumero
       ,[Stc_Codigo] AS stcCodigo
       ,[Comuna_Codigo] AS comunaCodigo
       ,[Cliente_CodigoPais] AS clienteCodigoPais
-      ,CC.DescCateg AS descCategoria
-      ,R.DescRubro AS descRubro
+      ,C.DescCateg AS descCategoria
+      ,C.DescRubro AS descRubro
       ,[Cliente_Representante] AS clienteRepresentante
-      ,F.CodTipoNegocio
-      ,F.idModoFacturacion
-      ,F.diaFacturacion
-      ,F.diasPago
-  FROM [clientes] AS C INNER JOIN facturacionCondiciones as F on F.Cliente_Numero = C.Cliente_Numero
-  INNER JOIN RUBRO AS R ON R.IdRubro = C.IdRubro 
-  INNER JOIN ClientesCategoria AS CC ON CC.CodCateg = C.CodCateg 
+      ,CodTipoNegocio
+      ,F.descripcion AS descModoFacturacion
+      ,diaFacturacion
+      ,diasPago
+      ,C.OC as oc
+      ,C.HES as hes
+  FROM cliente_drilo AS C INNER JOIN facturacionModo AS F ON F.idModoFacturacion = C.idModoFacturacion
   WHERE ((C.Cliente_Rut = @ClienteRut) OR (@ClienteRut = '0')) AND ((@NumeroCliente = 0) OR (C.Cliente_Numero = @NumeroCliente))
 END
+
 
 

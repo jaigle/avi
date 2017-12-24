@@ -14,10 +14,7 @@ namespace WebAPI.Test.Repositories
         ComunaRepository objRepo;
 
         [TestInitialize]
-        public void Initialize()
-        {
-            objRepo = new ComunaRepository(); 
-        }
+        public void Initialize() => objRepo = new ComunaRepository();
 
         [TestMethod]
         public void Comunas_getAll()

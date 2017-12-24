@@ -37,26 +37,26 @@ namespace WebAPI.Repository
             {                
                 var query = "ContactoNew_Ins_POSTContacto";
                 DynamicParameters p = new DynamicParameters();
-                p.Add("@Rut", entity.contacRutContacto);
-                p.Add("@Nombre", entity.contacNombre);
-                p.Add("@Contac_Numero", entity.contacNumero);
-                p.Add("@CodigoTipoNegocio", entity.codigoTipoNegocio);
-                p.Add("@idTipoContacto", entity.idTipoContacto);
-                p.Add("@Contac_Telefono1", entity.telefono1);
-                p.Add("@Contac_Mail", entity.contacMail);
-                p.Add("@Contac_Celular", entity.contacCelular); 
-                p.Add("@Ciudad_Codigo", entity.ciudadCodigo);
-                p.Add("@Cliente_Numero", entity.clienteNumero);
-                p.Add("@DescError", dbType: DbType.String, direction: ParameterDirection.Output, size: 1000);
-                p.Add("@NumError", dbType: DbType.Int32, direction: ParameterDirection.ReturnValue);
-                numeroContacto = _cnx.Execute(query, p, commandType: CommandType.StoredProcedure);
-                myError.ErrorCode = p.Get<int>("@NumError");
-                myError.ErrorMessage = p.Get<string>("@DescError");
-                return myError.ErrorCode > 0 ? throw new CustomException(myError.ErrorMessage, myError) : numeroContacto;
+                p.Add(name: "@Rut", value: entity.contacRutContacto);
+                p.Add(name: "@Nombre", value: entity.contacNombre);
+                p.Add(name: "@Contac_Numero", value: entity.contacNumero);
+                p.Add(name: "@CodigoTipoNegocio", value: entity.codigoTipoNegocio);
+                p.Add(name: "@idTipoContacto", value: entity.idTipoContacto);
+                p.Add(name: "@Contac_Telefono1", value: entity.telefono1);
+                p.Add(name: "@Contac_Mail", value: entity.contacMail);
+                p.Add(name: "@Contac_Celular", value: entity.contacCelular); 
+                p.Add(name: "@Ciudad_Codigo", value: entity.ciudadCodigo);
+                p.Add(name: "@Cliente_Numero", value: entity.clienteNumero);
+                p.Add(name: "@DescError", dbType: DbType.String, direction: ParameterDirection.Output, size: 1000);
+                p.Add(name: "@NumError", dbType: DbType.Int32, direction: ParameterDirection.ReturnValue);
+                numeroContacto = _cnx.Execute(sql: query, param: p, commandType: CommandType.StoredProcedure);
+                myError.ErrorCode = p.Get<int>(name: "@NumError");
+                myError.ErrorMessage = p.Get<string>(name: "@DescError");
+                return myError.ErrorCode > 0 ? throw new CustomException(message: myError.ErrorMessage, localError: myError) : numeroContacto;
             }
             catch (Exception e)
             {
-                throw new Exception("Error adicionado ContactNew : " + e.Message);
+                throw new Exception(message: "Error adicionado ContactNew : " + e.Message);
             }
         }
 
@@ -81,12 +81,12 @@ namespace WebAPI.Repository
             try
             {
                 var query = Consultas.SqlText.TipoContacto_Select;
-                IEnumerable<TipoContacto> entity = _cnx.Query<TipoContacto>(query);
+                IEnumerable<TipoContacto> entity = _cnx.Query<TipoContacto>(sql: query);
                 return entity;
             }
             catch (Exception e)
             {
-                throw new Exception("Error obteniendo Listado de Tipos de Contactos: " + e.Message);
+                throw new Exception(message: "Error obteniendo Listado de Tipos de Contactos: " + e.Message);
             }
         }
 
@@ -100,12 +100,12 @@ namespace WebAPI.Repository
             try
             {
                 var query = Consultas.SqlText.ContactoNew_SelectPorRut;
-                ContactoNew entity = _cnx.QuerySingle<ContactoNew>(query, new { Rut = new DbString { Value = valueContacRutContacto, IsFixedLength = false, Length = 11, IsAnsi = true } });
+                ContactoNew entity = _cnx.QuerySingle<ContactoNew>(sql: query, param: new { Rut = new DbString { Value = valueContacRutContacto, IsFixedLength = false, Length = 11, IsAnsi = true } });
                 return entity;
             }
             catch (Exception e)
             {
-                throw new Exception("Error obteniendo ContactNew por Rut: " + e.Message);
+                throw new Exception(message: "Error obteniendo ContactNew por Rut: " + e.Message);
             }
         }
 
@@ -120,7 +120,7 @@ namespace WebAPI.Repository
             try
             {
                 var query = Consultas.SqlText.ContactoCliente_Insert;
-                ContactoCliente entity = _cnx.QuerySingle<ContactoCliente>(query, new
+                ContactoCliente entity = _cnx.QuerySingle<ContactoCliente>(sql: query, param: new
                 {
                     ContactNumero = pintContactNumero,
                     ClienteNumero = pintClienteNumero
@@ -129,7 +129,7 @@ namespace WebAPI.Repository
             }
             catch (Exception e)
             {
-                throw new Exception("Error obteniendo ContactCliente por su llave: " + e.Message);
+                throw new Exception(message: "Error obteniendo ContactCliente por su llave: " + e.Message);
             }
         }
 
@@ -142,7 +142,7 @@ namespace WebAPI.Repository
             try
             {
                 var query = Consultas.SqlText.ContactNew_Max;
-                var numero = _cnx.Query<int>(query).First();
+                var numero = _cnx.Query<int>(sql: query).First();
                 return numero;
             }
             catch (Exception e)
@@ -156,7 +156,7 @@ namespace WebAPI.Repository
             try
             {
                 var query = Consultas.SqlText.ContactoNew_SelectPorContactNumber;
-                var entity = _cnx.QuerySingle<ContactoNew>(query, new
+                var entity = _cnx.QuerySingle<ContactoNew>(sql: query, param: new
                 {
                     Numero = pintContactNumber
                 });
@@ -164,7 +164,7 @@ namespace WebAPI.Repository
             }
             catch (Exception e)
             {
-                throw new Exception("Error obteiendo ContactNew por Contac_Numero: " + e.Message);
+                throw new Exception(message: "Error obteiendo ContactNew por Contac_Numero: " + e.Message);
             }
         }
 
@@ -178,7 +178,7 @@ namespace WebAPI.Repository
             try
             {
                 var query = Consultas.SqlText.Contactos_SelectPorEmpresa;
-                IEnumerable<ContactoEmpresa> entity = _cnx.Query<ContactoEmpresa>(query, new
+                IEnumerable<ContactoEmpresa> entity = _cnx.Query<ContactoEmpresa>(sql: query, param: new
                 {
                     IdEmpresa = pintIdEmpresa
                 }).ToList();
@@ -186,7 +186,7 @@ namespace WebAPI.Repository
             }
             catch (Exception e)
             {
-                throw new Exception("Error obteniendo Contactos por Empresa: " + e.Message);
+                throw new Exception(message: "Error obteniendo Contactos por Empresa: " + e.Message);
             }
         }
 
@@ -199,7 +199,7 @@ namespace WebAPI.Repository
             try
             {
                 var query = Consultas.SqlText.ContactoCliente_Update;
-                _cnx.Execute(query, new
+                _cnx.Execute(sql: query, param: new
                 {
                     TipoContrato = entity.idTipoContacto,
                     Telefono1 = entity.telefono1,
@@ -212,7 +212,7 @@ namespace WebAPI.Repository
             }
             catch (Exception e)
             {
-                throw new Exception("Error actualizando ContactosClientes: " + e.Message);
+                throw new Exception(message: "Error actualizando ContactosClientes: " + e.Message);
             }
         }
 
@@ -222,7 +222,7 @@ namespace WebAPI.Repository
             try
             {
                 var query = Consultas.SqlText.ContactoCliente_Delete;
-                _cnx.Execute(query, new
+                _cnx.Execute(sql: query, param: new
                 {
                     ContactNumero = pintContactNumero,
                     ClienteNumero = pintClienteNumero
@@ -230,7 +230,7 @@ namespace WebAPI.Repository
             }
             catch (Exception e)
             {
-                throw new Exception("Error desactivando ContactosClientes: " + e.Message);
+                throw new Exception(message: "Error desactivando ContactosClientes: " + e.Message);
             }
         }
 

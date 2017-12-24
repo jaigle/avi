@@ -1,16 +1,19 @@
-﻿CREATE PROCEDURE ContratoLO_Vehiculos_Select
+﻿CREATE PROCEDURE [dbo].[ContratoLO_Vehiculos_Select]
 	@IdContrato int
 	,@IdGrupoVehiculo int
+	,@IdCliente int
 	,@DescError	varchar(1000) ='' OUTPUT
 AS
 BEGIN
 BEGIN TRAN
 
-select IDContratoloGrupoEP AS iDContratoloGrupoEP, CtoLO AS ctoLO, Patente AS patente, VigenteAlMesActual AS vigenteAlMesActual, 
+select IDContratoLo_GrupoVeh AS idContratoLOGrupoVeh, CtoLO AS ctoLO, Patente AS patente, VigenteAlMesActual AS vigenteAlMesActual, 
 SubCat_NomMarca AS subCatNomMarca,SubCat_NomModelo AS subCatNomModelo,FechaIngreso AS fechaIngreso, FechaDevolucion AS fechaDevolucion, 
-FechaExtension AS fechaExtension, FechaTermino AS fechaTermino, Calidad AS calidad
+FechaExtension AS fechaExtension, FechaTermino AS fechaTermino, Calidad AS calidad, CodEmpresa AS codEmpresa
 FROM central.dbo.ContratoLO_Vehiculos_Drilo AS Pcpal    
-WHERE ((@IdContrato = 0) OR (Pcpal.CtoLO = @IdContrato)) AND ((@IdGrupoVehiculo = 0) OR (Pcpal.IDContratoLo_GrupoVeh = @IdGrupoVehiculo))
+WHERE ((@IdContrato = 0) OR (Pcpal.CtoLO = @IdContrato))
+AND ((@IdCliente = 0) OR (Pcpal.CodEmpresa = @IdCliente) ) 
+AND ((@IdGrupoVehiculo = 0) OR (Pcpal.IDContratoLo_GrupoVeh = @IdGrupoVehiculo))
    
 	declare	@NumError int = 0
 	set	@NumError= @@Error

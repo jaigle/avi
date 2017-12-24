@@ -33,7 +33,7 @@ namespace WebAPI.Repository
             try
             {
                 var query = "AgendaMant_Ins_POSTMantenimiento";
-                valor = _cnx.ExecuteScalar<int>(query, new
+                valor = _cnx.ExecuteScalar<int>(sql: query, param: new
                 {
                     IdEstadoAgenda = 1,
                     PendConf = "Avis",
@@ -54,7 +54,7 @@ namespace WebAPI.Repository
             }
             catch (Exception e)
             {
-                throw new Exception("Error insertando Mantencion: " + e.Message);
+                throw new Exception(message: "Error insertando Mantencion: " + e.Message);
             }
             return valor;
         }
@@ -70,7 +70,7 @@ namespace WebAPI.Repository
             try
             {
                 var query = "[AgendaMant_Upd_PUTMantenimiento]";
-                valor = _cnx.ExecuteScalar<int>(query, new
+                valor = _cnx.ExecuteScalar<int>(sql: query, param: new
                 {
                     IdEstadoAgenda = entity.idEstadoAgenda,
                     IdAgenda = entity.Id
@@ -78,7 +78,7 @@ namespace WebAPI.Repository
             }
             catch (Exception e)
             {
-                throw new Exception("Error actualizando registro: " + e.Message);
+                throw new Exception(message: "Error actualizando registro: " + e.Message);
             }
             return valor;
         }
@@ -99,7 +99,7 @@ namespace WebAPI.Repository
             try
             {
                 var query = "AgendaMant_Select_GetListMantencion";
-                valor = _cnx.Query<MantencionDto>(query, new
+                valor = _cnx.Query<MantencionDto>(sql: query, param: new
                 {
                     IdAgenda = pintIdAgenda,
                     NumCliente = pintNumCliente
@@ -107,7 +107,7 @@ namespace WebAPI.Repository
             }
             catch (Exception e)
             {
-                throw new Exception("Error seleccionando de Mantencion: registro: " + e.Message);
+                throw new Exception(message: "Error seleccionando de Mantencion: registro: " + e.Message);
             }
             return valor;
         }
@@ -121,19 +121,19 @@ namespace WebAPI.Repository
 
                 var query = "AgendaMant_Validacion";
                 DynamicParameters p = new DynamicParameters();
-                p.Add("@Mensaje", "",DbType.String,ParameterDirection.Output);
-                p.Add("@IdTaller", pintIdTaller);
-                p.Add("@FechaAgenda", pFecha);
-                p.Add("@NumError", dbType: DbType.Int16, direction: ParameterDirection.Output);
-                valor = _cnx.Query<MantencionDisponible>(query, p, commandType: CommandType.StoredProcedure);
-                myError.ErrorCode = p.Get<Int16>("@NumError");
-                myError.ErrorMessage = p.Get<string>("@Mensaje");
+                p.Add(name: "@Mensaje", value: "",dbType: DbType.String,direction: ParameterDirection.Output);
+                p.Add(name: "@IdTaller", value: pintIdTaller);
+                p.Add(name: "@FechaAgenda", value: pFecha);
+                p.Add(name: "@NumError", dbType: DbType.Int16, direction: ParameterDirection.Output);
+                valor = _cnx.Query<MantencionDisponible>(sql: query, param: p, commandType: CommandType.StoredProcedure);
+                myError.ErrorCode = p.Get<Int16>(name: "@NumError");
+                myError.ErrorMessage = p.Get<string>(name: "@Mensaje");
             }
             catch (Exception e)
             {
-                throw new Exception("Error seleccionando la Disponibilidad: registro: " + e.Message);
+                throw new Exception(message: "Error seleccionando la Disponibilidad: registro: " + e.Message);
             }
-            return myError.ErrorCode > 0 ? throw new CustomException(myError.ErrorMessage, myError) : valor;
+            return myError.ErrorCode > 0 ? throw new CustomException(message: myError.ErrorMessage, localError: myError) : valor;
         }
     }
 }

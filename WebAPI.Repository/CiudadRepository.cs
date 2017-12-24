@@ -20,12 +20,12 @@ namespace WebAPI.Repository
             try
             {
                 var query = Consultas.SqlText.Ciudad_Select;
-                var list = _cnx.Query<Ciudad>(query);
+                var list = _cnx.Query<Ciudad>(sql: query);
                 return list;
             }
             catch (Exception e)
             {
-                throw new Exception("Error obteniendo Listado de Ciudaddes: " + e.Message);
+                throw new Exception(message: "Error obteniendo Listado de Ciudaddes: " + e.Message);
             }
         }
     }

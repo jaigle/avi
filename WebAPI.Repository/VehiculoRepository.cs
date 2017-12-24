@@ -21,12 +21,12 @@ namespace WebAPI.Repository
             try
             {
                 var query = Consultas.SqlText.Comuna_Select;
-                var list = _cnx.Query<Vehiculo>(query);
+                var list = _cnx.Query<Vehiculo>(sql: query);
                 return list;
             }
             catch (Exception e)
             {
-                throw new Exception("Error obteniendo Listado de Vehiculos: " + e.Message);
+                throw new Exception(message: $"Error obteniendo Listado de Vehiculos: {e.Message}");
             }
         }
 
@@ -35,7 +35,7 @@ namespace WebAPI.Repository
             try
             {
                 var query = Consultas.SqlText.FLota_Select;
-                Vehiculo entity = _cnx.QuerySingle<Vehiculo>(query, new
+                Vehiculo entity = _cnx.QuerySingle<Vehiculo>(sql: query, param: new
                 {
                     Patente = pstrPatente
                 });
@@ -43,7 +43,7 @@ namespace WebAPI.Repository
             }
             catch (Exception e)
             {
-                throw new Exception("Error obteniendo Vehiculo: " + e.Message);
+                throw new Exception(message: "Error obteniendo Vehiculo: " + e.Message);
             }
         }
     }

@@ -22,9 +22,11 @@ namespace WebAPI.Model
         public string descRubro { get; set; }
         public string clienteRepresentante { get; set; }
         public string codTipoNegocio { get; set; }
-        public int idModoFacturacion { get; set; }
+        public string descModoFacturacion { get; set; }
         public int diaFacturacion { get; set; }
         public int diasPago { get; set; }
+        public string oc { get; set; }
+        public string hes { get; set; }
     }
 
     public class Empresa_put : Entity<int>
