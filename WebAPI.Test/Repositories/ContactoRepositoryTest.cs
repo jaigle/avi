@@ -71,7 +71,7 @@ namespace WebAPI.Test.Repositories
         public void ContactoCliente_BuscarPorLlave()
         {
             //Act
-            ContactoCliente result = objRepo.GetContactoClienteByKey(9163, 9690);
+            ContactoEmpresa result = objRepo.GetContactoClienteByKey(9163, 9690,2);
 
             //Assert
             Assert.IsNotNull(result);

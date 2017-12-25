@@ -81,13 +81,13 @@ namespace ApiLayer.Library
             return resultModel;
         }
 
-        public ResultModel GetContactoClientePorLlave(int pintContactNumero, int pintClienteNumero, string token)
+        public ResultModel GetContactoClientePorLlave(int pintContactNumero, int pintClienteNumero, int pintTipoContacto, string token)
         {
             ResultModel resultModel = CheckToken(token);
             if (!resultModel.Result) return resultModel;
             try
             {
-                resultModel.Payload = Tools.Base64Encode(JsonConvert.SerializeObject(_contactoRepository.GetContactoClienteByKey(pintContactNumero, pintClienteNumero)));
+                resultModel.Payload = Tools.Base64Encode(JsonConvert.SerializeObject(_contactoRepository.GetContactoClienteByKey(pintContactNumero, pintClienteNumero, pintTipoContacto)));
             }
             catch (Exception e)
             {
@@ -128,16 +128,23 @@ namespace ApiLayer.Library
             if (!resultModel.Result) return resultModel;
             try
             {
-                _contactoRepository.PutContactoCliente(entity);
-                resultModel.Payload = Tools.Base64Encode(JsonConvert.SerializeObject(_contactoRepository.GetContactoClienteByKey(entity.contactoNumero, entity.clienteNumero)));
+                resultModel.Payload = Tools.Base64Encode(JsonConvert.SerializeObject(_contactoRepository.PutContactoCliente(entity)));
+            }
+            catch (CustomException myException)
+            {
+                resultModel.ErrorMessage = myException.LocalError.ErrorMessage;
+                resultModel.ErrorCode = myException.LocalError.ErrorCode;
+                resultModel.Payload = String.Empty;
+                resultModel.Result = false;
+                resultModel.Token = String.Empty;
             }
             catch (Exception e)
             {
                 resultModel.ErrorMessage = e.Message;
-                resultModel.ErrorCode = 0;
+                resultModel.ErrorCode = 10;
                 resultModel.Payload = String.Empty;
                 resultModel.Result = false;
-                resultModel.Token = token;
+                resultModel.Token = String.Empty;
             }
             return resultModel;
         }

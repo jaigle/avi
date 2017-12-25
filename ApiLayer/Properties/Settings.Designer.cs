@@ -31,5 +31,23 @@ namespace ApiLayer.Properties {
                 return ((int)(this["tokenTimeToLive"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("avislo")]
+        public string tokenSecUser {
+            get {
+                return ((string)(this["tokenSecUser"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("@+$EP/^WXy>E7XD?")]
+        public string tokenSecPass {
+            get {
+                return ((string)(this["tokenSecPass"]));
+            }
+        }
     }
 }

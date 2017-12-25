@@ -116,16 +116,16 @@ namespace WebAPI.Repository
         /// <param name="pintContactNumero">Parametro ContactNumero</param>
         /// <param name="pintClienteNumero">PArametro ClienteNumero</param>
         /// <returns></returns>
-        public ContactoCliente GetContactoClienteByKey(int pintContactNumero, int pintClienteNumero)
+        public ContactoEmpresa GetContactoClienteByKey(int pintContactNumero, int pintClienteNumero, int pintTipoContacto)
         {
             try
             {
-                var query = Consultas.SqlText.ContactoCliente_Insert;
-                ContactoCliente entity = _cnx.QuerySingle<ContactoCliente>(sql: query, param: new
-                {
-                    ContactNumero = pintContactNumero,
-                    ClienteNumero = pintClienteNumero
-                });
+                var query = "Contacto_Select_GetListaContactos";
+                DynamicParameters p = new DynamicParameters();
+                p.Add(name: "@IdEmpresa", value: pintClienteNumero);
+                p.Add(name: "@Contac_Numero", value: pintContactNumero);
+                p.Add(name: "@IdTipoContacto", value: pintTipoContacto);
+                var entity = _cnx.QuerySingle<ContactoEmpresa>(sql: query, param: p, commandType: CommandType.StoredProcedure);
                 return entity;
             }
             catch (Exception e)
@@ -181,6 +181,8 @@ namespace WebAPI.Repository
                 var query = "Contacto_Select_GetListaContactos";
                 DynamicParameters p = new DynamicParameters();
                 p.Add(name: "@IdEmpresa", value: pintIdEmpresa);
+                p.Add(name: "@Contac_Numero", value: 0);
+                p.Add(name: "@IdTipoContacto", value: 0);
                 var listaContactos = _cnx.Query<ContactoEmpresa>(sql: query, param: p, commandType: CommandType.StoredProcedure);
                 return listaContactos;
             }
@@ -194,25 +196,33 @@ namespace WebAPI.Repository
         /// Actualiza un registro de Contacto de Clientes
         /// </summary>
         /// <param name="entity"></param>
-        public void PutContactoCliente(ContactoCliente entity)
+        public int PutContactoCliente(ContactoCliente entity)
         {
+            Error myError = new Error();
+            int numeroContacto;
+
             try
             {
-                var query = Consultas.SqlText.ContactoCliente_Update;
-                _cnx.Execute(sql: query, param: new
-                {
-                    TipoContrato = entity.idTipoContacto,
-                    Telefono1 = entity.telefono1,
-                    Celular = entity.contacCelular,
-                    Mail = entity.contacMail,
-                    Ciudad = entity.ciudadCodigo,
-                    ContactNumero = entity.contactoNumero,
-                    ClienteNumero = entity.clienteNumero
-                });
+                var query = "Contacto_Upd_PUTContacto";
+                DynamicParameters p = new DynamicParameters();
+                p.Add(name: "@Contac_Numero", value: entity.contactoNumero);
+                p.Add(name: "@idTipoContacto", value: entity.idTipoContacto);
+                p.Add(name: "@Contac_Telefono1", value: entity.telefono1);
+                p.Add(name: "@Contac_Mail", value: entity.contacMail);
+                p.Add(name: "@Contac_Celular", value: entity.contacCelular);
+                p.Add(name: "@Ciudad_Codigo", value: entity.ciudadCodigo);
+                p.Add(name: "@Cliente_Numero", value: entity.clienteNumero);
+                p.Add(name: "@DescError", dbType: DbType.String, direction: ParameterDirection.Output, size: 1000);
+                p.Add(name: "@NumError", dbType: DbType.Int32, direction: ParameterDirection.ReturnValue);
+                _cnx.Execute(sql: query, param: p, commandType: CommandType.StoredProcedure);
+                myError.ErrorCode = p.Get<int>(name: "@NumError");
+                myError.ErrorMessage = p.Get<string>(name: "@DescError");
+                numeroContacto = p.Get<int>(name: "@Contac_Numero");
+                return myError.ErrorCode > 0 ? throw new CustomException(message: myError.ErrorMessage, localError: myError) : numeroContacto;
             }
             catch (Exception e)
             {
-                throw new Exception(message: "Error actualizando ContactosClientes: " + e.Message);
+                throw new Exception(message: $"Error actualizando Contacto : {e.Message}");
             }
         }
 
