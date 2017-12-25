@@ -31,13 +31,13 @@ namespace ApiLayer.Controllers
             return contactoManager.GetContactoPorEmpresa(idEmpresa, String.Empty);
         }
 
-        [Route("contactoCliente/{id1}/cliente/{id2}")]
-        //public ResultModel GetContactoPorEmpresa(int id1, int id2, [FromUri] string token)
-        public ResultModel GetContactoPorEmpresa(int id1, int id2)
-        {
-            ContactoManager contactoManager = new ContactoManager();
-            return contactoManager.GetContactoClientePorLlave(id1,id2, String.Empty);
-        }
+        //[Route("contactoCliente/{id1}/cliente/{id2}")]
+        ////public ResultModel GetContactoPorEmpresa(int id1, int id2, [FromUri] string token)
+        //public ResultModel GetContactoPorEmpresa(int id1, int id2)
+        //{
+        //    ContactoManager contactoManager = new ContactoManager();
+        //    return contactoManager.GetContactoClientePorLlave(id1,id2, String.Empty);
+        //}
 
         [Route("deletecontactoCliente/{id1}/cliente/{id2}")]
         //public ResultModel DeleteContactoPorEmpresa(int id1, int id2, [FromUri] string token)

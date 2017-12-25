@@ -69,4 +69,7 @@
     <None Include="ContratoLO_Vehiculos_Select.sql" />
     <None Include="Cliente_PUTEmpresa.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <Build Include="Contacto_Select_GetListaContactos.sql" />
+  </ItemGroup>
 </Project>

@@ -178,16 +178,15 @@ namespace WebAPI.Repository
         {
             try
             {
-                var query = Consultas.SqlText.Contactos_SelectPorEmpresa;
-                IEnumerable<ContactoEmpresa> entity = _cnx.Query<ContactoEmpresa>(sql: query, param: new
-                {
-                    IdEmpresa = pintIdEmpresa
-                }).ToList();
-                return entity;
+                var query = "Contacto_Select_GetListaContactos";
+                DynamicParameters p = new DynamicParameters();
+                p.Add(name: "@IdEmpresa", value: pintIdEmpresa);
+                var listaContactos = _cnx.Query<ContactoEmpresa>(sql: query, param: p, commandType: CommandType.StoredProcedure);
+                return listaContactos;
             }
             catch (Exception e)
             {
-                throw new Exception(message: "Error obteniendo Contactos por Empresa: " + e.Message);
+                throw new Exception(message: $"Error obteniendo Contactos por Empresa: {e.Message}");
             }
         }
 
