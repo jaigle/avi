@@ -1,4 +1,4 @@
-﻿ALTER PROCEDURE ContratoLO_Select_GetContratos
+﻿CREATE PROCEDURE ContratoLO_Select_GetContratos
 	@CodEmpresa int
 AS	
 BEGIN

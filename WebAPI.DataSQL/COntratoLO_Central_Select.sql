@@ -1,4 +1,4 @@
-﻿ALTER PROCEDURE ContratoLO_GrupoDF_Select
+﻿CREATE PROCEDURE ContratoLO_GrupoDF_Select
 	@IdContrato int
 	,@DescError	varchar(1000) ='' OUTPUT
 AS
@@ -45,7 +45,8 @@ SELECT
 	for XML Path('')),1,1,'')+']') AS grupoFlotas
 	
   FROM [Central].[dbo].[ContratoLO_GrupoDF] AS Principal
-    
+  WHERE IDContratoloGrupoDF = @IdContrato
+
 	declare	@NumError int = 0
 	set	@NumError= @@Error
 	if	@NumError<> 0 
