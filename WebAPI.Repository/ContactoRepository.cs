@@ -30,8 +30,8 @@ namespace WebAPI.Repository
 
         public int Add(ContactoDto entity)
         {
-            Error myError = new Error();
-            int numeroContacto;
+            Error myError = new Error();            
+        int numeroContacto;
 
             try
             {                

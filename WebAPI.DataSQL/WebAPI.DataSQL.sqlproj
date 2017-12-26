@@ -72,5 +72,6 @@
   <ItemGroup>
     <Build Include="Contacto_Select_GetListaContactos.sql" />
     <Build Include="ContactoUpd_PUTContacto.sql" />
+    <Build Include="ContratoLO_GrupoDF_Select.sql" />
   </ItemGroup>
 </Project>
