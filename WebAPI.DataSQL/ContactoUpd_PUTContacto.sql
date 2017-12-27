@@ -1,8 +1,5 @@
-﻿CREATE PROCEDURE [dbo].[ContactoNew_Ins_POSTContacto] 
-	@Rut varchar(11),
-	@Nombre varchar(200),
+﻿CREATE PROCEDURE [dbo].Contacto_Upd_PUTContacto 
 	@Contac_Numero numeric(18,0) OUTPUT, 
-	@CodigoTipoNegocio numeric(18,0),
     @idTipoContacto smallint,
 	@Contac_Telefono1 varchar(60),
 	@Contac_Mail varchar(100),
@@ -15,60 +12,14 @@ BEGIN
     DECLARE @Correlativo int
     
 	set nocount on	
-	SELECT @Contac_Numero = cn.Contac_Numero FROM contactoNew cn WHERE cn.Contac_RutContacto = @Rut
 	BEGIN TRAN	
-		if ((@Contac_Numero is null) OR (@Contac_Numero = 0))
 		BEGIN
-			SET @Contac_Numero = (SELECT MAX(Contac_Numero)+1 FROM contactoNew)
-			INSERT INTO [contactoNew]
-					   ([Contac_Numero]
-					   ,[Contac_Nombre]
-					   ,[Contac_RutContacto])
-						VALUES
-					   (@Contac_Numero
-					   ,@Nombre
-					   ,@Rut)
-
-							
-			INSERT INTO [contactoCliente]
-					   ([Contac_Numero]
-					   ,[idTipoContacto]
-					   ,[Contac_Telefono1]
-					   ,[Contac_Mail]
-					   ,[Contac_Celular]
-					   ,Cliente_Numero
-					   ,CodTipoNegocio
-					   ,Ciudad_Codigo)
-				 VALUES
-					   (@Contac_Numero
-					   ,@idTipoContacto
-					   ,@Contac_Telefono1
-					   ,@Contac_Mail
-					   ,@Contac_Celular
-					   ,(SELECT MAX(Cliente_Numero)+1 FROM contactoCliente)
-					   ,2
-					   ,@Ciudad_Codigo)
-		END
-		ELSE
-		BEGIN
-			INSERT INTO [contactoCliente]
-					   ([Contac_Numero]
-					   ,[idTipoContacto]
-					   ,[Contac_Telefono1]
-					   ,[Contac_Mail]
-					   ,[Contac_Celular]
-					   ,Cliente_Numero
-					   ,CodTipoNegocio
-					   ,Ciudad_Codigo)
-				 VALUES
-					   (@Contac_Numero 
-					   ,@idTipoContacto 
-					   ,@Contac_Telefono1 
-					   ,@Contac_Mail  
-					   ,@Contac_Celular 
-					   ,@Cliente_Numero 
-					   ,@CodigoTipoNegocio 				
-					   ,@Ciudad_Codigo)				   
+			UPDATE contactoCliente SET
+			Contac_Telefono1 = @Contac_Telefono1,
+			Contac_Celular = @Contac_Celular,
+			Contac_Mail = @Contac_Mail,
+			Ciudad_Codigo = @Ciudad_Codigo
+			WHERE Contac_Numero = @Contac_Numero AND Cliente_Numero = @Cliente_Numero AND CodTipoNegocio = 2   
 		END
 
 
@@ -79,7 +30,7 @@ BEGIN
 		set	@NumError= @@Error
 		if	@NumError<> 0 
 			BEGIN
-				set @DescError= ' La inserción no se realizó  (error sql' + Cast(@NumError as varchar(15))+ ')'
+				set @DescError= ' La actualización no se realizó  (error sql' + Cast(@NumError as varchar(15))+ ')'
 				GOTO SALIR
 			END
 	COMMIT TRAN
