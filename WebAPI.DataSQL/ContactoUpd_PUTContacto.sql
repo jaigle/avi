@@ -19,7 +19,7 @@ BEGIN
 			Contac_Celular = @Contac_Celular,
 			Contac_Mail = @Contac_Mail,
 			Ciudad_Codigo = @Ciudad_Codigo
-			WHERE Contac_Numero = @Contac_Numero AND Cliente_Numero = @Cliente_Numero AND CodTipoNegocio = 2   
+			WHERE Contac_Numero = @Contac_Numero AND Cliente_Numero = @Cliente_Numero AND CodTipoNegocio = 2  AND  idTipoContacto = @idTipoContacto
 		END
 
 
