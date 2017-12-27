@@ -11,7 +11,6 @@ SELECT cc.Contac_Numero AS contactNumero, cc.Cliente_Numero AS clienteNumero, cn
   FROM contactoNew cn INNER JOIN contactoCliente cc ON cc.Contac_Numero = cn.Contac_Numero
 INNER JOIN tipoContacto tc ON tc.idTipoContacto = cc.idTipoContacto
 WHERE cc.CodTipoNegocio = 2 AND contac_estado = 'Activo' 
-AND cc.Cliente_Numero = 65275
 AND (@IdEmpresa = 0 OR @IdEmpresa = cc.Cliente_Numero )
 AND (@IdTipoContacto = 0 OR @IdTipoContacto = cc.idTipoContacto )
 AND (@Contac_Numero = 0 OR @Contac_Numero = cc.Contac_Numero )

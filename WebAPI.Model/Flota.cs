@@ -10,11 +10,11 @@ namespace WebAPI.Model
         public string vigenteAlMesActual { get; set; }
         public string subCatNomMarca { get; set; }
         public string subCatNomModelo { get; set; }
-        public DateTime fechaIngreso { get; set; }
-        public DateTime fechaDevolucion { get; set; }
-        public DateTime fechaTermino { get; set; }
-        public DateTime fechaExtension { get; set; }
+        public string fechaIngreso { get; set; }
+        public string fechaDevolucion { get; set; }
+        public string fechaTermino { get; set; }
+        public string fechaExtension { get; set; }
         public string calidad { get; set; }
-        public string codEmpresa { get; set; }
+        public string cliente { get; set; }
     }
 }

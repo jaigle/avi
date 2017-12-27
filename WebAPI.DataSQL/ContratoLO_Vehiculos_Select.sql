@@ -9,10 +9,10 @@ BEGIN TRAN
 
 select IDContratoLo_GrupoVeh AS idContratoLOGrupoVeh, CtoLO AS ctoLO, Patente AS patente, VigenteAlMesActual AS vigenteAlMesActual, 
 SubCat_NomMarca AS subCatNomMarca,SubCat_NomModelo AS subCatNomModelo,FechaIngreso AS fechaIngreso, FechaDevolucion AS fechaDevolucion, 
-FechaExtension AS fechaExtension, FechaTermino AS fechaTermino, Calidad AS calidad, CodEmpresa AS codEmpresa
-FROM central.dbo.ContratoLO_Vehiculos_Drilo AS Pcpal    
+FechaExtension AS fechaExtension, FechaTermino AS fechaTermino, Calidad AS calidad, CD.Cliente_NomRazonSocial AS cliente
+FROM central.dbo.ContratoLO_Vehiculos_Drilo AS Pcpal INNER JOIN cliente_drilo AS CD ON Pcpal.Cliente_Numero = CD.Cliente_Numero
 WHERE ((@IdContrato = 0) OR (Pcpal.CtoLO = @IdContrato))
-AND ((@IdCliente = 0) OR (Pcpal.CodEmpresa = @IdCliente) ) 
+AND ((@IdCliente = 0) OR (Pcpal.Cliente_Numero = @IdCliente) ) 
 AND ((@IdGrupoVehiculo = 0) OR (Pcpal.IDContratoLo_GrupoVeh = @IdGrupoVehiculo))
    
 	declare	@NumError int = 0
