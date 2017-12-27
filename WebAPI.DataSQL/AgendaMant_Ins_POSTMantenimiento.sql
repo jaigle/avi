@@ -54,6 +54,16 @@ BEGIN
 					@IdContacto,
 					@Kilom_Veh
 				   )
+		--Creación del registro de Log		   
+		INSERT INTO [Avis].[dbo].[AgendaMant_Estados]
+           ([IdAgenda]
+           ,[IdEstadoAgenda]
+           ,[FechaGrabacion]
+           ,[CodOperadorGrab]
+           ,[ObsGrabacion])
+     VALUES
+           (@@IDENTITY,@IdEstadoAgenda,GETDATE(),'drilo','Grabación desde el portal LO')
+           
   declare	@NumError int = 0
 	set	@NumError= @@Error
 	if	@NumError<> 0 

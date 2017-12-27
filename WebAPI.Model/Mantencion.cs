@@ -29,15 +29,17 @@ namespace WebAPI.Model
     /// </summary>
     public class MantencionDto : Entity<int>
     {
-        public int IdAgenda { get; set; }
+        private DateTime Fecha;
+
+        public int idAgenda { get; set; }
         public string estadoAgenda { get; set; }
         public string pendConf { get; set; }
         public int idTaller { get; set; }
         public int idDiaSemana { get; set; }
         public int idHorario { get; set; }
-        public DateTime fecha { get; set; }
+        public string fecha { get => Fecha.ToString("dd-MM-yyyy"); }
         public string patente { get; set; }
-        public int KilomIndicadoCliente { get; set; }
+        public int kilomIndicadoCliente { get; set; }
         public string clienteSolReemplazo { get; set; }
         public string descervicio { get; set; }
         public string obsServicio { get; set; }

@@ -5,22 +5,22 @@
 AS
 BEGIN
    BEGIN TRAN
-	SELECT [IdAgenda]
+	SELECT [IdAgenda] as idAgenda
 		  ,EAT.EstadoAgenda AS estadoAgenda
-		  ,[PendConf]
-		  ,[IdTaller]
-		  ,[IdDiaSemana]
-		  ,[IdHorario]
-		  ,[FechaAgenda] AS Fecha
-		  ,[Patente]
-		  ,[KilomIndicadoCliente]
-		  ,[ClienteSolReemplazo]
+		  ,[PendConf] AS pendConf
+		  ,[IdTaller] AS idTaller
+		  ,[IdDiaSemana] AS idDiaSemana
+		  ,[IdHorario] AS idHorario
+		  ,[FechaAgenda] AS fecha
+		  ,[Patente] AS patente
+		  ,[KilomIndicadoCliente] AS kilomIndicadoCliente
+		  ,[ClienteSolReemplazo] AS clienteSolReemplazo
 		  ,TS.IdServicio AS descervicio
-		  ,[ObsServicio]
-		  ,[NumCliente]
-		  ,[IdMedioAgenda]
-		  ,[IdContacto]
-		  ,[IdSigAgenda]
+		  ,[ObsServicio] AS obsServicio
+		  ,[NumCliente] As numCliente
+		  ,[IdMedioAgenda] AS idMedioAgenda
+		  ,[IdContacto] AS idContacto
+		  ,[IdSigAgenda] AS idSigAgenda
 	  FROM [AgendaMant] AS AM INNER JOIN EstadoAgendaMant AS EAT on EAT.IdEstadoAgenda = AM.IdEstadoAgenda
 	  inner join TipoServicioAgeMant TS ON TS.IdServicio = AM.IdServicio
 	  WHERE ((@IdAgenda = 0) OR (IdAgenda = @IdAgenda)) AND ((@NumCliente = 0) OR(NumCliente = @NumCliente)) 

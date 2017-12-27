@@ -38,7 +38,9 @@ BEGIN
 					   ,[Contac_Celular]
 					   ,Cliente_Numero
 					   ,CodTipoNegocio
-					   ,Ciudad_Codigo)
+					   ,Ciudad_Codigo
+					   ,Contac_Estado
+					   )
 				 VALUES
 					   (@Contac_Numero
 					   ,@idTipoContacto
@@ -47,7 +49,8 @@ BEGIN
 					   ,@Contac_Celular
 					   ,(SELECT MAX(Cliente_Numero)+1 FROM contactoCliente)
 					   ,2
-					   ,@Ciudad_Codigo)
+					   ,@Ciudad_Codigo
+					   ,'Activo')
 		END
 		ELSE
 		BEGIN
@@ -59,7 +62,9 @@ BEGIN
 					   ,[Contac_Celular]
 					   ,Cliente_Numero
 					   ,CodTipoNegocio
-					   ,Ciudad_Codigo)
+					   ,Ciudad_Codigo
+					   ,Contac_Estado
+					   )
 				 VALUES
 					   (@Contac_Numero 
 					   ,@idTipoContacto 
@@ -68,7 +73,8 @@ BEGIN
 					   ,@Contac_Celular 
 					   ,@Cliente_Numero 
 					   ,@CodigoTipoNegocio 				
-					   ,@Ciudad_Codigo)				   
+					   ,@Ciudad_Codigo
+					   ,'Activo')			   
 		END
 
 
