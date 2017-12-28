@@ -227,24 +227,47 @@ namespace WebAPI.Repository
         }
 
 
-        public void DeleteContactoCliente(int pintContactNumero, int pintClienteNumero)
+        public int DeleteContactoCliente(ContactoCliente entity)
         {
+            Error myError = new Error();
+            int numeroContacto;
+
             try
             {
-                var query = Consultas.SqlText.ContactoCliente_Delete;
-                _cnx.Execute(sql: query, param: new
-                {
-                    ContactNumero = pintContactNumero,
-                    ClienteNumero = pintClienteNumero
-                });
+                var query = "Contacto_Upd_DELETEContacto";
+                DynamicParameters p = new DynamicParameters();
+                p.Add(name: "@Contac_Numero", value: entity.contactoNumero);
+                p.Add(name: "@idTipoContacto", value: entity.idTipoContacto);
+                p.Add(name: "@Cliente_Numero", value: entity.clienteNumero);
+                p.Add(name: "@DescError", dbType: DbType.String, direction: ParameterDirection.Output, size: 1000);
+                p.Add(name: "@NumError", dbType: DbType.Int32, direction: ParameterDirection.ReturnValue);
+                _cnx.Execute(sql: query, param: p, commandType: CommandType.StoredProcedure);
+                myError.ErrorCode = p.Get<int>(name: "@NumError");
+                myError.ErrorMessage = p.Get<string>(name: "@DescError");
+                numeroContacto = p.Get<int>(name: "@Contac_Numero");
+                return myError.ErrorCode > 0 ? throw new CustomException(message: myError.ErrorMessage, localError: myError) : numeroContacto;
             }
             catch (Exception e)
             {
-                throw new Exception(message: "Error desactivando ContactosClientes: " + e.Message);
+                throw new Exception(message: $"Error desactivando Contacto : {e.Message}");
             }
         }
 
 
+        public IEnumerable<Usuario> GetListaUsuarios()
+        {
+            try
+            {
+                var query = "UsuarioWebDrilo_Select";
+                DynamicParameters p = new DynamicParameters();
+                var listaContratos = _cnx.Query<Usuario>(sql: query, param: p, commandType: CommandType.StoredProcedure);
+                return listaContratos;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(message: "Error obteniendo listado Usuarios: " + e.Message);
+            }
+        }
 
     }
 }

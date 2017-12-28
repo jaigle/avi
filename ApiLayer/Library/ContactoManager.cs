@@ -100,20 +100,20 @@ namespace ApiLayer.Library
             return resultModel;
         }
 
-        public ResultModel DeleteContactClient(int pintContactNumero, int pintClienteNumero, string token)
+        public ResultModel DeleteContactClient(ContactoCliente entity, string token)
         {
             //ResultModel resultModel = CheckToken(token);
             ResultModel resultModel = new ResultModel();
             if (!resultModel.Result) return resultModel;
             try
             {
-                _contactoRepository.DeleteContactoCliente(pintContactNumero, pintClienteNumero);
+                _contactoRepository.DeleteContactoCliente(entity);
                 resultModel.Payload = "0";
             }
             catch (Exception e)
             {
                 resultModel.ErrorMessage = e.Message;
-                resultModel.ErrorCode = 0;
+                resultModel.ErrorCode = 2;
                 resultModel.Payload = String.Empty;
                 resultModel.Result = false;
                 resultModel.Token = token;
@@ -158,6 +158,27 @@ namespace ApiLayer.Library
             {
                 resultModel.Payload =
                     Tools.Base64Encode(JsonConvert.SerializeObject(_contactoRepository.GetListaTipoContacto()));
+            }
+            catch (Exception e)
+            {
+                resultModel.ErrorMessage = e.Message;
+                resultModel.ErrorCode = 0;
+                resultModel.Payload = String.Empty;
+                resultModel.Result = false;
+                resultModel.Token = token;
+            }
+            return resultModel;
+        }
+
+        public ResultModel GetListUsuarios(string token)
+        {
+            //ResultModel resultModel = CheckToken(token);
+            ResultModel resultModel = new ResultModel();
+            if (!resultModel.Result) return resultModel;
+            try
+            {
+                resultModel.Payload =
+                    Tools.Base64Encode(JsonConvert.SerializeObject(_contactoRepository.GetListaUsuarios()));
             }
             catch (Exception e)
             {

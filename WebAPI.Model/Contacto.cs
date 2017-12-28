@@ -58,4 +58,13 @@ namespace WebAPI.Model
         public int idTipoContacto { get; set; }
         public string descripcion { get; set; }
     }
+
+    public class Usuario : Entity<int>
+    {
+        public string clienteNumero { get; set; }
+        public string clienteNomRazonSocial { get; set; }
+        public string contacNumero { get; set; }
+        public string contacNombre { get; set; }
+        public string contacMail { get; set; }
+    }
 }

@@ -36,10 +36,6 @@ AND cc.Cliente_Numero = @ClienteNumero
 AND cc.CodTipoNegocio = 2";
 
 
-            public static string ContactoCliente_Delete = @"UPDATE contactoCliente SET
-	Contac_Estado = 'Inactivo'
-    WHERE Contac_Numero = @ContactNumero AND Cliente_Numero = @ClienteNumero AND CodTipoNegocio = 2";
-
             public static string TipoContacto_Select =
                 "select tc.idTipoContacto, tc.descripcion from Avis.dbo.TipoContacto tc";
 
