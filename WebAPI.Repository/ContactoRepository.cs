@@ -205,7 +205,7 @@ namespace WebAPI.Repository
             {
                 var query = "Contacto_Upd_PUTContacto";
                 DynamicParameters p = new DynamicParameters();
-                p.Add(name: "@Contac_Numero", value: entity.contactoNumero);
+                p.Add(name: "@Contac_Numero", value: entity.contacNumero);
                 p.Add(name: "@idTipoContacto", value: entity.idTipoContacto);
                 p.Add(name: "@Contac_Telefono1", value: entity.telefono1);
                 p.Add(name: "@Contac_Mail", value: entity.contacMail);
@@ -236,7 +236,7 @@ namespace WebAPI.Repository
             {
                 var query = "Contacto_Upd_DELETEContacto";
                 DynamicParameters p = new DynamicParameters();
-                p.Add(name: "@Contac_Numero", value: entity.contactoNumero);
+                p.Add(name: "@Contac_Numero", value: entity.contacNumero);
                 p.Add(name: "@idTipoContacto", value: entity.idTipoContacto);
                 p.Add(name: "@Cliente_Numero", value: entity.clienteNumero);
                 p.Add(name: "@DescError", dbType: DbType.String, direction: ParameterDirection.Output, size: 1000);

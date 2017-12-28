@@ -31,7 +31,7 @@ namespace WebAPI.Model
 
     public class ContactoCliente : Entity<int>
     {
-        public int contactoNumero { get; set; }
+        public int contacNumero { get; set; }
         public int clienteNumero { get; set; }
         public string idTipoContacto { get; set; }
         public string telefono1 { get; set; }
@@ -42,7 +42,7 @@ namespace WebAPI.Model
 
     public class ContactoEmpresa : Entity<int>
     {
-        public string contactNumero { get; set; }
+        public string contacNumero { get; set; }
         public string clienteNumero { get; set; }
         public string contacNombre { get; set; }
         public string contacRutContacto { get; set; }

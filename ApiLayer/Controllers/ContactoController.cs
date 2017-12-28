@@ -52,7 +52,7 @@ namespace ApiLayer.Controllers
         {
             ContactoManager contactoManager = new ContactoManager();
             ContactoCliente miCliente = new ContactoCliente();
-            miCliente.contactoNumero = pintContacNum;
+            miCliente.contacNumero = pintContacNum;
             miCliente.clienteNumero = pintClienteNum;
             miCliente.idTipoContacto = pintTipoContacto.ToString();
 
