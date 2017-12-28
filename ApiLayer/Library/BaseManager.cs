@@ -55,8 +55,8 @@ namespace ApiLayer.Library
             }
             catch (Exception e)
             {
-                resultModel.ErrorMessage = e.Message;
-                resultModel.ErrorCode = 0;
+                resultModel.ErrorMessage = $"Error de chequeo del token de seguridad : {e.Message}";
+                resultModel.ErrorCode = 1;
                 resultModel.Payload = String.Empty;
                 resultModel.Result = false;
                 resultModel.Token = token;

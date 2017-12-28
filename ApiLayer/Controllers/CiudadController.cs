@@ -13,7 +13,7 @@ namespace ApiLayer.Controllers
     public class CiudadController : ApiController
     {
         // GET: api/Test
-        [Route("nada/{pstrToken}")]
+        [Route("{pstrToken}")]
         public ResultModel GetComunas(string pstrToken)
         {
             CiudadManager ciudadManager = new CiudadManager();
