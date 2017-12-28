@@ -20,6 +20,7 @@ BEGIN
 		  ,[NumCliente] As numCliente
 		  ,[IdMedioAgenda] AS idMedioAgenda
 		  ,[IdContacto] AS idContacto
+		  ,Kilom_Veh AS kilomVeh
 		  ,[IdSigAgenda] AS idSigAgenda
 	  FROM [AgendaMant] AS AM INNER JOIN EstadoAgendaMant AS EAT on EAT.IdEstadoAgenda = AM.IdEstadoAgenda
 	  inner join TipoServicioAgeMant TS ON TS.IdServicio = AM.IdServicio

@@ -5,6 +5,6 @@ namespace WebAPI.Repository
 {
     public interface IMantencionRepository : IGenericRepository<Mantencion>
     {
-        IEnumerable<Mantencion> GetListaMantencion();
+
     }
 }

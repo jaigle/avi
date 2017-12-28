@@ -17,8 +17,8 @@ namespace ApiLayer.Controllers
         [Route("")]
         public ResultModel GetTalleres()
         {
-            ComunaManager comunaManager = new ComunaManager();
-            return comunaManager.GetComunas();
+            TallerManager talleresManager = new TallerManager();
+            return talleresManager.GetTalleres(string.Empty);
         }
     }
 }

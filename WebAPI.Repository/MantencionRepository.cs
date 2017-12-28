@@ -88,11 +88,6 @@ namespace WebAPI.Repository
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Mantencion> GetListaMantencion()
-        {
-            throw new NotImplementedException();
-        }
-
         public IEnumerable<MantencionDto> GetListaMantencion(int pintIdAgenda, int pintNumCliente)
         {
             IEnumerable<MantencionDto> valor;
