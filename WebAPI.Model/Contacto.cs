@@ -51,6 +51,7 @@ namespace WebAPI.Model
         public string contacCelular { get; set; }
         public string contacMail { get; set; }
         public string ciudadCodigo { get; set; }
+        public string idTipoContacto { get; set; }
     }
 
     public class TipoContacto : Entity<int>
@@ -66,5 +67,6 @@ namespace WebAPI.Model
         public string contacNumero { get; set; }
         public string contacNombre { get; set; }
         public string contacMail { get; set; }
+        public string stcCodigo { get; set; }
     }
 }

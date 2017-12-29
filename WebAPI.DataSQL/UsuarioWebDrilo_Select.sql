@@ -8,6 +8,7 @@ BEGIN TRAN
 		  ,[Contac_Numero] AS contacNumero
 		  ,[Contac_Nombre] AS contacNombre
 		  ,[Contac_Mail] AS contacMail
+		  ,Stc_Codigo AS stcCodigo
 	  FROM [Avis].[dbo].[UsuarioWeb_Drilo]
 	declare	@NumError int = 0
 	set	@NumError= @@Error

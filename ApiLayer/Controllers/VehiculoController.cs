@@ -9,10 +9,12 @@ using Test.Entities;
 
 namespace ApiLayer.Controllers
 {
+    [RoutePrefix("api/vehiculo")]
     public class VehiculoController : ApiController
     {
         // GET: api/Test/{pstrPatente}
         //public ResultModel GetComunas([FromUri] string token)
+        [Route("patente/{pstrPatente}")]
         public ResultModel GetVehiculo(string pstrPatente)
         {
             VehiculoManager vehiculoManager = new VehiculoManager();
