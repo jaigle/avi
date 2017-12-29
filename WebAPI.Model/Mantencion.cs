@@ -65,4 +65,11 @@ namespace WebAPI.Model
         public string obsUltGrab { get; set; }
         public int cantMantAgendadas { get; set; }
     }
+
+    public class Disponibilidad : Entity<int>
+    {
+        public int disponible { get; set; }
+        public string mensaje { get; set; }
+        public string horasDisponibles { get; set; }
+    }
 }

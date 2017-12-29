@@ -55,6 +55,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Library\BaseManagerTests.cs" />
     <Compile Include="Repositories\FlotaRepositoryTest.cs" />
     <Compile Include="Repositories\TallerRepositoryTest.cs" />
     <Compile Include="Repositories\ContactoRepositoryTest.cs" />
@@ -67,6 +68,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ApiLayer\ApiLayer.csproj">
+      <Project>{07002A76-BB7F-4EE4-834D-534F55F59B07}</Project>
+      <Name>ApiLayer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WebAPI.Model\WebAPI.Model.csproj">
       <Project>{ba481d08-923e-4535-9132-f55fbec4fd32}</Project>
       <Name>WebAPI.Model</Name>

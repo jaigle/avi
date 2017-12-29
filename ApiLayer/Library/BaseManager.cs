@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Globalization;
+using System.Linq;
+using System.Text;
 using Test.Entities;
 
 namespace ApiLayer.Library
@@ -11,20 +14,6 @@ namespace ApiLayer.Library
 
         public bool IsValid(LoginModel loginData)
         {
-            //string st1 = Properties.Settings.Default.tokenSecUser;
-            //string st2 = Properties.Settings.Default.tokenSecPass;
-            //string rt1 = loginData.UserField;
-            //string rt2 = loginData.PassField;
-            //if (st1 == rt1)
-            //{
-            //    if (st2 == rt2)
-            //    {
-            //        return true;
-            //    }
-
-            //    return false;
-            //}
-            //return false;
             return (String.Equals(loginData.UserField, Properties.Settings.Default.tokenSecUser) &&
                 String.Equals(loginData.PassField, Properties.Settings.Default.tokenSecPass));
         }
@@ -32,6 +21,53 @@ namespace ApiLayer.Library
         public string BuildToken(LoginModel loginData)
         {
             return Tools.Base64Encode(CryptoManager.Encrypt($"{loginData.UserField}|{loginData.PassField}|{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}"));
+        }
+
+        public string BuildTokenPlain(string origText)
+        {
+            long n = long.Parse(DateTime.Now.ToString("yyyyMMddHHmmss"));
+            byte[] stringBytes = Encoding.Unicode.GetBytes(origText);
+            string token = n.ToString()+Convert.ToBase64String(stringBytes, 0, stringBytes.Length);
+            return token;
+        }
+
+        string DecodeString(string encodedText)
+        {
+            byte[] stringBytes = Convert.FromBase64String(encodedText);
+            return Encoding.Unicode.GetString(stringBytes);
+        }
+
+        public ResultModel CheckTokenPlain(string token)
+        {
+            ResultModel resultModel = new ResultModel();
+            string format = "yyyyMMddHHmmss";
+            CultureInfo provider = CultureInfo.InvariantCulture;
+            try
+            {
+                DateTime time = DateTime.ParseExact(token.Substring(0, 14), format, provider);
+                string user = DecodeString(token.Substring(14));
+
+                if (String.Equals(user, Properties.Settings.Default.tokenSecUser))
+                {
+                    if ((DateTime.Now - time).TotalSeconds > Convert.ToDouble(Properties.Settings.Default.tokenTimeToLive))
+                        throw new Exception("Token Expired !!!");
+                    resultModel.Result = true;
+                }
+                else {
+                    throw new Exception("Token incorrecto !!!");
+                }
+                resultModel.Payload = String.Empty;
+                resultModel.Token = String.Empty;
+            }
+            catch (Exception e)
+            {
+                resultModel.ErrorMessage = $"Error de chequeo del token de seguridad : {e.Message}";
+                resultModel.ErrorCode = 1;
+                resultModel.Payload = String.Empty;
+                resultModel.Result = false;
+                resultModel.Token = token;
+            }
+            return resultModel;
         }
 
         public ResultModel CheckToken(string token)

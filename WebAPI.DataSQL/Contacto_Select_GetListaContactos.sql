@@ -5,7 +5,7 @@
 	,@DescError	varchar(1000) ='' OUTPUT
 AS
 BEGIN
-SELECT cc.Contac_Numero AS contactNumero, cc.Cliente_Numero AS clienteNumero, cn.Contac_Nombre AS contacNombre,
+SELECT cc.Contac_Numero AS contacNumero, cc.Cliente_Numero AS clienteNumero, cn.Contac_Nombre AS contacNombre,
        cn.Contac_RutContacto AS contacRutContacto, tc.descripcion, cc.Contac_Telefono1 AS contacTelefono1, cc.Contac_Celular AS contacCelular,
        cc.Contac_Mail AS contacMail, cc.Ciudad_Codigo AS ciudadCodigo
   FROM contactoNew cn INNER JOIN contactoCliente cc ON cc.Contac_Numero = cn.Contac_Numero

@@ -54,6 +54,12 @@ BEGIN
 		END
 		ELSE
 		BEGIN
+			SELECT @Cliente_Numero = cc.Cliente_Numero FROM [contactoCliente] cc WHERE 
+			cc.Contac_Numero = @Contac_Numero AND cc.CodTipoNegocio = 2 
+			AND cc.idTipoContacto = @idTipoContacto
+			
+			IF ((@Cliente_Numero  is null) OR (@Cliente_Numero = 0))
+			BEGIN
 			INSERT INTO [contactoCliente]
 					   ([Contac_Numero]
 					   ,[idTipoContacto]
@@ -75,6 +81,12 @@ BEGIN
 					   ,@CodigoTipoNegocio 				
 					   ,@Ciudad_Codigo
 					   ,'Activo')			   
+			END
+			ELSE
+			BEGIN
+				UPDATE [contactoCliente]
+				SET Contac_Estado = 'Activo'
+			END
 		END
 
 

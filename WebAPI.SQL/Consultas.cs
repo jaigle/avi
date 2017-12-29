@@ -60,6 +60,7 @@ where F.Flotas_Patente = @Patente";
 ,EncargadoTaller AS  encargadoTaller
 ,FonoTaller AS fonoTaller
 ,EmailTaller AS emailTaller
+,CodCiudad AS codCiudad
  from Taller";
 
             public static string STCEjecutivos_Select_GetEjecutivos = @"SELECT [Stc_Codigo] AS stcCodigo

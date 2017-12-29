@@ -13,5 +13,6 @@ namespace WebAPI.Model
         public string encargadoTaller { get; set; }
         public string fonoTaller { get; set; }
         public string emailTaller { get; set; }
+        public string codCiudad { get; set; }
     }
 }

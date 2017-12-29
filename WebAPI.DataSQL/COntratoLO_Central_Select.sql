@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE ContratoLO_GrupoDF_Select
+﻿CREATE sss PROCEDURE ContratoLO_GrupoDF_Select
 	@IdContrato int
 	,@DescError	varchar(1000) ='' OUTPUT
 AS

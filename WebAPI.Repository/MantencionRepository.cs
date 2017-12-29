@@ -107,28 +107,28 @@ namespace WebAPI.Repository
             return valor;
         }
 
-        public IEnumerable<MantencionDisponible> GetDisponibilidad(int pintIdTaller, DateTime pFecha)
+        public Disponibilidad GetDisponibilidad(int pintIdTaller, DateTime pFecha)
         {
             Error myError = new Error();
-            IEnumerable<MantencionDisponible> valor;
+            Disponibilidad entity = new Disponibilidad();
+            int valor;
             try
             {
-
                 var query = "AgendaMant_Validacion";
                 DynamicParameters p = new DynamicParameters();
-                p.Add(name: "@Mensaje", value: "",dbType: DbType.String,direction: ParameterDirection.Output);
+                p.Add(name: "@Mensaje", dbType: DbType.String, direction: ParameterDirection.Output, size: 1000);
                 p.Add(name: "@IdTaller", value: pintIdTaller);
                 p.Add(name: "@FechaAgenda", value: pFecha);
-                p.Add(name: "@NumError", dbType: DbType.Int16, direction: ParameterDirection.Output);
-                valor = _cnx.Query<MantencionDisponible>(sql: query, param: p, commandType: CommandType.StoredProcedure);
+                valor = _cnx.ExecuteScalar<int>(sql: query, param: p, commandType: CommandType.StoredProcedure);
                 myError.ErrorCode = p.Get<Int16>(name: "@NumError");
                 myError.ErrorMessage = p.Get<string>(name: "@Mensaje");
-            }
+                entity.mensaje = myError.ErrorMessage;
+             }
             catch (Exception e)
             {
-                throw new Exception(message: "Error seleccionando la Disponibilidad: registro: " + e.Message);
+                throw new Exception(message: "Error seleccionando la Disponibilidad: " + e.Message);
             }
-            return myError.ErrorCode > 0 ? throw new CustomException(message: myError.ErrorMessage, localError: myError) : valor;
+            return myError.ErrorCode > 0 ? throw new CustomException(message: myError.ErrorMessage, localError: myError) : entity;
         }
     }
 }
