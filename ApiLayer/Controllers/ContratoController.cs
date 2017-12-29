@@ -13,12 +13,11 @@ namespace ApiLayer.Controllers
     public class ContratoController : ApiController
     {
         // GET: api/Test
-        //public ResultModel GetComunas([FromUri] string token)
         [Route("empresa/{pintCodEmpresa}")]
-        public ResultModel GetListadoContrato(int pintCodEmpresa)
+        public ResultModel GetListadoContrato(int pintCodEmpresa, [FromUri] string token)
         {
             ContratoManager entityManager = new ContratoManager();
-            return entityManager.GetListadoContratos(String.Empty, pintCodEmpresa);
+            return entityManager.GetListadoContratos(token, pintCodEmpresa);
         }
     }
 }

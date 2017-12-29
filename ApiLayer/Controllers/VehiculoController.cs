@@ -13,12 +13,11 @@ namespace ApiLayer.Controllers
     public class VehiculoController : ApiController
     {
         // GET: api/Test/{pstrPatente}
-        //public ResultModel GetComunas([FromUri] string token)
         [Route("patente/{pstrPatente}")]
-        public ResultModel GetVehiculo(string pstrPatente)
+        public ResultModel GetVehiculo(string pstrPatente, [FromUri] string token)
         {
             VehiculoManager vehiculoManager = new VehiculoManager();
-            return vehiculoManager.GetVehiculo(pstrPatente, string.Empty);
+            return vehiculoManager.GetVehiculo(pstrPatente, token);
         }
     }
 }

@@ -14,27 +14,18 @@ namespace ApiLayer.Controllers
     public class EmpresaController : ApiController
     {
         // GET: api/Empresa
-        //public ResultModel GetComunas([FromUri] string token)
         [Route("rut/{pstrRut}/cliente/{pintNumCliente}")]
-        public ResultModel GetEmpresa(string pstrRut, int pintNumCliente)
+        public ResultModel GetEmpresa(string pstrRut, int pintNumCliente, [FromUri] string token)
         {
             EmpresaManager empresaManager = new EmpresaManager();
-            return empresaManager.GetEmpresa(pstrRut, pintNumCliente);
+            return empresaManager.GetEmpresa(pstrRut, pintNumCliente, token);
         }
 
-        //// PUT: api/Empresa
-        //[Route("")]
-        //public ResultModel PutMantencion([FromBody]Empresa_put value)
-        //{
-        //    EmpresaManager empresaManager = new EmpresaManager();
-        //    return empresaManager.ActualizarEmpresa(value);
-        //}
-
         [Route("")]
-        public ResultModel PutEmpresa([FromBody]Empresa_put value)
+        public ResultModel PutEmpresa([FromBody]Empresa_put value, [FromUri] string token)
         {
             EmpresaManager empresaManager = new EmpresaManager();
-            return empresaManager.ActualizarEmpresa(value);
+            return empresaManager.ActualizarEmpresa(value, token);
         }
     }
 }

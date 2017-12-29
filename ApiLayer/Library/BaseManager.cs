@@ -18,12 +18,12 @@ namespace ApiLayer.Library
                 String.Equals(loginData.PassField, Properties.Settings.Default.tokenSecPass));
         }
 
-        public string BuildToken(LoginModel loginData)
+        public string BuildTokenold(LoginModel loginData)
         {
             return Tools.Base64Encode(CryptoManager.Encrypt($"{loginData.UserField}|{loginData.PassField}|{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}"));
         }
 
-        public string BuildTokenPlain(string origText)
+        public string BuildToken(string origText)
         {
             long n = long.Parse(DateTime.Now.ToString("yyyyMMddHHmmss"));
             byte[] stringBytes = Encoding.Unicode.GetBytes(origText);
@@ -37,7 +37,7 @@ namespace ApiLayer.Library
             return Encoding.Unicode.GetString(stringBytes);
         }
 
-        public ResultModel CheckTokenPlain(string token)
+        public ResultModel CheckToken(string token)
         {
             ResultModel resultModel = new ResultModel();
             string format = "yyyyMMddHHmmss";
@@ -70,7 +70,7 @@ namespace ApiLayer.Library
             return resultModel;
         }
 
-        public ResultModel CheckToken(string token)
+        public ResultModel CheckTokenold(string token)
         {
             ResultModel resultModel = new ResultModel();
             try

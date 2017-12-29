@@ -42,7 +42,7 @@ namespace ApiLayer.Controllers
         public ResultModel GetDisponibilidad(int pintIdTaller, DateTime pFecha)
         {
             MantencionManager mantencionManager = new MantencionManager();
-            return mantencionManager.GetDisponibilidad(pintIdTaller, DateTime.Today);
+            return mantencionManager.GetDisponibilidad(pintIdTaller, pFecha);
         }
     }
 }

@@ -13,12 +13,11 @@ namespace ApiLayer.Controllers
     public class EjecutivoController : ApiController
     {
         // GET: api/Test
-        //public ResultModel GetComunas([FromUri] string token)
         [Route("")]
-        public ResultModel GetEjecutivos()
+        public ResultModel GetEjecutivos([FromUri] string token)
         {
             EjecutivoManager ciudadManager = new EjecutivoManager();
-            return ciudadManager.GetEjecutivos(String.Empty);
+            return ciudadManager.GetEjecutivos(token);
         }
     }
 }

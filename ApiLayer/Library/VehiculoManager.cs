@@ -19,8 +19,7 @@ namespace ApiLayer.Library
 
         public ResultModel GetVehiculo(string pstrPatente, string token)
         {
-            //ResultModel resultModel = CheckToken(token);
-            ResultModel resultModel = new ResultModel();
+            ResultModel resultModel = CheckToken(token);
             try
             {
                 if (resultModel.Result)

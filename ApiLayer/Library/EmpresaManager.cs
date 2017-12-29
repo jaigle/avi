@@ -17,9 +17,9 @@ namespace ApiLayer.Library
             _empresaRepository = new EmpresaRepository();
         }
 
-        public ResultModel GetEmpresa(string pstrRut, int pintNumCliente)
+        public ResultModel GetEmpresa(string pstrRut, int pintNumCliente, string token)
         {
-            ResultModel resultModel = new ResultModel();
+            ResultModel resultModel = CheckToken(token);            
             try
             {
                 resultModel.Payload = Tools.Base64Encode(JsonConvert.SerializeObject(_empresaRepository.Get(pstrRut, pintNumCliente)));
@@ -35,9 +35,9 @@ namespace ApiLayer.Library
             return resultModel;
         }
 
-        public ResultModel ActualizarEmpresa(Empresa_put value)
+        public ResultModel ActualizarEmpresa(Empresa_put value, string token)
         {
-            ResultModel resultModel = new ResultModel();
+            ResultModel resultModel = CheckToken(token);
             try
             {
                 _empresaRepository.Edit(value);

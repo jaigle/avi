@@ -35,8 +35,7 @@ namespace ApiLayer.Library
 
         public ResultModel AddContacto(ContactoDto value, string token)
         {
-            //ResultModel resultModel = CheckToken(token);
-            ResultModel resultModel = new ResultModel();
+            ResultModel resultModel = CheckToken(token);
             if (!resultModel.Result) return resultModel;
             try
             {
@@ -63,8 +62,7 @@ namespace ApiLayer.Library
 
         public ResultModel GetContactoPorEmpresa(int pintIdEmpresa, string token)
         {
-            //ResultModel resultModel = CheckToken(token);
-            ResultModel resultModel = new ResultModel();
+            ResultModel resultModel = CheckToken(token);
             if (!resultModel.Result) return resultModel;
             try
             {
@@ -102,8 +100,7 @@ namespace ApiLayer.Library
 
         public ResultModel DeleteContactClient(ContactoCliente entity, string token)
         {
-            //ResultModel resultModel = CheckToken(token);
-            ResultModel resultModel = new ResultModel();
+            ResultModel resultModel = CheckToken(token);
             if (!resultModel.Result) return resultModel;
             try
             {
@@ -123,8 +120,7 @@ namespace ApiLayer.Library
 
         public ResultModel PutContactoCliente(ContactoCliente entity, string token)
         {
-            //ResultModel resultModel = CheckToken(token);
-            ResultModel resultModel = new ResultModel();
+            ResultModel resultModel = CheckToken(token);
             if (!resultModel.Result) return resultModel;
             try
             {
@@ -151,8 +147,7 @@ namespace ApiLayer.Library
 
         public ResultModel GetListTipoContacto(string token)
         {
-            //ResultModel resultModel = CheckToken(token);
-            ResultModel resultModel = new ResultModel();
+            ResultModel resultModel = CheckToken(token);
             if (!resultModel.Result) return resultModel;
             try
             {
@@ -172,8 +167,7 @@ namespace ApiLayer.Library
 
         public ResultModel GetListUsuarios(string token)
         {
-            //ResultModel resultModel = CheckToken(token);
-            ResultModel resultModel = new ResultModel();
+            ResultModel resultModel = CheckToken(token);
             if (!resultModel.Result) return resultModel;
             try
             {

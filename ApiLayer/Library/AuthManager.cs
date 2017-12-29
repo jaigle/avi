@@ -18,7 +18,7 @@ namespace ApiLayer.Library
                     return new ResultModel()
                     {
                         Result = true,
-                        Token = BuildTokenPlain(loginData.UserField),
+                        Token = BuildToken(loginData.UserField),
                         ErrorMessage = "OK",
                         ErrorCode = 0,
                         Payload = ""

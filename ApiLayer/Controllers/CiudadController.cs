@@ -13,13 +13,6 @@ namespace ApiLayer.Controllers
     public class CiudadController : ApiController
     {
         // GET: api/Test
-        //[Route("{pstrToken}")]
-        //public ResultModel GetCiudades(string pstrToken)
-        //{
-        //    CiudadManager ciudadManager = new CiudadManager();
-        //    return ciudadManager.GetCiudades(pstrToken);
-        //}
-
         [Route("")]
         public ResultModel GetCiudades2([FromUri] string token)
         {

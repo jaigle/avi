@@ -27,9 +27,9 @@ namespace ApiLayer.Library.Tests
         [TestMethod()]
         public void BuildTokenPlainTest()
         {
-            string mytoken = myClass.BuildTokenPlain("avislo");
+            string mytoken = myClass.BuildToken("avislo");
             Test.Entities.ResultModel myResult = new Test.Entities.ResultModel();
-            myResult = myClass.CheckTokenPlain(mytoken);
+            myResult = myClass.CheckToken(mytoken);
             Assert.Fail();
         }
 

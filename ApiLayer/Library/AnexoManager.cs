@@ -19,9 +19,8 @@ namespace ApiLayer.Library
 
         public ResultModel GetAnexo(int pintIdAnexo, string token)
         {
-            //ResultModel resultModel = CheckToken(token);
+            ResultModel resultModel = CheckToken(token);
             Anexo entity = new Anexo {iDContratoGrupoDF = pintIdAnexo};
-            ResultModel resultModel = new ResultModel();
             try
             {
                 if (resultModel.Result)

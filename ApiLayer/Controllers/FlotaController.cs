@@ -14,13 +14,12 @@ namespace ApiLayer.Controllers
     public class FlotaController : ApiController
     {
         // GET: api/Test
-        //public ResultModel GetComunas([FromUri] string token)
         [Route("cliente/{pintCliente}/grupoVehiculo/{pintGrupoVehiculo}")]
         [ResponseType(typeof(ResultModel))]
-        public ResultModel GetListadoFlota(int pintCliente, int pintGrupoVehiculo)
+        public ResultModel GetListadoFlota(int pintCliente, int pintGrupoVehiculo, [FromUri] string token)
         {
             FlotaManager flotaManager = new FlotaManager();
-            return flotaManager.GetListadoFlota(pintCliente, pintGrupoVehiculo, String.Empty);
+            return flotaManager.GetListadoFlota(pintCliente, pintGrupoVehiculo, token);
         }
     }
 }

@@ -19,8 +19,7 @@ namespace ApiLayer.Library
 
         public ResultModel GetCiudades(string token)
         {
-            ResultModel resultModel = CheckTokenPlain(token);
-            //ResultModel resultModel = new ResultModel();
+            ResultModel resultModel = CheckToken(token);
             try
             {
                 if (resultModel.Result)

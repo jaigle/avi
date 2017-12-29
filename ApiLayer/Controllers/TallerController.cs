@@ -13,12 +13,11 @@ namespace ApiLayer.Controllers
     public class TallerController : ApiController
     {
         // GET: api/Test
-        //public ResultModel GetComunas([FromUri] string token)
         [Route("")]
-        public ResultModel GetTalleres()
+        public ResultModel GetTalleres([FromUri] string token)
         {
             TallerManager talleresManager = new TallerManager();
-            return talleresManager.GetTalleres(string.Empty);
+            return talleresManager.GetTalleres(token);
         }
     }
 }

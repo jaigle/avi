@@ -12,12 +12,11 @@ namespace ApiLayer.Controllers
     public class AnexoController : ApiController
     {
         // GET: api/Test
-        //public ResultModel GetComunas([FromUri] string token)
         [Route("api/anexo/{pintIdAnexo}")]
-        public ResultModel GetAnexo(int pintIdAnexo)
+        public ResultModel GetAnexo(int pintIdAnexo, [FromUri] string token)
         {
             AnexoManager anexoManager = new AnexoManager();
-            return anexoManager.GetAnexo(pintIdAnexo, String.Empty);
+            return anexoManager.GetAnexo(pintIdAnexo, token);
         }
     }
 }

@@ -118,7 +118,7 @@ namespace WebAPI.Repository
                 DynamicParameters p = new DynamicParameters();
                 p.Add(name: "@Mensaje", dbType: DbType.String, direction: ParameterDirection.Output, size: 1000);
                 p.Add(name: "@IdTaller", value: pintIdTaller);
-                p.Add(name: "@FechaAgenda", value: pFecha);
+                p.Add(name: "@FechaAgenda", dbType: DbType.DateTime, value: pFecha);
                 valor = _cnx.ExecuteScalar<int>(sql: query, param: p, commandType: CommandType.StoredProcedure);
                 myError.ErrorCode = p.Get<Int16>(name: "@NumError");
                 myError.ErrorMessage = p.Get<string>(name: "@Mensaje");
@@ -126,7 +126,7 @@ namespace WebAPI.Repository
              }
             catch (Exception e)
             {
-                throw new Exception(message: "Error seleccionando la Disponibilidad: " + e.Message);
+                throw new Exception(message: $"Error seleccionando la Disponibilidad: {e.Message}");
             }
             return myError.ErrorCode > 0 ? throw new CustomException(message: myError.ErrorMessage, localError: myError) : entity;
         }
