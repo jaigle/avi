@@ -37,7 +37,7 @@ namespace WebAPI.Model
         public int idTaller { get; set; }
         public int idDiaSemana { get; set; }
         public int idHorario { get; set; }
-        public string fecha { get => Fecha.ToString("dd-MM-yyyy"); }
+        public string fecha { get => Fecha.ToString("dd-MM-yyyy hh:mm:ss"); }
         public string patente { get; set; }
         public int kilomIndicadoCliente { get; set; }
         public string clienteSolReemplazo { get; set; }
@@ -68,8 +68,14 @@ namespace WebAPI.Model
 
     public class Disponibilidad : Entity<int>
     {
+
         public int disponible { get; set; }
         public string mensaje { get; set; }
-        public string horasDisponibles { get; set; }
+        public TimeSpan HoraDesde { get; set; }
+        public TimeSpan HoraHasta { get; set; }
+        public int CantVehMismoHorario { get; set; }
+        public int CantVehAgendadosHorario { get; set; }
+        public int IdHorario { get; set; }
+        
     }
 }
