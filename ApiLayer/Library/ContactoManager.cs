@@ -35,8 +35,7 @@ namespace ApiLayer.Library
 
         public ResultModel AddContacto(ContactoDto value, string token)
         {
-            ResultModel resultModel = new ResultModel();
-            //resultModel = CheckToken(token);
+            ResultModel resultModel = CheckToken(token);
             if (!resultModel.Result) return resultModel;
             try
             {
@@ -121,8 +120,7 @@ namespace ApiLayer.Library
 
         public ResultModel PutContactoCliente(ContactoCliente entity, string token)
         {
-            ResultModel resultModel = new ResultModel();
-            //ResultModel resultModel = CheckToken(token);
+            ResultModel resultModel = CheckToken(token);
             if (!resultModel.Result) return resultModel;
             try
             {
