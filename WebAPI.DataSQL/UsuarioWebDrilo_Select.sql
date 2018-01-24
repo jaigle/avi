@@ -30,6 +30,3 @@ BEGIN TRAN
 		return (@NumError)
 END
 
-
-GO
-

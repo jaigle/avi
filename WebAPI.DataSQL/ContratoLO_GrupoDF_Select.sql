@@ -67,5 +67,4 @@ SELECT
 	OK:
 		return (@NumError)
 END
-GO
 

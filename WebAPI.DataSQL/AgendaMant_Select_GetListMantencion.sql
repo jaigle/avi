@@ -45,5 +45,4 @@ BEGIN
 	OK:
 		return (@NumError)  
 END
-GO
 

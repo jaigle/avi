@@ -29,6 +29,5 @@ AND (@Contac_Numero = 0 OR @Contac_Numero = cc.Contac_Numero )
 	OK:
 		return (@NumError)
 END
-GO
 
 
