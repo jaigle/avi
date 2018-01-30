@@ -12,14 +12,9 @@ namespace WebAPI.Test.Repositories
     public class ComunaRepositoryTest
     {
         ComunaRepository objRepo;
-        MantencionRepository objMantencion;
 
         [TestInitialize]
-        public void Initialize()
-        {
-            objRepo = new ComunaRepository();
-            objMantencion = new MantencionRepository();
-        }
+        public void Initialize() => objRepo = new ComunaRepository();
 
         [TestMethod]
         public void Comunas_getAll()
@@ -30,27 +25,6 @@ namespace WebAPI.Test.Repositories
             //Assert
             Assert.IsNotNull(result);
             //Assert.AreEqual(92, result.AsList().Count);
-        }
-
-        [TestMethod]
-        public void DisponibilidadTest()
-        {
-            string aaaa;
-            //Act
-            int idtaller = 1;
-            DateTime fecha = new DateTime(2018, 1, 1);
-            try
-            {
-                IEnumerable<Disponibilidad> resultado = objMantencion.GetDisponibilidad(idtaller, fecha);
-            }
-            catch (Exception ex)
-            {
-                aaaa = ex.Message;
-                throw;
-            }
-
-            //Assert
-            Assert.IsNotNull(null);
         }
     }
 }

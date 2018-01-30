@@ -107,50 +107,28 @@ namespace WebAPI.Repository
             return valor;
         }
 
-        public IEnumerable<Disponibilidad> GetDisponibilidad(int pintIdTaller, DateTime pFecha)
+        public Disponibilidad GetDisponibilidad(int pintIdTaller, DateTime pFecha)
         {
-            //Error myError = new Error();
-            //Disponibilidad entity = new Disponibilidad();
-            //int valor;
-            //try
-            //{
-            //    var query = "AgendaMant_Validacion";
-            //    DynamicParameters p = new DynamicParameters();
-            //    //p.Add(name: "@Mensaje", dbType: DbType.String, direction: ParameterDirection.Output, size: 1000);
-            //    //p.Add(name: "@IdTaller", value: pintIdTaller);
-            //    //p.Add(name: "@FechaAgenda", dbType: DbType.DateTime, value: pFecha);
-            //    p.Add(name: "@Mensaje", dbType: DbType.String, direction: ParameterDirection.Output, size: 1000);
-            //    p.Add(name: "@NumError", dbType: DbType.Int32, direction: ParameterDirection.ReturnValue);
-            //    _cnx.Query(sql: query, param: p, commandType: CommandType.StoredProcedure);
-            //   // _cnx.ExecuteScalar<int>(sql: query, commandType: CommandType.StoredProcedure);
-            //    myError.ErrorCode = p.Get<int>(name: "@NumError");
-            //    myError.ErrorMessage = p.Get<string>(name: "@Mensaje");
-            //    entity.mensaje = myError.ErrorMessage;
-            // }
-            //catch (Exception e)
-            //{
-            //    throw new Exception(message: $"Error seleccionando la Disponibilidad: {e.Message}");
-            //}
-            //return myError.ErrorCode > 0 ? throw new CustomException(message: myError.ErrorMessage, localError: myError) : entity;
-
             Error myError = new Error();
+            Disponibilidad entity = new Disponibilidad();
+            int valor;
             try
             {
-                var query = "Mantenimiento_GetDisponibilidad";
+                var query = "AgendaMant_Validacion";
                 DynamicParameters p = new DynamicParameters();
-                p.Add(name: "@IdTaller", value: pintIdTaller, dbType: DbType.String);
-                p.Add(name: "@FechaAgenda", value: pFecha, dbType: DbType.DateTime);
-                p.Add(name: "@DescError", dbType: DbType.String, direction: ParameterDirection.Output, size: 1000);
-                p.Add(name: "@NumError", dbType: DbType.Int32, direction: ParameterDirection.ReturnValue);
-                IEnumerable<Disponibilidad> list = _cnx.Query<Disponibilidad>(sql: query, param: p, commandType: CommandType.StoredProcedure);
-                myError.ErrorCode = p.Get<int>(name: "@NumError");
-                myError.ErrorMessage = p.Get<string>(name: "@DescError");
-                return myError.ErrorCode > 0 ? throw new CustomException(message: myError.ErrorMessage, localError: myError) : list;
-            }
+                p.Add(name: "@Mensaje", dbType: DbType.String, direction: ParameterDirection.Output, size: 1000);
+                p.Add(name: "@IdTaller", value: pintIdTaller);
+                p.Add(name: "@FechaAgenda", dbType: DbType.DateTime, value: pFecha);
+                valor = _cnx.ExecuteScalar<int>(sql: query, param: p, commandType: CommandType.StoredProcedure);
+                myError.ErrorCode = p.Get<Int16>(name: "@NumError");
+                myError.ErrorMessage = p.Get<string>(name: "@Mensaje");
+                entity.mensaje = myError.ErrorMessage;
+             }
             catch (Exception e)
             {
-                throw new Exception(message: "Error obteniendo Disponibilidad: " + e.Message);
+                throw new Exception(message: $"Error seleccionando la Disponibilidad: {e.Message}");
             }
+            return myError.ErrorCode > 0 ? throw new CustomException(message: myError.ErrorMessage, localError: myError) : entity;
         }
     }
 }
