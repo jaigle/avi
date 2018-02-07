@@ -20,4 +20,18 @@ namespace WebAPI.Model
         public string cantFlotaVig { get; set; }
         public string anexos { get; set; }
     }
+
+
+    public class ContratoAnexo : Entity<int>
+    {
+        public string idAnexo { get; set; }
+        public string contrato { get; set; }
+        public string codCliente { get; set; }
+        public string clienteNumero { get; set; }
+        public string codEmpresa { get; set; }
+        public string cantPatentes { get; set; }
+        public string cantPatentesVigentes { get; set; }
+        public string fechaInicio { get; set; }
+        public string fechaTermino { get; set; }
+    }
 }

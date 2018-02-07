@@ -75,14 +75,23 @@ namespace ApiLayer.Library
             return resultModel;
         }
 
-        public ResultModel GetDisponibilidad(int pintIdTaller, DateTime pFecha, string token)
+        public ResultModel GetDisponibilidad(int pintIdTaller, string pFecha, string token)
         {
             ResultModel resultModel = CheckToken(token);
+            DateTime pFecha1;
             try
             {
+                try {
+                    //pFecha1 = DateTime.ParseExact(pFecha, "yyyy-mm-dd", System.Globalization.CultureInfo.InvariantCulture);
+                    pFecha1 = DateTime.ParseExact(pFecha, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
+                }
+                catch
+                {
+                    throw new Exception("Fecha no suministrada o con formato erroneo.");
+                }
                 resultModel.Payload =
                     Tools.Base64Encode(
-                        JsonConvert.SerializeObject(_mantencionRepository.GetDisponibilidad(pintIdTaller, pFecha)));
+                        JsonConvert.SerializeObject(_mantencionRepository.GetDisponibilidad(pintIdTaller, pFecha1)));
             }
              catch (CustomException myException)
             {

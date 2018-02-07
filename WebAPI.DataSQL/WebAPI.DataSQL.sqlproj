@@ -69,6 +69,7 @@
     <None Include="Cliente_PUTEmpresa.sql" />
     <None Include="Mantenimiento_GetDisponibilidad.sql" />
     <None Include="ContactoCliente_Consulta_Varios.sql" />
+    <None Include="ContratoyAnexo_Select.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Contacto_Select_GetListaContactos.sql" />

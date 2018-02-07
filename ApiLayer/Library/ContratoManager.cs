@@ -35,5 +35,24 @@ namespace ApiLayer.Library
             }
             return resultModel;
         }
+
+        internal ResultModel GetListadoContratosAnexo(string token, int pintCodEmpresa)
+        {
+            ResultModel resultModel = CheckToken(token);
+            try
+            {
+                if (resultModel.Result)
+                    resultModel.Payload = Tools.Base64Encode(JsonConvert.SerializeObject(_contratoRepository.GetListaContratoAnexo(pintCodEmpresa)));
+            }
+            catch (Exception e)
+            {
+                resultModel.ErrorMessage = e.Message;
+                resultModel.ErrorCode = 10;
+                resultModel.Payload = String.Empty;
+                resultModel.Result = false;
+                resultModel.Token = String.Empty;
+            }
+            return resultModel;
+        }
     }
 }

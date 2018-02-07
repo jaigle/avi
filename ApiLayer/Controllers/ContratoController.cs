@@ -19,5 +19,13 @@ namespace ApiLayer.Controllers
             ContratoManager entityManager = new ContratoManager();
             return entityManager.GetListadoContratos(token, pintCodEmpresa);
         }
+
+        // GET: api/Test
+        [Route("anexo/empresa/{pintCodEmpresa}")]
+        public ResultModel GetListadoContratoAnexo(int pintCodEmpresa, [FromUri] string token)
+        {
+            ContratoManager entityManager = new ContratoManager();
+            return entityManager.GetListadoContratosAnexo(token, pintCodEmpresa);
+        }
     }
 }

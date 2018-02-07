@@ -30,5 +30,41 @@ namespace WebAPI.Repository
                 throw new Exception(message: "Error obteniendo listado Contratos: " + e.Message);
             }
         }
+
+        public IEnumerable<ContratoAnexo> GetListaContratoAnexo(int pintCliente)
+        {
+            Error myError = new Error();
+            try
+            {
+                var query = "ContratoyAnexo_Select";
+                DynamicParameters p = new DynamicParameters();
+                p.Add(name: "@Cliente_Numero", value: pintCliente, dbType: DbType.Int64);
+                p.Add(name: "@DescError", dbType: DbType.String, direction: ParameterDirection.Output, size: 1000);
+                p.Add(name: "@NumError", dbType: DbType.Int32, direction: ParameterDirection.ReturnValue);
+                IEnumerable<ContratoAnexo> list = _cnx.Query<ContratoAnexo>(sql: query, param: p, commandType: CommandType.StoredProcedure);
+                myError.ErrorCode = p.Get<int>(name: "@NumError");
+                myError.ErrorMessage = p.Get<string>(name: "@DescError");
+                return myError.ErrorCode > 0 ? throw new CustomException(message: myError.ErrorMessage, localError: myError) : list;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(message: "Error obteniendo listado ContratosAnexos: " + e.Message);
+            }
+
+
+
+            //try
+            //{
+            //    var query = "ContratoyAnexo_Select";
+            //    DynamicParameters p = new DynamicParameters();
+            //    p.Add(name: "@Cliente_Numero", value: pintCliente);
+            //    var listaContratos = _cnx.Query<ContratoAnexo>(sql: query, param: p, commandType: CommandType.StoredProcedure);
+            //    return listaContratos;
+            //}
+            //catch (Exception e)
+            //{
+            //    throw new Exception(message: "Error obteniendo listado ContratosAnexos: " + e.Message);
+            //}
+        }
     }
 }

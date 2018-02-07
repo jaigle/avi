@@ -18,7 +18,7 @@ namespace ApiLayer.Controllers
         public ResultModel PutMantencion([FromBody]Mantencion value, [FromUri] string token)
         {
             MantencionManager mantencionManager = new MantencionManager();
-            return mantencionManager.ActualizarMantencion(value,token);
+            return mantencionManager.ActualizarMantencion(value, token);
         }
 
         // POST: api/Mantencion
@@ -39,7 +39,7 @@ namespace ApiLayer.Controllers
 
         // GET: api/Mantencion/{Agenda}{CodigoCliente}
         [Route("taller/{pintIdTaller}/fecha/{pFecha}")]
-        public ResultModel GetDisponibilidad(int pintIdTaller, DateTime pFecha, [FromUri] string token)
+        public ResultModel GetDisponibilidad(int pintIdTaller, string pFecha, [FromUri] string token)
         {
             MantencionManager mantencionManager = new MantencionManager();
             return mantencionManager.GetDisponibilidad(pintIdTaller, pFecha, token);
