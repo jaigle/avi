@@ -49,7 +49,11 @@ namespace WebAPI.Repository
                     NumCliente = entity.NumCliente,
                     IdMedioAgenda = 4,
                     IdContacto = entity.idContacto,
-                    Kilom_Veh = entity.kilomVeh
+                    Kilom_Veh = entity.kilomVeh,
+                    token = entity.token,
+                    esMantencion = entity.esMantencion,
+                    esSiniestro = entity.esSiniestro,
+                    esReparacion = entity.esReparacion
                 }, commandType: CommandType.StoredProcedure);
             }
             catch (Exception e)
@@ -73,7 +77,8 @@ namespace WebAPI.Repository
                 valor = _cnx.ExecuteScalar<int>(sql: query, param: new
                 {
                     IdEstadoAgenda = entity.idEstadoAgenda,
-                    IdAgenda = entity.Id
+                    IdAgenda = entity.Id,
+                    token = entity.token
                 },commandType: CommandType.StoredProcedure);
             }
             catch (Exception e)

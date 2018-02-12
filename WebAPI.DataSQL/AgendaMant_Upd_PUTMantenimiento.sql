@@ -1,12 +1,13 @@
 ﻿CREATE PROCEDURE [dbo].[AgendaMant_Upd_PUTMantenimiento] 
 	@IdEstadoAgenda int,
 	@IdAgenda int,
+	@token varchar(30),
 	@DescError	varchar(1000) ='' OUTPUT
 AS
 BEGIN
 	BEGIN TRAN
 	UPDATE AgendaMant
-	SET IdEstadoAgenda = @IdEstadoAgenda 
+	SET IdEstadoAgenda = @IdEstadoAgenda, Token = @token  
 	where IdAgenda = @IdAgenda
 	
 	declare	@NumError int = 0

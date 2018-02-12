@@ -22,6 +22,10 @@ namespace WebAPI.Model
         public string idMedioAgenda { get; set; }
         public int idContacto { get; set; }
         public int kilomVeh { get; set; }
+        public string token { get; set; }
+        public string esMantencion { get; set; }
+        public string esReparacion { get; set; }
+        public string esSiniestro { get; set; }
     }
 
     /// <summary>
@@ -48,6 +52,10 @@ namespace WebAPI.Model
         public int idContacto { get; set; }
         public int kilomVeh { get; set; }
         public int idSigAgenda { get; set; }
+        public string token { get; set; }
+        public string esMantencion { get; set; }
+        public string esReparacion { get; set; }
+        public string esSiniestro { get; set; }
     }
 
 

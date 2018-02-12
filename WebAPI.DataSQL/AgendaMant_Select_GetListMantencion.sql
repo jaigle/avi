@@ -22,6 +22,7 @@ BEGIN
 		  ,[IdContacto] AS idContacto
 		  ,Kilom_Veh AS kilomVeh
 		  ,[IdSigAgenda] AS idSigAgenda
+		  ,Token AS token
 	  FROM [AgendaMant] AS AM INNER JOIN EstadoAgendaMant AS EAT on EAT.IdEstadoAgenda = AM.IdEstadoAgenda
 	  inner join TipoServicioAgeMant TS ON TS.IdServicio = AM.IdServicio
 	  WHERE ((@IdAgenda = 0) OR (IdAgenda = @IdAgenda)) AND ((@NumCliente = 0) OR(NumCliente = @NumCliente)) 
