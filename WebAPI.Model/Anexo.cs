@@ -11,7 +11,7 @@ namespace WebAPI.Model
         public string multaDevFlota { get; set; }
         public string limiteCoordinaMP { get; set; }
         public string cobCliNoAcudeMP { get; set; }
-        public string cobKMAdivDevolAnt { get; set; }
+        public string cobKmAdicDevolAnt { get; set; }
         public string deducibleObs { get; set; }
         public string reempModalidad { get; set; }
         public string cambNeumatico { get; set; }
@@ -20,7 +20,7 @@ namespace WebAPI.Model
         public string reempCondicion { get; set; }
         public string roboAccesorioVeh { get; set; }
         public string reempFlotaSuperior10 { get; set; }
-        public string reemplFlotaInferior10 { get; set; }
+        public string reempFlotaInferior10 { get; set; }
         public string seguroNeumatico { get; set; }
         public string archivos { get; set; }
         public string grupoFlotas { get; set; }

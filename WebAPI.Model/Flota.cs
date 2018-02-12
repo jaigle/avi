@@ -21,6 +21,8 @@ namespace WebAPI.Model
         public string fechaExtension { get => (FechaExtension.ToString("dd-MM-yyyy") == "01-01-0001") ? " " : FechaExtension.ToString("dd-MM-yyyy"); }
         public string calidad { get; set; }
         public string cliente { get; set; }
+        public string valorNeto { get; set; }
+        public string valorgps { get; set; }
 
     }
 }

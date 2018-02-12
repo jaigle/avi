@@ -24,11 +24,14 @@ namespace WebAPI.Model
 
     public class ContratoAnexo : Entity<int>
     {
+        public string ctoLO { get; set; }
         public string idAnexo { get; set; }
         public string contrato { get; set; }
         public string codCliente { get; set; }
         public string clienteNumero { get; set; }
         public string codEmpresa { get; set; }
+        public string modoFacturacion { get; set; }
+        public string estadoAnexo { get; set; }
         public string cantPatentes { get; set; }
         public string cantPatentesVigentes { get; set; }
         public string fechaInicio { get; set; }

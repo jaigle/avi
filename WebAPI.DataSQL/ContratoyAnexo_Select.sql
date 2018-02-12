@@ -1,23 +1,11 @@
 ﻿USE [Avis]
 GO
-
-/****** Object:  StoredProcedure [dbo].[ContratoyAnexo_Select]    Script Date: 02/03/2018 22:12:21 ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[ContratoyAnexo_Select]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [dbo].[ContratoyAnexo_Select]
-GO
-
-USE [Avis]
-GO
-
-/****** Object:  StoredProcedure [dbo].[ContratoyAnexo_Select]    Script Date: 02/03/2018 22:12:21 ******/
+/****** Object:  StoredProcedure [dbo].[ContratoyAnexo_Select]    Script Date: 02/06/2018 23:53:50 ******/
 SET ANSI_NULLS ON
 GO
-
 SET QUOTED_IDENTIFIER ON
 GO
-
-
-CREATE PROCEDURE [dbo].[ContratoyAnexo_Select]
+ALTER PROCEDURE [dbo].[ContratoyAnexo_Select]
 	@Cliente_Numero			int  
 	,@DescError	varchar(1000) ='' OUTPUT
 AS
@@ -32,13 +20,15 @@ BEGIN TRAN
 	codCliente  varchar(100),
 	clienteNumero  varchar(100),
 	codEmpresa  varchar(100),
+	modoFacturacion  varchar(100),
+	estadoAnexo  varchar(100),
 	cantPatentes  varchar(100),
 	cantPatentesVigentes  varchar(100),
-	fechaInicio  varchar(100),
-	fechaTermino  varchar(100)
+	fechaInicio  datetime,
+	fechaTermino  datetime
 	)
 	INSERT INTO @table
-	exec Central.dbo.ContratosyAnexos_Drilo 231704
+	exec Central.dbo.ContratosyAnexos_Drilo @Cliente_Numero
 	select * from @table
 	declare	@NumError int = 0    
 	set	@NumError= @@Error
@@ -59,8 +49,3 @@ BEGIN TRAN
 	OK:
 		return (@NumError)
 END
-
-
-GO
-
-

@@ -17,7 +17,7 @@ namespace WebAPI.Repository
             _cnx = myConection.GetConnection;
         }
 
-        public IEnumerable<Flota> GetListaFlota(int pintContrato, int pintGrupoVehiculo, int pintCliente)
+        public IEnumerable<Flota> GetListaFlota(int pintContrato, int pintIdAnexo, int pintCliente)
         {
             Error myError = new Error();
             try
@@ -26,7 +26,7 @@ namespace WebAPI.Repository
                 DynamicParameters p = new DynamicParameters();
                 p.Add(name: "@IdCliente", value: pintCliente, dbType: DbType.String);
                 p.Add(name: "@IdContrato", value: pintContrato, dbType: DbType.String);
-                p.Add(name: "@IdGrupoVehiculo", value: pintGrupoVehiculo, dbType: DbType.String);
+                p.Add(name: "@IdAnexo", value: pintIdAnexo, dbType: DbType.String);
                 p.Add(name: "@DescError", dbType: DbType.String, direction: ParameterDirection.Output, size: 1000);
                 p.Add(name: "@NumError", dbType: DbType.Int32, direction: ParameterDirection.ReturnValue);
                 IEnumerable<Flota> list = _cnx.Query<Flota>(sql: query, param: p, commandType: CommandType.StoredProcedure);
