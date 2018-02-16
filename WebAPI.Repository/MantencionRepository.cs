@@ -32,7 +32,7 @@ namespace WebAPI.Repository
             int valor = 0;
             try
             {
-                var query = "AgendaMant_Ins_POSTMantenimiento";
+                var query = "Drilo_AgendaMant_Ins_POSTMantenimiento";
                 valor = _cnx.ExecuteScalar<int>(sql: query, param: new
                 {
                     IdEstadoAgenda = 1,
@@ -73,7 +73,7 @@ namespace WebAPI.Repository
             int valor = 0;
             try
             {
-                var query = "[AgendaMant_Upd_PUTMantenimiento]";
+                var query = "Drilo_AgendaMant_Upd_PUTMantenimiento";
                 valor = _cnx.ExecuteScalar<int>(sql: query, param: new
                 {
                     IdEstadoAgenda = entity.idEstadoAgenda,
@@ -98,7 +98,7 @@ namespace WebAPI.Repository
             IEnumerable<MantencionDto> valor;
             try
             {
-                var query = "AgendaMant_Select_GetListMantencion";
+                var query = "Drilo_AgendaMant_Select_GetListMantencion";
                 valor = _cnx.Query<MantencionDto>(sql: query, param: new
                 {
                     IdAgenda = pintIdAgenda,
@@ -119,7 +119,7 @@ namespace WebAPI.Repository
             //int valor;
             //try
             //{
-            //    var query = "AgendaMant_Validacion";
+            //    var query = "Drilo_AgendaMant_Validacion";
             //    DynamicParameters p = new DynamicParameters();
             //    //p.Add(name: "@Mensaje", dbType: DbType.String, direction: ParameterDirection.Output, size: 1000);
             //    //p.Add(name: "@IdTaller", value: pintIdTaller);
@@ -141,7 +141,7 @@ namespace WebAPI.Repository
             Error myError = new Error();
             try
             {
-                var query = "Mantenimiento_GetDisponibilidad";
+                var query = "Drilo_Mantenimiento_GetDisponibilidad";
                 DynamicParameters p = new DynamicParameters();
                 p.Add(name: "@IdTaller", value: pintIdTaller, dbType: DbType.String);
                 p.Add(name: "@FechaAgenda", value: pFecha, dbType: DbType.DateTime);

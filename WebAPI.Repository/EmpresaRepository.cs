@@ -21,7 +21,7 @@ namespace WebAPI.Repository
         {
             try
             {
-                var query = "Cliente_Select_GetEmpresa";
+                var query = "Drilo_Cliente_Select_GetEmpresa";
                 DynamicParameters p = new DynamicParameters();
                 p.Add(name: "@ClienteRut", value: pstrRut, dbType: DbType.String);
                 p.Add(name: "@NumeroCliente", value: pintNumeroCliente);
@@ -66,7 +66,7 @@ namespace WebAPI.Repository
 
             try
             {
-                var query = "Cliente_PUTEmpresa";
+                var query = "Drilo_Cliente_PUTEmpresa";
                 DynamicParameters p = new DynamicParameters();
                 p.Add(name: "@clienteNumero", value: entity.clienteNumero);
                 p.Add(name: "@clienteRut", value: entity.clienteRut);

@@ -19,7 +19,7 @@ namespace WebAPI.Repository
         {
             try
             {
-                var query = "ContratoLO_Select_GetContratos";
+                var query = "Drilo_ContratoLO_Select_GetContratos";
                 DynamicParameters p = new DynamicParameters();
                 p.Add(name: "@CodEmpresa", value: pintCodEmpresa);
                 var listaContratos = _cnx.Query<Contrato>(sql: query, param: p, commandType: CommandType.StoredProcedure);
@@ -36,7 +36,7 @@ namespace WebAPI.Repository
             Error myError = new Error();
             try
             {
-                var query = "ContratoyAnexo_Select";
+                var query = "Drilo_ContratoyAnexo_Select";
                 DynamicParameters p = new DynamicParameters();
                 p.Add(name: "@Cliente_Numero", value: pintCliente, dbType: DbType.Int64);
                 p.Add(name: "@DescError", dbType: DbType.String, direction: ParameterDirection.Output, size: 1000);
@@ -55,7 +55,7 @@ namespace WebAPI.Repository
 
             //try
             //{
-            //    var query = "ContratoyAnexo_Select";
+            //    var query = "Drilo_ContratoyAnexo_Select";
             //    DynamicParameters p = new DynamicParameters();
             //    p.Add(name: "@Cliente_Numero", value: pintCliente);
             //    var listaContratos = _cnx.Query<ContratoAnexo>(sql: query, param: p, commandType: CommandType.StoredProcedure);

@@ -21,7 +21,7 @@ namespace WebAPI.Repository
             Error myError = new Error();
             try
             {
-                var query = "ContratoLO_GrupoDF_Select";
+                var query = "Drilo_ContratoLO_GrupoDF_Select";
                 DynamicParameters p = new DynamicParameters();
                 p.Add(name: "@IdContrato", value: pintContrato, dbType: DbType.String);
                 p.Add(name: "@DescError", dbType: DbType.String, direction: ParameterDirection.Output, size: 1000);

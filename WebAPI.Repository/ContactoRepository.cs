@@ -35,7 +35,7 @@ namespace WebAPI.Repository
 
             try
             {                
-                var query = "ContactoNew_Ins_POSTContacto";
+                var query = "Drilo_ContactoNew_Ins_POSTContacto";
                 DynamicParameters p = new DynamicParameters();
                 p.Add(name: "@Rut", value: entity.contacRutContacto);
                 p.Add(name: "@Nombre", value: entity.contacNombre);
@@ -120,7 +120,7 @@ namespace WebAPI.Repository
         {
             try
             {
-                var query = "Contacto_Select_GetListaContactos";
+                var query = "Drilo_Contacto_Select_GetListaContactos";
                 DynamicParameters p = new DynamicParameters();
                 p.Add(name: "@IdEmpresa", value: pintClienteNumero);
                 p.Add(name: "@Contac_Numero", value: pintContactNumero);
@@ -178,7 +178,7 @@ namespace WebAPI.Repository
         {
             try
             {
-                var query = "Contacto_Select_GetListaContactos";
+                var query = "Drilo_Contacto_Select_GetListaContactos";
                 DynamicParameters p = new DynamicParameters();
                 p.Add(name: "@IdEmpresa", value: pintIdEmpresa);
                 p.Add(name: "@Contac_Numero", value: 0);
@@ -203,7 +203,7 @@ namespace WebAPI.Repository
 
             try
             {
-                var query = "Contacto_Upd_PUTContacto";
+                var query = "Drilo_Contacto_Upd_PUTContacto";
                 DynamicParameters p = new DynamicParameters();
                 p.Add(name: "@Contac_Numero", value: entity.contacNumero);
                 p.Add(name: "@idTipoContacto", value: entity.idTipoContacto);
@@ -234,7 +234,7 @@ namespace WebAPI.Repository
 
             try
             {
-                var query = "Contacto_Upd_DELETEContacto";
+                var query = "Drilo_Contacto_Upd_DELETEContacto";
                 DynamicParameters p = new DynamicParameters();
                 p.Add(name: "@Contac_Numero", value: entity.contacNumero);
                 p.Add(name: "@idTipoContacto", value: entity.idTipoContacto);
@@ -258,7 +258,7 @@ namespace WebAPI.Repository
         {
             try
             {
-                var query = "UsuarioWebDrilo_Select";
+                var query = "Drilo_UsuarioWebDrilo_Select";
                 DynamicParameters p = new DynamicParameters();
                 var listaContratos = _cnx.Query<Usuario>(sql: query, param: p, commandType: CommandType.StoredProcedure);
                 return listaContratos;

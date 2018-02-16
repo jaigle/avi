@@ -54,7 +54,7 @@ namespace WebAPI.Repository
 
         public IEnumerable<Customer> GetAllCustomers()
         {
-            var query = "GetAllCustomers";
+            var query = "Drilo_GetAllCustomers";
             var list = _cnx.Query<Customer>(sql: query, commandType: CommandType.StoredProcedure);
             return list;
         }

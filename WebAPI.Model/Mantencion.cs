@@ -56,6 +56,8 @@ namespace WebAPI.Model
         public string esMantencion { get; set; }
         public string esReparacion { get; set; }
         public string esSiniestro { get; set; }
+        public string horaDesde { get; set; }
+        public string horaHasta { get; set; }
     }
 
 

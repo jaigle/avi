@@ -1,4 +1,13 @@
-﻿CREATE PROCEDURE [dbo].[AgendaMant_Select_GetListMantencion] 
+﻿USE [Avis]
+GO
+/****** Object:  StoredProcedure [dbo].[Drilo_AgendaMant_Select_GetListMantencion]    Script Date: 02/16/2018 05:15:04 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+ALTER PROCEDURE [dbo].[Drilo_AgendaMant_Select_GetListMantencion] 
 	@NumCliente integer,
 	@IdAgenda integer,
 	@DescError	varchar(1000) ='' OUTPUT
@@ -8,9 +17,9 @@ BEGIN
 	SELECT [IdAgenda] as idAgenda
 		  ,EAT.EstadoAgenda AS estadoAgenda
 		  ,[PendConf] AS pendConf
-		  ,[IdTaller] AS idTaller
-		  ,[IdDiaSemana] AS idDiaSemana
-		  ,[IdHorario] AS idHorario
+		  ,AM.[IdTaller] AS idTaller
+		  ,AM.[IdDiaSemana] AS idDiaSemana
+		  ,AM.[IdHorario] AS idHorario
 		  ,[FechaAgenda] AS fecha
 		  ,[Patente] AS patente
 		  ,[KilomIndicadoCliente] AS kilomIndicadoCliente
@@ -23,8 +32,11 @@ BEGIN
 		  ,Kilom_Veh AS kilomVeh
 		  ,[IdSigAgenda] AS idSigAgenda
 		  ,Token AS token
+		  ,REPLACE(REPLACE(RIGHT('0'+LTRIM(RIGHT(CONVERT(varchar,HoraDesde,100),7)),7),'AM',' AM'),'PM',' PM') as horaDesde
+		  ,REPLACE(REPLACE(RIGHT('0'+LTRIM(RIGHT(CONVERT(varchar,HoraHasta,100),7)),7),'AM',' AM'),'PM',' PM') as horaHasta
 	  FROM [AgendaMant] AS AM INNER JOIN EstadoAgendaMant AS EAT on EAT.IdEstadoAgenda = AM.IdEstadoAgenda
 	  inner join TipoServicioAgeMant TS ON TS.IdServicio = AM.IdServicio
+	  inner join AgendaMant_Horario AH ON AM.IdHorario = AH.IdHorario
 	  WHERE ((@IdAgenda = 0) OR (IdAgenda = @IdAgenda)) AND ((@NumCliente = 0) OR(NumCliente = @NumCliente)) 
 	  
 	  declare	@NumError int = 0
