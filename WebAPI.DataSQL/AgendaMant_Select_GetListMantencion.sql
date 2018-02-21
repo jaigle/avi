@@ -1,15 +1,14 @@
 ﻿USE [Avis]
 GO
-/****** Object:  StoredProcedure [dbo].[Drilo_AgendaMant_Select_GetListMantencion]    Script Date: 02/16/2018 05:15:04 ******/
+/****** Object:  StoredProcedure [dbo].[Drilo_AgendaMant_Select_GetListMantencion]    Script Date: 02/21/2018 01:23:00 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
-
 ALTER PROCEDURE [dbo].[Drilo_AgendaMant_Select_GetListMantencion] 
 	@NumCliente integer,
 	@IdAgenda integer,
+	@token varchar(30),
 	@DescError	varchar(1000) ='' OUTPUT
 AS
 BEGIN
@@ -37,7 +36,9 @@ BEGIN
 	  FROM [AgendaMant] AS AM INNER JOIN EstadoAgendaMant AS EAT on EAT.IdEstadoAgenda = AM.IdEstadoAgenda
 	  inner join TipoServicioAgeMant TS ON TS.IdServicio = AM.IdServicio
 	  inner join AgendaMant_Horario AH ON AM.IdHorario = AH.IdHorario
-	  WHERE ((@IdAgenda = 0) OR (IdAgenda = @IdAgenda)) AND ((@NumCliente = 0) OR(NumCliente = @NumCliente)) 
+	  WHERE ((@IdAgenda = 0) OR (IdAgenda = @IdAgenda)) 
+	  AND ((@NumCliente = 0) OR(NumCliente = @NumCliente)) 
+	  AND ((@token = '0') OR(Token = @token)) 
 	  
 	  declare	@NumError int = 0
 	set	@NumError= @@Error
@@ -58,4 +59,3 @@ BEGIN
 	OK:
 		return (@NumError)  
 END
-

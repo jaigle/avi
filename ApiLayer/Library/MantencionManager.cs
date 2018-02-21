@@ -57,12 +57,12 @@ namespace ApiLayer.Library
             return resultModel;
         }
 
-        public ResultModel GetListadoMantencion(int pintIdAgenda, int pintNumCliente, string token)
+        public ResultModel GetListadoMantencion(int pintIdAgenda, int pintNumCliente, string pstrToken, string token)
         {
             ResultModel resultModel = CheckToken(token);
             try
             {
-                resultModel.Payload = Tools.Base64Encode(JsonConvert.SerializeObject(_mantencionRepository.GetListaMantencion(pintIdAgenda, pintNumCliente)));
+                resultModel.Payload = Tools.Base64Encode(JsonConvert.SerializeObject(_mantencionRepository.GetListaMantencion(pintIdAgenda, pintNumCliente,pstrToken)));
             }
             catch (Exception e)
             {

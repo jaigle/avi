@@ -30,11 +30,11 @@ namespace ApiLayer.Controllers
         }
 
         // GET: api/Mantencion/{Agenda}{CodigoCliente}
-        [Route("agenda/{pintIdAgenda:int}/cliente/{pintCodCliente:int}")]
-        public ResultModel GetListMantencion(int pintIdAgenda, int pintCodCliente, [FromUri] string token)
+        [Route("agenda/{pintIdAgenda:int}/cliente/{pintCodCliente:int}/token/{pstrToken}")]
+        public ResultModel GetListMantencion(int pintIdAgenda, int pintCodCliente, string pstrToken, [FromUri] string token)
         {
             MantencionManager mantencionManager = new MantencionManager();
-            return mantencionManager.GetListadoMantencion(pintIdAgenda, pintCodCliente, token);
+            return mantencionManager.GetListadoMantencion(pintIdAgenda, pintCodCliente, pstrToken, token);
         }
 
         // GET: api/Mantencion/{Agenda}{CodigoCliente}

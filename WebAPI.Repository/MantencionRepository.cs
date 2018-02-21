@@ -93,7 +93,7 @@ namespace WebAPI.Repository
             throw new NotImplementedException();
         }
 
-        public IEnumerable<MantencionDto> GetListaMantencion(int pintIdAgenda, int pintNumCliente)
+        public IEnumerable<MantencionDto> GetListaMantencion(int pintIdAgenda, int pintNumCliente, string pstrToken)
         {
             IEnumerable<MantencionDto> valor;
             try
@@ -102,7 +102,8 @@ namespace WebAPI.Repository
                 valor = _cnx.Query<MantencionDto>(sql: query, param: new
                 {
                     IdAgenda = pintIdAgenda,
-                    NumCliente = pintNumCliente
+                    NumCliente = pintNumCliente,
+                    token = pstrToken
                 }, commandType: CommandType.StoredProcedure);
             }
             catch (Exception e)
