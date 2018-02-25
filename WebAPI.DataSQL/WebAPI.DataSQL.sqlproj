@@ -70,6 +70,9 @@
     <None Include="Mantenimiento_GetDisponibilidad.sql" />
     <None Include="ContactoCliente_Consulta_Varios.sql" />
     <None Include="ContratoyAnexo_Select.sql" />
+    <None Include="Drilo_Flota_Select_GetVehiculo.sql" />
+    <None Include="Drilo_Infracciones_Select.sql" />
+    <None Include="Drilo_OrdenTrabajo_Select.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Contacto_Select_GetListaContactos.sql" />

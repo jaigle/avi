@@ -131,6 +131,8 @@
     <Compile Include="Controllers\FlotaController.cs" />
     <Compile Include="Controllers\AnexoController.cs" />
     <Compile Include="Controllers\ContratoController.cs" />
+    <Compile Include="Controllers\InfraccionController.cs" />
+    <Compile Include="Controllers\OrdenTrabajoController.cs" />
     <Compile Include="Controllers\VehiculoController.cs" />
     <Compile Include="Controllers\EmpresaController.cs" />
     <Compile Include="Controllers\ComunaController.cs" />
@@ -148,6 +150,8 @@
     <Compile Include="Library\FlotaManager.cs" />
     <Compile Include="Library\AnexoManager.cs" />
     <Compile Include="Library\ContratoManager.cs" />
+    <Compile Include="Library\InfraccionManager.cs" />
+    <Compile Include="Library\OrdenTrabajoManager.cs" />
     <Compile Include="Library\VehiculoManager.cs" />
     <Compile Include="Library\EmpresaManager.cs" />
     <Compile Include="Library\MantencionManager.cs" />
