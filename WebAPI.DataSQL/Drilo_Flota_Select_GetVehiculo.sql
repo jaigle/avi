@@ -22,11 +22,24 @@ CREATE PROCEDURE [dbo].[Drilo_Flota_Select_GetVehiculo]
 AS
 BEGIN
 BEGIN TRAN
-	select F.Flotas_Patente as flotaPatente, E.EstFlo_Nombre as estFloAltaBaja, 
-	S.SubCat_NomMarca as subCatNomMarca, S.SubCat_NomModelo as subCatNomModelo, 
-	F.Flotas_AnoFabric as flotasAnoFrabic, F.Flotas_UltKiloEntr as flotasUltKiloEntr,
-	ISNULL(v.CapacidadEstanque,'0') as capacidadEstanque, ISNULL(V.TipoCombustible,'Sin Especificar') as tipoCombustible,
-	ISNULL(v.KmActualGPS,'0') as kmActualGps
+	select F.Flotas_Patente as flotaPatente, 
+	E.EstFlo_Nombre as estFloAltaBaja, 
+	S.SubCat_NomMarca as subCatNomMarca, 
+	S.SubCat_NomModelo as subCatNomModelo, 
+	F.Flotas_AnoFabric as flotasAnoFrabic, 
+	F.Flotas_UltKiloEntr as flotasUltKiloEntr,
+	ISNULL(v.CapacidadEstanque,'0') as capacidadEstanque, 
+	ISNULL(V.TipoCombustible,'Sin Especificar') as tipoCombustible,
+	ISNULL(v.KmActualGPS,'0') as kmActualGps,
+	v.CtoLO as ctoLO,
+	v.IdAnexo as idAnexo,
+	v.Cliente_Numero as clienteNumero,
+	v.FechaIngreso as fechaIngreso,
+	v.FechaTermino as fechaTermino,
+	v.FechaDevolucion as fechaDevolucion,
+	v.FechaExtension as fechaExtension,
+	v.ValorNeto as valorNeto,
+	v.Calidad as calidad
 	from Flota as F inner join ESTADOFLOTA as E on F.Flotas_Estado = E.EstFlo_COdigo
 	inner join SUBCATEGORIAS as S on F.SubCat_CodMarcaModelo = S.SubCat_CodMarcaModelo
 	left outer join Central.dbo.ContratoLO_Vehiculos_Drilo as v on v.Patente = F.Flotas_Patente COLLATE Modern_Spanish_CS_AS
@@ -51,6 +64,5 @@ BEGIN TRAN
 	OK:
 		return (@NumError)
 END
---select * from Central.dbo.ContratoLO_Vehiculos_Drilo
 GO
 
