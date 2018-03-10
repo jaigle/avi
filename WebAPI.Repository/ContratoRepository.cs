@@ -50,21 +50,27 @@ namespace WebAPI.Repository
             {
                 throw new Exception(message: "Error obteniendo listado ContratosAnexos: " + e.Message);
             }
+        }
 
-
-
-            //try
-            //{
-            //    var query = "Drilo_ContratoyAnexo_Select";
-            //    DynamicParameters p = new DynamicParameters();
-            //    p.Add(name: "@Cliente_Numero", value: pintCliente);
-            //    var listaContratos = _cnx.Query<ContratoAnexo>(sql: query, param: p, commandType: CommandType.StoredProcedure);
-            //    return listaContratos;
-            //}
-            //catch (Exception e)
-            //{
-            //    throw new Exception(message: "Error obteniendo listado ContratosAnexos: " + e.Message);
-            //}
+        public IEnumerable<EstadoPago> GetListaEstadoPago(int pintCliente)
+        {
+            Error myError = new Error();
+            try
+            {
+                var query = "Drilo_EstadoPago_Select";
+                DynamicParameters p = new DynamicParameters();
+                p.Add(name: "@@IdCliente", value: pintCliente, dbType: DbType.Int64);
+                p.Add(name: "@DescError", dbType: DbType.String, direction: ParameterDirection.Output, size: 1000);
+                p.Add(name: "@NumError", dbType: DbType.Int32, direction: ParameterDirection.ReturnValue);
+                IEnumerable<EstadoPago> list = _cnx.Query<EstadoPago>(sql: query, param: p, commandType: CommandType.StoredProcedure);
+                myError.ErrorCode = p.Get<int>(name: "@NumError");
+                myError.ErrorMessage = p.Get<string>(name: "@DescError");
+                return myError.ErrorCode > 0 ? throw new CustomException(message: myError.ErrorMessage, localError: myError) : list;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(message: "Error obteniendo listado ContratosAnexos: " + e.Message);
+            }
         }
     }
 }

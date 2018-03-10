@@ -37,4 +37,22 @@ namespace WebAPI.Model
         public string fechaInicio { get; set; }
         public string fechaTermino { get; set; }
     }
+
+
+    public class EstadoPago : Entity<int>
+    {
+        public string ctoLO { get; set; }
+        public string cantidadVehiculos { get; set; }
+        public string numEstadoPago { get; set; }
+        public string periodoCreacion { get; set; }
+        public string observacion { get; set; }
+        public string estado { get; set; }
+        public string periodoConsumo { get; set; }
+        public string tipoDocumento { get; set; }
+        public string numDocumento { get; set; }
+        public string monto { get; set; }
+        public string pathArchivo { get; set; }
+        public string idCliente { get; set; }
+    }
+
 }

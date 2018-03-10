@@ -51,5 +51,27 @@ namespace WebAPI.Repository
                 throw new Exception(message: "Error obteniendo Vehiculo: " + e.Message);
             }
         }
+
+        public IEnumerable<Reemplazo> GetListaReemplazos(int pintCliente, string pstrPatente)
+        {
+            Error myError = new Error();
+            try
+            {
+                var query = "[Drilo_Reemplazo_Select]";
+                DynamicParameters p = new DynamicParameters();
+                p.Add(name: "@IdCliente", value: pintCliente, dbType: DbType.Int64);
+                p.Add(name: "@Patente", value: pstrPatente, dbType: DbType.String);
+                p.Add(name: "@DescError", dbType: DbType.String, direction: ParameterDirection.Output, size: 1000);
+                p.Add(name: "@NumError", dbType: DbType.Int32, direction: ParameterDirection.ReturnValue);
+                IEnumerable<Reemplazo> list = _cnx.Query<Reemplazo>(sql: query, param: p, commandType: CommandType.StoredProcedure);
+                myError.ErrorCode = p.Get<int>(name: "@NumError");
+                myError.ErrorMessage = p.Get<string>(name: "@DescError");
+                return myError.ErrorCode > 0 ? throw new CustomException(message: myError.ErrorMessage, localError: myError) : list;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(message: "Error obteniendo reemplazos: " + e.Message);
+            }
+        }
     }
 }

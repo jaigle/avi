@@ -73,6 +73,8 @@
     <None Include="Drilo_Flota_Select_GetVehiculo.sql" />
     <None Include="Drilo_Infracciones_Select.sql" />
     <None Include="Drilo_OrdenTrabajo_Select.sql" />
+    <None Include="Drilo_Reemplazo_Select.sql" />
+    <None Include="Drilo_EstadoPago_Select.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Contacto_Select_GetListaContactos.sql" />

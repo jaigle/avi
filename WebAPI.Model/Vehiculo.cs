@@ -28,4 +28,24 @@ namespace WebAPI.Model
         public string valorNeto { get; set; }
         public string calidad { get; set; }
     }
+
+    public class Reemplazo : Entity<int>
+    {
+        private DateTime FechaTrasladoEntrega;
+        private DateTime FechaTrasladoDevolucion;
+
+
+        public string patenteVehiculo { get; set; }
+        public string modeloVehiculoTitular { get; set; }
+        public string ctoLO { get; set; }
+        public string patenteVehiculoReemplazo { get; set; }
+        public string motivo { get; set; }
+        public string actaEntrega { get; set; }
+        public string fechaTrasladoEntrega { get => (FechaTrasladoEntrega.ToString("dd-MM-yyyy") == "01-01-0001 0:00") ? " " : FechaTrasladoEntrega.ToString("dd-MM-yyyy HH:mm"); }
+        public string fechaTrasladoDevolucion { get => (FechaTrasladoDevolucion.ToString("dd-MM-yyyy") == "01-01-0001 0:00") ? " " : FechaTrasladoDevolucion.ToString("dd-MM-yyyy HH:mm"); }
+        public string actaRecepcion { get; set; }
+        public string idCliente { get; set; }
+        public string fechaIngreso { get; set; }
+    }
+
 }
