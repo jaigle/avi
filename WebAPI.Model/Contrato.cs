@@ -53,6 +53,24 @@ namespace WebAPI.Model
         public string monto { get; set; }
         public string pathArchivo { get; set; }
         public string idCliente { get; set; }
+        public string servicio { get; set; }
+    }
+
+    public class EstadoPagoDetalle : Entity<int>
+    {
+        private DateTime FechaInicio;
+        private DateTime FechaTermino;
+
+        public string nProceso { get; set; }
+        public string periodoConsumo { get; set; }
+        public string fechaInicio { get => (FechaInicio.ToString("dd-MM-yyyy") == "01-01-0001") ? " " : FechaInicio.ToString("dd-MM-yyyy"); }
+        public string fechaTermino { get => (FechaTermino.ToString("dd-MM-yyyy") == "01-01-0001") ? " " : FechaTermino.ToString("dd-MM-yyyy"); }
+        public string valor { get; set; }
+        public string patente { get; set; }
+        public string modelo { get; set; }
+        public string marca { get; set; }
+        public string idCtoLo { get; set; }
+        public string idAnexo { get; set; }
     }
 
 }

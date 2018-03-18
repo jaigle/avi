@@ -59,7 +59,7 @@ namespace WebAPI.Repository
             {
                 var query = "Drilo_EstadoPago_Select";
                 DynamicParameters p = new DynamicParameters();
-                p.Add(name: "@@IdCliente", value: pintCliente, dbType: DbType.Int64);
+                p.Add(name: "@IdCliente", value: pintCliente, dbType: DbType.Int64);
                 p.Add(name: "@DescError", dbType: DbType.String, direction: ParameterDirection.Output, size: 1000);
                 p.Add(name: "@NumError", dbType: DbType.Int32, direction: ParameterDirection.ReturnValue);
                 IEnumerable<EstadoPago> list = _cnx.Query<EstadoPago>(sql: query, param: p, commandType: CommandType.StoredProcedure);
@@ -69,7 +69,28 @@ namespace WebAPI.Repository
             }
             catch (Exception e)
             {
-                throw new Exception(message: "Error obteniendo listado ContratosAnexos: " + e.Message);
+                throw new Exception(message: "Error obteniendo listado Estado Pago: " + e.Message);
+            }
+        }
+
+        public IEnumerable<EstadoPagoDetalle> GetListaEstadoPagoDetalle(int pIdEP)
+        {
+            Error myError = new Error();
+            try
+            {
+                var query = "[Drilo_EstadoPagoDetalle_Select]";
+                DynamicParameters p = new DynamicParameters();
+                p.Add(name: "@IdEP", value: pIdEP, dbType: DbType.Int64);
+                p.Add(name: "@DescError", dbType: DbType.String, direction: ParameterDirection.Output, size: 1000);
+                p.Add(name: "@NumError", dbType: DbType.Int32, direction: ParameterDirection.ReturnValue);
+                IEnumerable<EstadoPagoDetalle> list = _cnx.Query<EstadoPagoDetalle>(sql: query, param: p, commandType: CommandType.StoredProcedure);
+                myError.ErrorCode = p.Get<int>(name: "@NumError");
+                myError.ErrorMessage = p.Get<string>(name: "@DescError");
+                return myError.ErrorCode > 0 ? throw new CustomException(message: myError.ErrorMessage, localError: myError) : list;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(message: "Error obteniendo listado de Detalle Estado de Pago: " + e.Message);
             }
         }
     }

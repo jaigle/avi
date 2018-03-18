@@ -34,7 +34,11 @@ BEGIN TRAN
     ReempFInicio     AS fechaTrasladoEntrega,
     ReempFTermino     AS fechaTrasladoDevolucion,
     ActaDevol    AS actaRecepcion,
-    IdCliente     AS idCliente
+    IdCliente     AS idCliente,
+    R.MarcaVehTit as marcaVehiculoTitular,
+    R.MarcaVehReem as marcaVehiculoReemplazo,
+    R.ModeloVehReem as modeloVehiculoReemplazo,
+    R.IdAnexo as idAnexo
 	from Central.dbo.Drilo_Reemplazos AS R
     WHERE (@IdCliente = 0 OR R.IdCliente = @IdCliente) 
     AND (@Patente = '00' OR  R.PatenteTitular = @Patente)

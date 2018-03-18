@@ -35,7 +35,8 @@ EP.TipoDoc  AS tipoDocumento,
 EP.NumDoc  AS numDocumento,
 EP.MontoNeto_EP  AS monto,
 ''  AS pathArchivo,
-EP.IdCliente  AS idCliente 
+EP.IdCliente  AS idCliente,
+EP.Servicio as servicio  
 	from Central.dbo.Drilo_Estado_Pago AS EP
     WHERE (@IdCliente = 0 OR EP.IdCliente = @IdCliente) 
     

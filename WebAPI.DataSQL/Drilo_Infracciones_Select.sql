@@ -27,17 +27,18 @@ BEGIN TRAN
 	SELECT 
 	I.InfracID	as nInfraccion,
 	I.StatusInfraRecobDesc	as estado,
-	'EP Asociado'	as ePAsociado,
-	I.FecInfrac	as fechaEP,
-	'Contrato'	as nContrato,
+	I.IdEp	as ePAsociado,
+	I.PeridoConsumoEP as fechaEP,
+	I.IdCtoLO	as nContrato,
 	I.Patente as patenteVehiculo,
 	I.SubCat_NomModelo	as modeloVehiculo,
 	I.FecInfrac	as fechaInfraccion,
 	I.RolCausa	as rolCausa,
 	I.JuzgadoDescrip	as juzgado,
 	I.StatusInfraRecobDesc	as observacion,
-	'pathArchivo'	as pathArchivo,
-	I.Cliente_Numero	as idCliente
+	I.UrlAdjunto as pathArchivo,
+	I.Cliente_Numero	as idCliente,
+	I.IdAnexo as nAnexo
 	from Central.dbo.Drilo_Infracciones as I
     WHERE (@IdCliente = 0 OR I.Cliente_Numero = @IdCliente)     
     AND (@Patente = '00' OR  I.Patente = @Patente)

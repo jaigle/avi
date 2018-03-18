@@ -19,5 +19,6 @@ namespace WebAPI.Model
         public string observacion { get; set; }
         public string pathArchivo { get; set; }
         public string idCliente { get; set; }
+        public string nAnexo { get; set; }
     }
 }

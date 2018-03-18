@@ -73,5 +73,24 @@ namespace ApiLayer.Library
             }
             return resultModel;
         }
+
+        internal ResultModel GetListadoEstadoPagoDetalle(string token, int pIdEP)
+        {
+            ResultModel resultModel = CheckToken(token);
+            try
+            {
+                if (resultModel.Result)
+                    resultModel.Payload = Tools.Base64Encode(JsonConvert.SerializeObject(_contratoRepository.GetListaEstadoPagoDetalle(pIdEP)));
+            }
+            catch (Exception e)
+            {
+                resultModel.ErrorMessage = e.Message;
+                resultModel.ErrorCode = 10;
+                resultModel.Payload = String.Empty;
+                resultModel.Result = false;
+                resultModel.Token = String.Empty;
+            }
+            return resultModel;
+        }
     }
 }

@@ -36,5 +36,13 @@ namespace ApiLayer.Controllers
             ContratoManager entityManager = new ContratoManager();
             return entityManager.GetListadoEstadoPago(token, pintCodEmpresa);
         }
+
+        // GET: api/EstadoPagoDetalle
+        [Route("estadopago/detalle/{pIdEP}")]
+        public ResultModel GetListadoEstadoPagoDetalle(int pIdEP, [FromUri] string token)
+        {
+            ContratoManager entityManager = new ContratoManager();
+            return entityManager.GetListadoEstadoPagoDetalle(token, pIdEP);
+        }
     }
 }

@@ -46,6 +46,10 @@ namespace WebAPI.Model
         public string actaRecepcion { get; set; }
         public string idCliente { get; set; }
         public string fechaIngreso { get; set; }
+        public string marcaVehiculoTitular{ get; set; }
+        public string marcaVehiculoReemplazo { get; set; }
+        public string modeloVehiculoReemplazo { get; set; }
+        public string idAnexo { get; set; }
     }
 
 }

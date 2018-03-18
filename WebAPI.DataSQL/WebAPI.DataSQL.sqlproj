@@ -75,6 +75,7 @@
     <None Include="Drilo_OrdenTrabajo_Select.sql" />
     <None Include="Drilo_Reemplazo_Select.sql" />
     <None Include="Drilo_EstadoPago_Select.sql" />
+    <None Include="Drilo_EstadoPagoDetalle_Select.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Contacto_Select_GetListaContactos.sql" />
