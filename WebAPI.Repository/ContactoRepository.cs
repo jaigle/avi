@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
 using Dapper;
@@ -27,27 +28,36 @@ namespace WebAPI.Repository
             throw new NotImplementedException();
         }
 
-        public ContactoDto Add(ContactoDto entity)
+        public int Add(ContactoDto entity)
         {
-            throw new NotImplementedException();
-        }
+            Error myError = new Error();            
+        int numeroContacto;
 
-        public int Add(ContactoNew entity)
-        {
             try
             {                
-                var query = Consultas.SqlText.ContactoNew_Insert;
-                var numeroContacto = _cnx.QuerySingle<int>(query, new
-                {
-                    Nombre = entity.contacNombre,
-                    Rut = entity.contacRutContacto
-                });
-                ContactoNew myEntity = GetContactoNew_ByContactoNumber(numeroContacto);
-                return myEntity.contacNumero;
+                var query = "Drilo_ContactoNew_Ins_POSTContacto";
+                DynamicParameters p = new DynamicParameters();
+                p.Add(name: "@Rut", value: entity.contacRutContacto);
+                p.Add(name: "@Nombre", value: entity.contacNombre);
+                p.Add(name: "@Contac_Numero", value: entity.contacNumero, direction: ParameterDirection.Output);
+                p.Add(name: "@CodigoTipoNegocio", value: entity.codigoTipoNegocio);
+                p.Add(name: "@idTipoContacto", value: entity.idTipoContacto);
+                p.Add(name: "@Contac_Telefono1", value: entity.telefono1);
+                p.Add(name: "@Contac_Mail", value: entity.contacMail);
+                p.Add(name: "@Contac_Celular", value: entity.contacCelular); 
+                p.Add(name: "@Ciudad_Codigo", value: entity.ciudadCodigo);
+                p.Add(name: "@Cliente_Numero", value: entity.clienteNumero);
+                p.Add(name: "@DescError", dbType: DbType.String, direction: ParameterDirection.Output, size: 1000);
+                p.Add(name: "@NumError", dbType: DbType.Int32, direction: ParameterDirection.ReturnValue);
+                _cnx.Execute(sql: query, param: p, commandType: CommandType.StoredProcedure);
+                myError.ErrorCode = p.Get<int>(name: "@NumError");
+                myError.ErrorMessage = p.Get<string>(name: "@DescError");
+                numeroContacto = p.Get<int>(name: "@Contac_Numero");
+                return myError.ErrorCode > 0 ? throw new CustomException(message: myError.ErrorMessage, localError: myError) : numeroContacto;
             }
             catch (Exception e)
             {
-                throw new Exception("Error adicionado ContactNew : " + e.Message);
+                throw new Exception(message: "Error adicionado ContactNew : " + e.Message);
             }
         }
 
@@ -72,12 +82,12 @@ namespace WebAPI.Repository
             try
             {
                 var query = Consultas.SqlText.TipoContacto_Select;
-                IEnumerable<TipoContacto> entity = _cnx.Query<TipoContacto>(query);
+                IEnumerable<TipoContacto> entity = _cnx.Query<TipoContacto>(sql: query);
                 return entity;
             }
             catch (Exception e)
             {
-                throw new Exception("Error obteniendo Listado de Tipos de Contactos: " + e.Message);
+                throw new Exception(message: "Error obteniendo Listado de Tipos de Contactos: " + e.Message);
             }
         }
 
@@ -91,12 +101,12 @@ namespace WebAPI.Repository
             try
             {
                 var query = Consultas.SqlText.ContactoNew_SelectPorRut;
-                ContactoNew entity = _cnx.QuerySingle<ContactoNew>(query, new { Rut = new DbString { Value = valueContacRutContacto, IsFixedLength = false, Length = 11, IsAnsi = true } });
+                ContactoNew entity = _cnx.QuerySingle<ContactoNew>(sql: query, param: new { Rut = new DbString { Value = valueContacRutContacto, IsFixedLength = false, Length = 11, IsAnsi = true } });
                 return entity;
             }
             catch (Exception e)
             {
-                throw new Exception("Error obteniendo ContactNew por Rut: " + e.Message);
+                throw new Exception(message: "Error obteniendo ContactNew por Rut: " + e.Message);
             }
         }
 
@@ -106,21 +116,21 @@ namespace WebAPI.Repository
         /// <param name="pintContactNumero">Parametro ContactNumero</param>
         /// <param name="pintClienteNumero">PArametro ClienteNumero</param>
         /// <returns></returns>
-        public ContactoCliente GetContactoClienteByKey(int pintContactNumero, int pintClienteNumero)
+        public ContactoEmpresa GetContactoClienteByKey(int pintContactNumero, int pintClienteNumero, int pintTipoContacto)
         {
             try
             {
-                var query = Consultas.SqlText.ContactoCliente_Insert;
-                ContactoCliente entity = _cnx.QuerySingle<ContactoCliente>(query, new
-                {
-                    ContactNumero = pintContactNumero,
-                    ClienteNumero = pintClienteNumero
-                });
+                var query = "Drilo_Contacto_Select_GetListaContactos";
+                DynamicParameters p = new DynamicParameters();
+                p.Add(name: "@IdEmpresa", value: pintClienteNumero);
+                p.Add(name: "@Contac_Numero", value: pintContactNumero);
+                p.Add(name: "@IdTipoContacto", value: pintTipoContacto);
+                var entity = _cnx.QuerySingle<ContactoEmpresa>(sql: query, param: p, commandType: CommandType.StoredProcedure);
                 return entity;
             }
             catch (Exception e)
             {
-                throw new Exception("Error obteniendo ContactCliente por su llave: " + e.Message);
+                throw new Exception(message: "Error obteniendo ContactCliente por su llave: " + e.Message);
             }
         }
 
@@ -133,7 +143,7 @@ namespace WebAPI.Repository
             try
             {
                 var query = Consultas.SqlText.ContactNew_Max;
-                var numero = _cnx.Query<int>(query).First();
+                var numero = _cnx.Query<int>(sql: query).First();
                 return numero;
             }
             catch (Exception e)
@@ -147,7 +157,7 @@ namespace WebAPI.Repository
             try
             {
                 var query = Consultas.SqlText.ContactoNew_SelectPorContactNumber;
-                var entity = _cnx.QuerySingle<ContactoNew>(query, new
+                var entity = _cnx.QuerySingle<ContactoNew>(sql: query, param: new
                 {
                     Numero = pintContactNumber
                 });
@@ -155,7 +165,7 @@ namespace WebAPI.Repository
             }
             catch (Exception e)
             {
-                throw new Exception("Error obteiendo ContactNew por Contac_Numero: " + e.Message);
+                throw new Exception(message: "Error obteiendo ContactNew por Contac_Numero: " + e.Message);
             }
         }
 
@@ -168,16 +178,17 @@ namespace WebAPI.Repository
         {
             try
             {
-                var query = Consultas.SqlText.Contactos_SelectPorEmpresa;
-                IEnumerable<ContactoEmpresa> entity = _cnx.Query<ContactoEmpresa>(query, new
-                {
-                    IdEmpresa = pintIdEmpresa
-                }).ToList();
-                return entity;
+                var query = "Drilo_Contacto_Select_GetListaContactos";
+                DynamicParameters p = new DynamicParameters();
+                p.Add(name: "@IdEmpresa", value: pintIdEmpresa);
+                p.Add(name: "@Contac_Numero", value: 0);
+                p.Add(name: "@IdTipoContacto", value: 0);
+                var listaContactos = _cnx.Query<ContactoEmpresa>(sql: query, param: p, commandType: CommandType.StoredProcedure);
+                return listaContactos;
             }
             catch (Exception e)
             {
-                throw new Exception("Error obteniendo Contactos por Empresa: " + e.Message);
+                throw new Exception(message: $"Error obteniendo Contactos por Empresa: {e.Message}");
             }
         }
 
@@ -185,47 +196,78 @@ namespace WebAPI.Repository
         /// Actualiza un registro de Contacto de Clientes
         /// </summary>
         /// <param name="entity"></param>
-        public void PutContactoCliente(ContactoCliente entity)
+        public int PutContactoCliente(ContactoCliente entity)
         {
+            Error myError = new Error();
+            int numeroContacto;
+
             try
             {
-                var query = Consultas.SqlText.ContactoCliente_Update;
-                _cnx.Execute(query, new
-                {
-                    TipoContrato = entity.idTipoContacto,
-                    Telefono1 = entity.telefono1,
-                    Celular = entity.contacCelular,
-                    Mail = entity.contacMail,
-                    Ciudad = entity.ciudadCodigo,
-                    ContactNumero = entity.contactoNumero,
-                    ClienteNumero = entity.clienteNumero
-                });
+                var query = "Drilo_Contacto_Upd_PUTContacto";
+                DynamicParameters p = new DynamicParameters();
+                p.Add(name: "@Contac_Numero", value: entity.contacNumero);
+                p.Add(name: "@idTipoContacto", value: entity.idTipoContacto);
+                p.Add(name: "@Contac_Telefono1", value: entity.telefono1);
+                p.Add(name: "@Contac_Mail", value: entity.contacMail);
+                p.Add(name: "@Contac_Celular", value: entity.contacCelular);
+                p.Add(name: "@Ciudad_Codigo", value: entity.ciudadCodigo);
+                p.Add(name: "@Cliente_Numero", value: entity.clienteNumero);
+                p.Add(name: "@DescError", dbType: DbType.String, direction: ParameterDirection.Output, size: 1000);
+                p.Add(name: "@NumError", dbType: DbType.Int32, direction: ParameterDirection.ReturnValue);
+                _cnx.Execute(sql: query, param: p, commandType: CommandType.StoredProcedure);
+                myError.ErrorCode = p.Get<int>(name: "@NumError");
+                myError.ErrorMessage = p.Get<string>(name: "@DescError");
+                numeroContacto = p.Get<int>(name: "@Contac_Numero");
+                return myError.ErrorCode > 0 ? throw new CustomException(message: myError.ErrorMessage, localError: myError) : numeroContacto;
             }
             catch (Exception e)
             {
-                throw new Exception("Error actualizando ContactosClientes: " + e.Message);
+                throw new Exception(message: $"Error actualizando Contacto : {e.Message}");
             }
         }
 
 
-        public void DeleteContactoCliente(int pintContactNumero, int pintClienteNumero)
+        public int DeleteContactoCliente(ContactoCliente entity)
         {
+            Error myError = new Error();
+            int numeroContacto;
+
             try
             {
-                var query = Consultas.SqlText.ContactoCliente_Update;
-                _cnx.Execute(query, new
-                {
-                    ContactNumero = pintContactNumero,
-                    ClienteNumero = pintClienteNumero
-                });
+                var query = "Drilo_Contacto_Upd_DELETEContacto";
+                DynamicParameters p = new DynamicParameters();
+                p.Add(name: "@Contac_Numero", value: entity.contacNumero);
+                p.Add(name: "@idTipoContacto", value: entity.idTipoContacto);
+                p.Add(name: "@Cliente_Numero", value: entity.clienteNumero);
+                p.Add(name: "@DescError", dbType: DbType.String, direction: ParameterDirection.Output, size: 1000);
+                p.Add(name: "@NumError", dbType: DbType.Int32, direction: ParameterDirection.ReturnValue);
+                _cnx.Execute(sql: query, param: p, commandType: CommandType.StoredProcedure);
+                myError.ErrorCode = p.Get<int>(name: "@NumError");
+                myError.ErrorMessage = p.Get<string>(name: "@DescError");
+                numeroContacto = p.Get<int>(name: "@Contac_Numero");
+                return myError.ErrorCode > 0 ? throw new CustomException(message: myError.ErrorMessage, localError: myError) : numeroContacto;
             }
             catch (Exception e)
             {
-                throw new Exception("Error desactivando ContactosClientes: " + e.Message);
+                throw new Exception(message: $"Error desactivando Contacto : {e.Message}");
             }
         }
 
 
+        public IEnumerable<Usuario> GetListaUsuarios()
+        {
+            try
+            {
+                var query = "Drilo_UsuarioWebDrilo_Select";
+                DynamicParameters p = new DynamicParameters();
+                var listaContratos = _cnx.Query<Usuario>(sql: query, param: p, commandType: CommandType.StoredProcedure);
+                return listaContratos;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(message: "Error obteniendo listado Usuarios: " + e.Message);
+            }
+        }
 
     }
 }

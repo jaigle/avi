@@ -20,7 +20,7 @@ namespace WebAPI.Repository
         {
         }
 
-        public IEnumerable<T> GetAllAsync()
+        public IEnumerable<T> GetAll()
         {
             throw new NotImplementedException();
         }
@@ -31,6 +31,11 @@ namespace WebAPI.Repository
         }
 
         public T Add(T entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public T Get(T entity)
         {
             throw new NotImplementedException();
         }

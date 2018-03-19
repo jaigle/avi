@@ -15,34 +15,34 @@ namespace ApiLayer.Controllers
     {
         // PUT: api/Mantencion
         [Route("")]
-        public ResultModel PutMantencion([FromBody]Mantencion value)
+        public ResultModel PutMantencion([FromBody]Mantencion value, [FromUri] string token)
         {
             MantencionManager mantencionManager = new MantencionManager();
-            return mantencionManager.ActualizarMantencion(value);
+            return mantencionManager.ActualizarMantencion(value, token);
         }
 
         // POST: api/Mantencion
         [Route("")]
-        public ResultModel PostMantencion([FromBody]Mantencion value)
+        public ResultModel PostMantencion([FromBody]Mantencion value, [FromUri] string token)
         {
             MantencionManager mantencionManager = new MantencionManager();
-            return mantencionManager.AgregarMantencion(value);
+            return mantencionManager.AgregarMantencion(value, token);
         }
 
         // GET: api/Mantencion/{Agenda}{CodigoCliente}
-        [Route("Listado/{pintIdAgenda:int}/{pintCodCliente:int}")]
-        public ResultModel GetListMantencion(int pintIdAgenda, int pintCodCliente)
+        [Route("agenda/{pintIdAgenda:int}/cliente/{pintCodCliente:int}/token/{pstrToken}")]
+        public ResultModel GetListMantencion(int pintIdAgenda, int pintCodCliente, string pstrToken, [FromUri] string token)
         {
             MantencionManager mantencionManager = new MantencionManager();
-            return mantencionManager.GetListadoMantencion(pintIdAgenda, pintCodCliente);
+            return mantencionManager.GetListadoMantencion(pintIdAgenda, pintCodCliente, pstrToken, token);
         }
 
         // GET: api/Mantencion/{Agenda}{CodigoCliente}
-        [Route("Disponibilidad/{pintIdTaller:int}/{pFecha:datetime:regex(\\d{4}-\\d{2}-\\d{2})}")]
-        public ResultModel GetDisponibilidad(int pintIdTaller, DateTime pFecha)
+        [Route("taller/{pintIdTaller}/fecha/{pFecha}")]
+        public ResultModel GetDisponibilidad(int pintIdTaller, string pFecha, [FromUri] string token)
         {
             MantencionManager mantencionManager = new MantencionManager();
-            return mantencionManager.GetDisponibilidad(pintIdTaller, DateTime.Today);
+            return mantencionManager.GetDisponibilidad(pintIdTaller, pFecha, token);
         }
     }
 }

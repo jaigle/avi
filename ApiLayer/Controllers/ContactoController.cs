@@ -10,61 +10,66 @@ using WebAPI.Model;
 
 namespace ApiLayer.Controllers
 {
+    [RoutePrefix("api/contacto")]
     public class ContactoController : ApiController
     {
         // GET: api/TipoContacto
-        [Route("api/TipoContacto/")]
-        //public ResultModel GetListTipoContacto([FromUri] string token)
-        public ResultModel GetListTipoContacto()
+        [Route("tipoContacto/")]
+        public ResultModel GetListTipoContacto([FromUri] string token)
         {
             ContactoManager contactoManager = new ContactoManager();
-            return contactoManager.GetListTipoContacto(String.Empty);
+            return contactoManager.GetListTipoContacto(token);
         }
 
         // GET: api/Contacto/5
-        [Route("api/ContactoEmpresa/{id}")]
-        //public ResultModel GetContactoPorEmpresa(int id, [FromUri] string token)
-        public ResultModel GetContactoPorEmpresa(int id)
+        [Route("contactoEmpresa/{idEmpresa:int?}")]
+        public ResultModel GetContactoPorEmpresa([FromUri] string token, int idEmpresa = 0)
         {
             ContactoManager contactoManager = new ContactoManager();
-            return contactoManager.GetContactoPorEmpresa(id, String.Empty);
+            return contactoManager.GetContactoPorEmpresa(idEmpresa, token);
         }
 
-        [Route("api/ContactoCliente/{id1}/cliente/{id2}")]
-        //public ResultModel GetContactoPorEmpresa(int id1, int id2, [FromUri] string token)
-        public ResultModel GetContactoPorEmpresa(int id1, int id2)
+        [Route("deletecontactoCliente2")]
+        public ResultModel DeleteContactoPorEmpresa2([FromBody]ContactoCliente value, [FromUri] string token)
         {
             ContactoManager contactoManager = new ContactoManager();
-            return contactoManager.GetContactoClientePorLlave(id1,id2, String.Empty);
+            return contactoManager.DeleteContactClient(value, token);
         }
 
-        [Route("api/ContactoCliente/{id1}/cliente/{id2}")]
-        //public ResultModel DeleteContactoPorEmpresa(int id1, int id2, [FromUri] string token)
-        public ResultModel DeleteContactoPorEmpresa(int id1, int id2)
+        [Route("deletecontactoCliente/contacnum/{pintContacNum}/clientenum/{pintClienteNum}/tipocontacto/{pintTipoContacto}")]
+        public ResultModel DeleteContactoPorEmpresa(int pintContacNum, int pintClienteNum, int pintTipoContacto, [FromUri] string token)
         {
             ContactoManager contactoManager = new ContactoManager();
-            return contactoManager.GetContactoClientePorLlave(id1, id2, String.Empty);
+            ContactoCliente miCliente = new ContactoCliente();
+            miCliente.contacNumero = pintContacNum;
+            miCliente.clienteNumero = pintClienteNum;
+            miCliente.idTipoContacto = pintTipoContacto.ToString();
+
+            return contactoManager.DeleteContactClient(miCliente,token);
         }
 
         // POST: api/Contacto
-        //public ResultModel Post([FromBody]ContactoDto value, [FromUri] string token)
-        public ResultModel Post([FromBody]ContactoDto value)
+        [Route("")]
+        public ResultModel Post([FromBody]ContactoDto value, [FromUri] string token)
         {
             ContactoManager contactoManager = new ContactoManager();
-            return contactoManager.AddContacto(value, String.Empty);
+            return contactoManager.AddContacto(value, token);
         }
 
         // PUT: api/Contacto/5
-        //public ResultModel Put([FromBody]ContactoCliente value, [FromUri] string token)
-        public ResultModel Put([FromBody]ContactoCliente value)
+        [Route("")]
+        public ResultModel Put([FromBody]ContactoCliente value, [FromUri] string token)
         {
             ContactoManager contactoManager = new ContactoManager();
-            return contactoManager.PutContactoCliente(value, String.Empty);
+            return contactoManager.PutContactoCliente(value, token);
         }
 
-        // DELETE: api/Contacto/5
-        public void Delete(int id)
+
+        [Route("usuario/")]
+        public ResultModel GetListUsuarios([FromUri] string token)
         {
+            ContactoManager contactoManager = new ContactoManager();
+            return contactoManager.GetListUsuarios(token);
         }
     }
 }

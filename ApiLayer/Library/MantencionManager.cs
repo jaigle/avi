@@ -17,9 +17,10 @@ namespace ApiLayer.Library
             _mantencionRepository = new MantencionRepository();
         }
 
-        public ResultModel ActualizarMantencion(Mantencion entity)
+        public ResultModel ActualizarMantencion(Mantencion entity, string token)
         {
-            ResultModel resultModel = new ResultModel();
+            //ResultModel resultModel = new ResultModel();
+            ResultModel resultModel = CheckToken(token);
             try
             {
                 resultModel.Payload = Tools.Base64Encode(JsonConvert.SerializeObject(_mantencionRepository.Edit(entity)));
@@ -37,9 +38,9 @@ namespace ApiLayer.Library
         }
 
 
-        public ResultModel AgregarMantencion(Mantencion entity)
+        public ResultModel AgregarMantencion(Mantencion entity, string token)
         {
-            ResultModel resultModel = new ResultModel();
+            ResultModel resultModel = CheckToken(token);
             try
             {
                 resultModel.Payload = Tools.Base64Encode(JsonConvert.SerializeObject(_mantencionRepository.Add(entity)));
@@ -56,12 +57,12 @@ namespace ApiLayer.Library
             return resultModel;
         }
 
-        public ResultModel GetListadoMantencion(int pintIdAgenda, int pintNumCliente)
+        public ResultModel GetListadoMantencion(int pintIdAgenda, int pintNumCliente, string pstrToken, string token)
         {
-            ResultModel resultModel = new ResultModel();
+            ResultModel resultModel = CheckToken(token);
             try
             {
-                resultModel.Payload = Tools.Base64Encode(JsonConvert.SerializeObject(_mantencionRepository.GetListaMantencion(pintIdAgenda, pintNumCliente)));
+                resultModel.Payload = Tools.Base64Encode(JsonConvert.SerializeObject(_mantencionRepository.GetListaMantencion(pintIdAgenda, pintNumCliente,pstrToken)));
             }
             catch (Exception e)
             {
@@ -74,16 +75,25 @@ namespace ApiLayer.Library
             return resultModel;
         }
 
-        public ResultModel GetDisponibilidad(int pintIdTaller, DateTime pFecha)
+        public ResultModel GetDisponibilidad(int pintIdTaller, string pFecha, string token)
         {
-            ResultModel resultModel = new ResultModel();
+            ResultModel resultModel = CheckToken(token);
+            DateTime pFecha1;
             try
             {
+                try {
+                    //pFecha1 = DateTime.ParseExact(pFecha, "yyyy-mm-dd", System.Globalization.CultureInfo.InvariantCulture);
+                    pFecha1 = DateTime.ParseExact(pFecha, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
+                }
+                catch
+                {
+                    throw new Exception("Fecha no suministrada o con formato erroneo.");
+                }
                 resultModel.Payload =
                     Tools.Base64Encode(
-                        JsonConvert.SerializeObject(_mantencionRepository.GetDisponibilidad(pintIdTaller, pFecha)));
+                        JsonConvert.SerializeObject(_mantencionRepository.GetDisponibilidad(pintIdTaller, pFecha1)));
             }
-            catch (CustomException myException)
+             catch (CustomException myException)
             {
                 resultModel.ErrorMessage = myException.LocalError.ErrorMessage;
                 resultModel.ErrorCode = myException.LocalError.ErrorCode;

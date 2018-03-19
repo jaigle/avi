@@ -37,7 +37,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
     <OutputPath>bin\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -118,23 +118,46 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_GlobalResources Folder\GlobalResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GlobalResource.resx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\EjecutivoController.cs" />
+    <Compile Include="Controllers\TallerController.cs" />
+    <Compile Include="Controllers\CiudadController.cs" />
+    <Compile Include="Controllers\FlotaController.cs" />
+    <Compile Include="Controllers\AnexoController.cs" />
+    <Compile Include="Controllers\ContratoController.cs" />
+    <Compile Include="Controllers\InfraccionController.cs" />
+    <Compile Include="Controllers\OrdenTrabajoController.cs" />
+    <Compile Include="Controllers\VehiculoController.cs" />
+    <Compile Include="Controllers\EmpresaController.cs" />
     <Compile Include="Controllers\ComunaController.cs" />
     <Compile Include="Controllers\ContactoController.cs" />
-    <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\MantencionController.cs" />
-    <Compile Include="Controllers\TestController.cs" />
+    <Compile Include="Controllers\SecController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Library\AuthManager.cs" />
     <Compile Include="Library\BaseManager.cs" />
+    <Compile Include="Library\EjecutivoManager.cs" />
+    <Compile Include="Library\TallerManager.cs" />
+    <Compile Include="Library\CiudadManager.cs" />
+    <Compile Include="Library\FlotaManager.cs" />
+    <Compile Include="Library\AnexoManager.cs" />
+    <Compile Include="Library\ContratoManager.cs" />
+    <Compile Include="Library\InfraccionManager.cs" />
+    <Compile Include="Library\OrdenTrabajoManager.cs" />
+    <Compile Include="Library\VehiculoManager.cs" />
+    <Compile Include="Library\EmpresaManager.cs" />
     <Compile Include="Library\MantencionManager.cs" />
     <Compile Include="Library\ContactoManager.cs" />
     <Compile Include="Library\CryptoManager.cs" />
     <Compile Include="Library\ComunaManager.cs" />
-    <Compile Include="Library\CustomerManager.cs" />
     <Compile Include="Library\Tools.cs" />
     <Compile Include="Library\UserManager.cs" />
     <Compile Include="Models\LoginModel.cs" />
@@ -145,6 +168,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Settings.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -185,6 +209,12 @@
       <Project>{126FF4CD-FCAE-45B3-A841-435F138FF099}</Project>
       <Name>WebAPI.Repository</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="App_GlobalResources Folder\GlobalResource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>GlobalResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -16,21 +16,7 @@ namespace WebAPI.Repository
             _cnx = myConection.GetConnection;
         }
 
-        public IEnumerable<Comuna> GetListaComunas()
-        {
-            try
-            {
-                var query = SqlText.Comuna_Select;
-                var list = _cnx.Query<Comuna>(query);
-                return list;
-            }
-            catch (Exception e)
-            {
-                throw new Exception("Error obteniendo Listado de Comunas de Contactos: " + e.Message);
-            }
-        }
-
-        public IEnumerable<Comuna> GetAllAsync()
+        public IEnumerable<Comuna> GetAll()
         {
             throw new NotImplementedException();
         }
@@ -58,6 +44,20 @@ namespace WebAPI.Repository
         public void Save()
         {
             throw new NotImplementedException();
+        }
+
+        public IEnumerable<Comuna> GetListaComunas()
+        {
+            try
+            {
+                var query = SqlText.Comuna_Select;
+                var list = _cnx.Query<Comuna>(sql: query);
+                return list;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(message: "Error obteniendo Listado de Comunas de Contactos: " + e.Message);
+            }
         }
     }
 }

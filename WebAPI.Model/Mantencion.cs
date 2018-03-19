@@ -22,6 +22,10 @@ namespace WebAPI.Model
         public string idMedioAgenda { get; set; }
         public int idContacto { get; set; }
         public int kilomVeh { get; set; }
+        public string token { get; set; }
+        public string esMantencion { get; set; }
+        public string esReparacion { get; set; }
+        public string esSiniestro { get; set; }
     }
 
     /// <summary>
@@ -29,15 +33,17 @@ namespace WebAPI.Model
     /// </summary>
     public class MantencionDto : Entity<int>
     {
-        public int IdAgenda { get; set; }
+        private DateTime Fecha;
+
+        public int idAgenda { get; set; }
         public string estadoAgenda { get; set; }
         public string pendConf { get; set; }
         public int idTaller { get; set; }
         public int idDiaSemana { get; set; }
         public int idHorario { get; set; }
-        public DateTime fecha { get; set; }
+        public string fecha { get => Fecha.ToString("dd-MM-yyyy hh:mm:ss"); }
         public string patente { get; set; }
-        public int KilomIndicadoCliente { get; set; }
+        public int kilomIndicadoCliente { get; set; }
         public string clienteSolReemplazo { get; set; }
         public string descervicio { get; set; }
         public string obsServicio { get; set; }
@@ -46,6 +52,12 @@ namespace WebAPI.Model
         public int idContacto { get; set; }
         public int kilomVeh { get; set; }
         public int idSigAgenda { get; set; }
+        public string token { get; set; }
+        public string esMantencion { get; set; }
+        public string esReparacion { get; set; }
+        public string esSiniestro { get; set; }
+        public string horaDesde { get; set; }
+        public string horaHasta { get; set; }
     }
 
 
@@ -62,5 +74,18 @@ namespace WebAPI.Model
         public string codOpUltGrab { get; set; }
         public string obsUltGrab { get; set; }
         public int cantMantAgendadas { get; set; }
+    }
+
+    public class Disponibilidad : Entity<int>
+    {
+
+        public int disponible { get; set; }
+        public string mensaje { get; set; }
+        public TimeSpan HoraDesde { get; set; }
+        public TimeSpan HoraHasta { get; set; }
+        public int CantVehMismoHorario { get; set; }
+        public int CantVehAgendadosHorario { get; set; }
+        public int IdHorario { get; set; }
+        
     }
 }

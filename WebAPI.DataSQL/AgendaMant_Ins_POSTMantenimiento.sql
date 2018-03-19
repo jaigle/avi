@@ -1,4 +1,24 @@
-﻿CREATE PROCEDURE [dbo].[AgendaMant_Ins_POSTMantenimiento] 
+﻿USE [Avis]
+GO
+
+/****** Object:  StoredProcedure [dbo].[AgendaMant_Ins_POSTMantenimiento]    Script Date: 02/12/2018 06:32:05 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[AgendaMant_Ins_POSTMantenimiento]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[AgendaMant_Ins_POSTMantenimiento]
+GO
+
+USE [Avis]
+GO
+
+/****** Object:  StoredProcedure [dbo].[AgendaMant_Ins_POSTMantenimiento]    Script Date: 02/12/2018 06:32:05 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+CREATE PROCEDURE [dbo].[AgendaMant_Ins_POSTMantenimiento] 
 	@IdEstadoAgenda INTEGER,
 	@PendConf VARCHAR(5),
 	@IdTaller INTEGER,
@@ -14,11 +34,17 @@
 	@IdMedioAgenda INTEGER,
 	@IdContacto INTEGER,
 	@Kilom_Veh INT,
+	@token VARCHAR(30),
+	@esMantencion BIT,
+    @esReparacion BIT,
+    @esSiniestro BIT,
 	@DescError	varchar(1000) ='' OUTPUT
 
 AS
 BEGIN
 	BEGIN TRAN
+		DECLARE @IdAgenda INTEGER = 0
+		 
 		INSERT INTO [AgendaMant]
 				   ([IdEstadoAgenda]
 				   ,[PendConf]
@@ -34,7 +60,11 @@ BEGIN
 				   ,[NumCliente]
 				   ,[IdMedioAgenda]
 				   ,[IdContacto]
-				   ,[Kilom_Veh]) 
+				   ,[Kilom_Veh]
+				   ,[EsMantencion]
+				   ,[EsReparacion]
+				   ,[EsSiniestro]
+				   ,[Token]) 
 				   OUTPUT INSERTED.IdAgenda          
 			 VALUES
 				   (
@@ -52,24 +82,52 @@ BEGIN
 					@NumCliente,
 					@IdMedioAgenda,
 					@IdContacto,
-					@Kilom_Veh
+					@Kilom_Veh,
+					@esMantencion,
+					@esReparacion,
+					@esSiniestro,
+					@token
 				   )
-  declare	@NumError int = 0
-	set	@NumError= @@Error
-	if	@NumError<> 0 
+		SET @IdAgenda = @@IDENTITY
+
+		--Creación del registro de Log		   
+		INSERT INTO [Avis].[dbo].[AgendaMant_Estados]
+           ([IdAgenda]
+           ,[IdEstadoAgenda]
+           ,[FechaGrabacion]
+           ,[CodOperadorGrab]
+           ,[ObsGrabacion])
+		VALUES
+			(@IdAgenda,@IdEstadoAgenda,GETDATE(),'drilo','Grabación desde el portal LO')
+           
+		declare	@NumError int = 0
+		set	@NumError= @@Error
+		if	@NumError<> 0 
 		BEGIN
 			set @DescError= 'La inserciónn no se realizó  (error sql' + Cast(@NumError as varchar(15))+ ')'
 			GOTO SALIR
 		END
+
+		exec @NumError = avis.dbo.AgendaMant_Upd_Datos @IdAgenda, @DescError output
+
+		if @NumError<> 0 begin
+			goto SALIR
+		end
+
 	COMMIT TRAN
 	goto OK
 
 	SALIR:
 		set nocount off
-		if @@rowcount<>0 
+
+		if @@trancount <> 0 
 			ROLLBACK TRAN
 		else 
 			COMMIT TRAN
 	OK:
 		return (@NumError)         
-END           
+END
+
+
+GO
+

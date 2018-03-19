@@ -20,8 +20,8 @@ namespace WebAPI.Repository
 
         public IEnumerable<Taller> GetListaTalleres()
         {
-            var query = SqlText.Comuna_Select;
-            var list = _cnx.Query<Taller>(query);
+            var query = SqlText.Taller_Select;
+            var list = _cnx.Query<Taller>(sql: query);
             return list;
         }
 

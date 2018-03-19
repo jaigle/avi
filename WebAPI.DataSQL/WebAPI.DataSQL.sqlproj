@@ -63,5 +63,25 @@
     <None Include="AgendaMant_Upd_PUTMantenimiento.sql" />
     <None Include="AgendaMant_Ins_POSTMantenimiento.sql" />
     <None Include="AgendaMant_Select_GetListMantencion.sql" />
+    <None Include="Cliente_Select_GetEmpresa.sql" />
+    <None Include="ContratosLO_Select_GetListaContratos.sql" />
+    <None Include="ContratoLO_Vehiculos_Select.sql" />
+    <None Include="Cliente_PUTEmpresa.sql" />
+    <None Include="Mantenimiento_GetDisponibilidad.sql" />
+    <None Include="ContactoCliente_Consulta_Varios.sql" />
+    <None Include="ContratoyAnexo_Select.sql" />
+    <None Include="Drilo_Flota_Select_GetVehiculo.sql" />
+    <None Include="Drilo_Infracciones_Select.sql" />
+    <None Include="Drilo_OrdenTrabajo_Select.sql" />
+    <None Include="Drilo_Reemplazo_Select.sql" />
+    <None Include="Drilo_EstadoPago_Select.sql" />
+    <None Include="Drilo_EstadoPagoDetalle_Select.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Contacto_Select_GetListaContactos.sql" />
+    <Build Include="ContactoUpd_PUTContacto.sql" />
+    <Build Include="ContratoLO_GrupoDF_Select.sql" />
+    <Build Include="Contacto_Upd_DELETEContacto.sql" />
+    <Build Include="UsuarioWebDrilo_Select.sql" />
   </ItemGroup>
 </Project>
