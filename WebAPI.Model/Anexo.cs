@@ -24,5 +24,6 @@ namespace WebAPI.Model
         public string seguroNeumatico { get; set; }
         public string archivos { get; set; }
         public string grupoFlotas { get; set; }
+        public string urlAdjunto { get; set; }
     }
 }

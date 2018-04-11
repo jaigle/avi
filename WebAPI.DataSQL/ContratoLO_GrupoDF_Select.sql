@@ -1,4 +1,15 @@
-CREATE PROCEDURE [dbo].[ContratoLO_GrupoDF_Select]
+USE [Avis]
+GO
+/****** Object:  StoredProcedure [dbo].[Drilo_ContratoLO_GrupoDF_Select]    Script Date: 04/11/2018 02:44:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+--exec Drilo_ContratoLO_GrupoDF_Select 16,''
+
+CREATE PROCEDURE [dbo].[Drilo_ContratoLO_GrupoDF_Select]
 	@IdContrato int
 	,@DescError	varchar(1000) ='' OUTPUT
 AS
@@ -23,6 +34,7 @@ SELECT
       ,[ReempFlotaInferior10] AS reempFlotaInferior10      
       ,[CambNeumatico] AS cambNeumatico
       ,[RoboVehArrend] AS roboVehArrend
+	  ,[roboAccesorioVeh] AS roboAccesorioVeh
       ,[SeguroNeumatico] AS seguroNeumatico
       ,ISNULL((select '['+stuff((
 	select ',{"urlAdjunto": "'+CONVERT(varchar,cg.UrlAdjunto)+'","fechaUltGrab": "'+CONVERT(varchar,cg.FechaUltGrab)+'"}'
@@ -43,7 +55,16 @@ SELECT
 	FROM [Central].[dbo].[ContratoLO_GrupoVeh] as A
   INNER JOIN Central.dbo.LO_Modelo as B ON B.idModelo = A.IdModelo
   WHERE A.IDContratoloGrupoDF = Principal.[IDContratoloGrupoDF]
-	for XML Path('')),1,1,'')+']') AS grupoFlotas
+	for XML Path('')),1,1,'')+']') AS grupoFlotas, 
+
+
+	(
+	SELECT top 1 ad.UrlAdjunto
+	FROM  historico.dbo.Archivos_Adjuntos AS ad with(Nolock)
+	WHERE (ad.TipoOrigen = 'DOCLO') AND (ad.NumOrigen = Principal.[CtoLO]) AND (ad.NumOrigen2 = Principal.IDContratoloGrupoDF )
+	) as urlAdjunto
+
+
 	
   FROM [Central].[dbo].[ContratoLO_GrupoDF] AS Principal
   where IDContratoloGrupoDF = @IdContrato
@@ -67,4 +88,5 @@ SELECT
 	OK:
 		return (@NumError)
 END
+
 

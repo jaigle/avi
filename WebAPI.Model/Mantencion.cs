@@ -58,6 +58,8 @@ namespace WebAPI.Model
         public string esSiniestro { get; set; }
         public string horaDesde { get; set; }
         public string horaHasta { get; set; }
+        public string contactoNombre { get; set; }
+        public string tallerNombre { get; set; }
     }
 
 

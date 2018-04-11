@@ -1,10 +1,12 @@
 ﻿USE [Avis]
 GO
-/****** Object:  StoredProcedure [dbo].[Drilo_AgendaMant_Select_GetListMantencion]    Script Date: 02/21/2018 01:23:00 ******/
+/****** Object:  StoredProcedure [dbo].[Drilo_AgendaMant_Select_GetListMantencion]    Script Date: 04/11/2018 03:09:42 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
+
+
 ALTER PROCEDURE [dbo].[Drilo_AgendaMant_Select_GetListMantencion] 
 	@NumCliente integer,
 	@IdAgenda integer,
@@ -33,9 +35,13 @@ BEGIN
 		  ,Token AS token
 		  ,REPLACE(REPLACE(RIGHT('0'+LTRIM(RIGHT(CONVERT(varchar,HoraDesde,100),7)),7),'AM',' AM'),'PM',' PM') as horaDesde
 		  ,REPLACE(REPLACE(RIGHT('0'+LTRIM(RIGHT(CONVERT(varchar,HoraHasta,100),7)),7),'AM',' AM'),'PM',' PM') as horaHasta
+		  ,CN.Contac_Nombre as contactoNombre
+		  ,T.NombreTaller as tallerNombre
 	  FROM [AgendaMant] AS AM INNER JOIN EstadoAgendaMant AS EAT on EAT.IdEstadoAgenda = AM.IdEstadoAgenda
 	  inner join TipoServicioAgeMant TS ON TS.IdServicio = AM.IdServicio
 	  inner join AgendaMant_Horario AH ON AM.IdHorario = AH.IdHorario
+	  inner join Avis.dbo.contactoNew CN ON AM.IdContacto = CN.Contac_Numero
+	  inner join Avis.dbo.Taller T ON AM.IdTaller = T.IdTaller
 	  WHERE ((@IdAgenda = 0) OR (IdAgenda = @IdAgenda)) 
 	  AND ((@NumCliente = 0) OR(NumCliente = @NumCliente)) 
 	  AND ((@token = '0') OR(Token = @token)) 
@@ -59,3 +65,4 @@ BEGIN
 	OK:
 		return (@NumError)  
 END
+
