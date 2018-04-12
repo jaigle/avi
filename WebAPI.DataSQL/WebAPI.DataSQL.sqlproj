@@ -83,5 +83,8 @@
     <Build Include="ContratoLO_GrupoDF_Select.sql" />
     <Build Include="Contacto_Upd_DELETEContacto.sql" />
     <Build Include="UsuarioWebDrilo_Select.sql" />
+    <None Include="Siniestro_Ins_POSTSiniestro.sql" />
+    <None Include="SiniestroTercero_Ins_POSTSiniestroTercero.sql" />
+    <None Include="SiniestroFoto_Ins_POSTSiniestroFoto.sql" />
   </ItemGroup>
 </Project>
