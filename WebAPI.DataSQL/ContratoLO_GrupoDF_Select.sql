@@ -1,10 +1,10 @@
-USE [Avis]
-GO
+--USE [Avis]
+--GO
 /****** Object:  StoredProcedure [dbo].[Drilo_ContratoLO_GrupoDF_Select]    Script Date: 04/11/2018 02:44:47 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+--SET ANSI_NULLS ON
+--GO
+--SET QUOTED_IDENTIFIER ON
+--GO
 
 
 --exec Drilo_ContratoLO_GrupoDF_Select 16,''

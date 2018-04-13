@@ -6,35 +6,35 @@ namespace WebAPI.Model
     {
         public int id { get; set; }
         public int idEmpresa { get; set; }
-        public int patente{ get; set; }
-        public int email { get; set; }
-        public int denuncianteNombre { get; set; }
-        public int denuncianteRut { get; set; }
-        public int denuncianteNacionalidad { get; set; }
-        public int denuncianteDomicilio { get; set; }
-        public int denuncianteComuna { get; set; }
-        public int siniestroFecha { get; set; }
-        public int siniestroHora { get; set; }
-        public int siniestroDireccion { get; set; }
-        public int siniestroCiudad { get; set; }
-        public int siniestroTipo { get; set; }
-        public int sinitroTipoOtro { get; set; }
-        public int siniestroAccion { get; set; }
-        public int siniestroRelato { get; set; }
-        public int siniestroDano { get; set; }
-        public int ciArchivo { get; set; }
-        public int licenciaArchivo { get; set; }
+        public string patente { get; set; }
+        public string email { get; set; }
+        public string denuncianteNombre { get; set; }
+        public string denuncianteRut { get; set; }
+        public string denuncianteNacionalidad { get; set; }
+        public string denuncianteDomicilio { get; set; }
+        public string denuncianteComuna { get; set; }
+        public string siniestroFecha { get; set; }
+        public string siniestroHora { get; set; }
+        public string siniestroDireccion { get; set; }
+        public string siniestroCiudad { get; set; }
+        public string siniestroTipo { get; set; }
+        public string sinitroTipoOtro { get; set; }
+        public string siniestroAccion { get; set; }
+        public string siniestroRelato { get; set; }
+        public string siniestroDano { get; set; }
+        public string ciArchivo { get; set; }
+        public string licenciaArchivo { get; set; }
         public int lesionados { get; set; }
-        public int unidadPolocial { get; set; }
-        public int fechaAviso { get; set; }
-        public int horaAviso { get; set; }
-        public int numParte { get; set; }
-        public int numFolio { get; set; }
-        public int numConstancia { get; set; }
+        public string unidadPolocial { get; set; }
+        public string fechaAviso { get; set; }
+        public string horaAviso { get; set; }
+        public string numParte { get; set; }
+        public string numFolio { get; set; }
+        public string numConstancia { get; set; }
         public int citacion { get; set; }
-        public int citacionFecha { get; set; }
-        public int juzgado { get; set; }
-        public int constanciaArchivo { get; set; }
+        public string citacionFecha { get; set; }
+        public string juzgado { get; set; }
+        public string constanciaArchivo { get; set; }
     }
 
     public class SiniestroFoto : Entity<int>

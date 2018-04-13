@@ -125,6 +125,7 @@
     </Compile>
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\SiniestroController.cs" />
     <Compile Include="Controllers\EjecutivoController.cs" />
     <Compile Include="Controllers\TallerController.cs" />
     <Compile Include="Controllers\CiudadController.cs" />
@@ -144,6 +145,7 @@
     </Compile>
     <Compile Include="Library\AuthManager.cs" />
     <Compile Include="Library\BaseManager.cs" />
+    <Compile Include="Library\SiniestroManager.cs" />
     <Compile Include="Library\EjecutivoManager.cs" />
     <Compile Include="Library\TallerManager.cs" />
     <Compile Include="Library\CiudadManager.cs" />
