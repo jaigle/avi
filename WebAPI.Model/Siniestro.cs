@@ -35,6 +35,11 @@ namespace WebAPI.Model
         public string citacionFecha { get; set; }
         public string juzgado { get; set; }
         public string constanciaArchivo { get; set; }
+        public string siniestro_expediente { get; set; }
+        public string siniestroVelocidad { get; set; }
+        public string siniestroComuna { get; set; }
+        public string culpable { get; set; }
+        public string denuncianteCiudad { get; set; }
     }
 
     public class SiniestroFoto : Entity<int>

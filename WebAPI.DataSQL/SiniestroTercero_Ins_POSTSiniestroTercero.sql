@@ -16,7 +16,7 @@ CREATE PROCEDURE [dbo].[SiniestroTercero_Ins_POSTSiniestroTercero]
     ,@telefono varchar(20)
     ,@email varchar(60)
     ,@patente varchar(20)
-    ,@marcas text
+    ,@marcas varchar(MAX)
     ,@modelo varchar(150)
     ,@ano int
 	,@DescError varchar(1000) ='' OUTPUT

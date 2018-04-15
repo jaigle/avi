@@ -86,5 +86,6 @@
     <None Include="Siniestro_Ins_POSTSiniestro.sql" />
     <None Include="SiniestroTercero_Ins_POSTSiniestroTercero.sql" />
     <None Include="SiniestroFoto_Ins_POSTSiniestroFoto.sql" />
+    <Build Include="CREATESiniestroTables.sql" />
   </ItemGroup>
 </Project>
