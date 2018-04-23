@@ -44,14 +44,14 @@ namespace WebAPI.Repository
                 p.Add(name: "@siniestroDireccion", value: entity.siniestroDireccion);
                 p.Add(name: "@siniestroCiudad", value: entity.siniestroCiudad);
                 p.Add(name: "@siniestroTipo", value: entity.siniestroTipo);
-                p.Add(name: "@sinitroTipoOtro", value: entity.sinitroTipoOtro);
+                p.Add(name: "@siniestroTipoOtro", value: entity.siniestroTipoOtro);
                 p.Add(name: "@siniestroAccion", value: entity.siniestroAccion);
                 p.Add(name: "@siniestroRelato", dbType: DbType.String, value: entity.siniestroRelato);
                 p.Add(name: "@siniestroDano", value: entity.siniestroDano);
                 p.Add(name: "@ciArchivo", value: entity.ciArchivo);
                 p.Add(name: "@licenciaArchivo", value: entity.licenciaArchivo);
                 p.Add(name: "@lesionados", value: entity.lesionados);
-                p.Add(name: "@unidadPolocial", value: entity.unidadPolocial);
+                p.Add(name: "@unidadPolicial", value: entity.unidadPolicial);
                 p.Add(name: "@fechaAviso", value: entity.fechaAviso);
                 p.Add(name: "@horaAviso", value: entity.horaAviso);
                 p.Add(name: "@numParte", value: entity.numParte);
@@ -61,6 +61,9 @@ namespace WebAPI.Repository
                 p.Add(name: "@citacionFecha", value: entity.citacionFecha);
                 p.Add(name: "@juzgado", value: entity.juzgado);
                 p.Add(name: "@constanciaArchivo", value: entity.constanciaArchivo);
+                p.Add(name: "@citacionArchivo", value: entity.citacionArchivo);
+                p.Add(name: "@siniestroGrua", value: entity.siniestroGrua);
+                p.Add(name: "@terceros", value: entity.terceros);
                 p.Add(name: "@DescError", dbType: DbType.String, direction: ParameterDirection.Output, size: 1000);
                 p.Add(name: "@NumError", dbType: DbType.Int32, direction: ParameterDirection.ReturnValue);
                 _cnx.Execute(sql: query, param: p, commandType: CommandType.StoredProcedure);

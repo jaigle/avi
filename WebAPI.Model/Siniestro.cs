@@ -18,14 +18,14 @@ namespace WebAPI.Model
         public string siniestroDireccion { get; set; }
         public string siniestroCiudad { get; set; }
         public string siniestroTipo { get; set; }
-        public string sinitroTipoOtro { get; set; }
+        public string siniestroTipoOtro { get; set; }
         public string siniestroAccion { get; set; }
         public string siniestroRelato { get; set; }
         public string siniestroDano { get; set; }
         public string ciArchivo { get; set; }
         public string licenciaArchivo { get; set; }
         public int lesionados { get; set; }
-        public string unidadPolocial { get; set; }
+        public string unidadPolicial { get; set; }
         public string fechaAviso { get; set; }
         public string horaAviso { get; set; }
         public string numParte { get; set; }
@@ -40,6 +40,10 @@ namespace WebAPI.Model
         public string siniestroComuna { get; set; }
         public string culpable { get; set; }
         public string denuncianteCiudad { get; set; }
+
+        public string citacionArchivo { get; set; }
+        public string siniestroGrua { get; set; }
+        public string terceros { get; set; }
     }
 
     public class SiniestroFoto : Entity<int>
