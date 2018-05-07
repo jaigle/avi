@@ -50,6 +50,7 @@ namespace WebAPI.Model
         public string marcaVehiculoReemplazo { get; set; }
         public string modeloVehiculoReemplazo { get; set; }
         public string idAnexo { get; set; }
+        public string tipoVehReemplazo { get; set; }
     }
 
 }

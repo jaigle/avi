@@ -38,7 +38,8 @@ BEGIN TRAN
     R.MarcaVehTit as marcaVehiculoTitular,
     R.MarcaVehReem as marcaVehiculoReemplazo,
     R.ModeloVehReem as modeloVehiculoReemplazo,
-    R.IdAnexo as idAnexo
+    R.IdAnexo as idAnexo,
+	R.TipoVehReemplazo as tipoVehReemplazo 
 	from Central.dbo.Drilo_Reemplazos AS R
     WHERE (@IdCliente = 0 OR R.IdCliente = @IdCliente) 
     AND (@Patente = '00' OR  R.PatenteTitular = @Patente)
